@@ -43,3 +43,6 @@ next-env.d.ts
 # design-taste-frontend checker output
 .taste-skill/
 shots/
+
+# Claude Code local skills/settings (private)
+.claude/
