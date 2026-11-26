@@ -1,0 +1,145 @@
+/*
+ * Site-wide motion that plain CSS does best: page transitions (View
+ * Transitions API, driven by React's <ViewTransition>), self-drawing marks,
+ * scroll-driven reveals and the frosted menu bar.
+ *
+ * Rules of the house:
+ * - Only opacity and transforms animate (composited, 60fps).
+ * - Scroll reveals use CSS scroll timelines: no JavaScript, so nothing
+ *   flickers before hydration, and browsers without support show the page as is.
+ * - prefers-reduced-motion turns all of it off; prefers-reduced-transparency
+ *   turns the glass solid.
+ */
+
+/* ---------------- Page transitions ---------------- */
+
+/* The page body: the old page fades out quickly, the new one rises into place */
+::view-transition-old(.page) {
+  animation: vt-out 160ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(.page) {
+  animation: vt-in 380ms cubic-bezier(0.23, 1, 0.32, 1) 60ms both;
+}
+
+/* Shared photos: a card's photo travels into the next page's header */
+::view-transition-group(.morph) {
+  animation-duration: 460ms;
+  animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: vt-blur;
+}
+
+@keyframes vt-out {
+  to { opacity: 0; }
+}
+@keyframes vt-in {
+  from { opacity: 0; transform: translateY(10px); }
+}
+@keyframes vt-blur {
+  40% { filter: blur(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* ---------------- Hand-drawn gold marks draw themselves on ---------------- */
+
+@keyframes draw-on {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  [data-draw] path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: draw-on 900ms cubic-bezier(0.65, 0, 0.35, 1) 350ms forwards;
+  }
+}
+
+/* ---------------- Scroll reveals (every browser; see ScrollReveal.tsx) ----------------
+   Headings, cards and list items below the first screen wait 28px low and
+   transparent, then rise into place as they scroll in. Siblings cascade via
+   --rv-delay. `translate` is separate from `transform`, so hover lifts still work. */
+
+[data-rv="pending"] {
+  opacity: 0;
+  translate: 0 28px;
+}
+[data-rv="in"] {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 600ms cubic-bezier(0.23, 1, 0.32, 1) var(--rv-delay, 0ms),
+    translate 760ms cubic-bezier(0.23, 1, 0.32, 1) var(--rv-delay, 0ms);
+}
+@media (prefers-reduced-motion: reduce), print {
+  [data-rv] { opacity: 1 !important; translate: none !important; }
+}
+
+/* ---------------- Photo settle + statement drift (CSS scroll-driven; Chrome and Edge) ---------------- */
+
+@keyframes reveal-img {
+  from { scale: 1.07; }
+  to { scale: 1; }
+}
+@keyframes drift-left {
+  from { translate: 5% 0; }
+  to { translate: -5% 0; }
+}
+@keyframes drift-right {
+  from { translate: -5% 0; }
+  to { translate: 5% 0; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Photographs settle into their frames: a slow 7% zoom-out.
+       `scale` is separate from `transform`, so hover zooms still compose. */
+    main img:not([data-no-reveal]) {
+      animation: reveal-img linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+
+    /* The homepage statement: its lines glide in opposite directions as you pass */
+    [data-drift] text:nth-of-type(odd) {
+      animation: drift-left linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+    [data-drift] text:nth-of-type(even) {
+      animation: drift-right linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+/* ---------------- Frosted menu bar (once the page scrolls) ---------------- */
+
+[data-glass="on"] {
+  background: rgba(255, 255, 255, 0.72) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border-color: rgba(255, 255, 255, 0.65) !important;
+  box-shadow:
+    0 10px 30px -12px rgba(22, 18, 31, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(22, 18, 31, 0.06) !important;
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  [data-glass="on"] { background: rgba(255, 255, 255, 0.97) !important; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  [data-glass="on"] {
+    background: #fff !important;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

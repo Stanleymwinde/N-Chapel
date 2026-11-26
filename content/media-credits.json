@@ -1,0 +1,1317 @@
+{
+  "items": [
+    {
+      "key": "home.hero",
+      "file": "/media/home/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/vibrant-outdoor-group-prayer-gathering-37826398/",
+      "author": "Speak Media Uganda",
+      "licence": "Pexels License",
+      "searchQuery": "African church worship tent congregation",
+      "usedOn": [
+        "/"
+      ],
+      "altText": "Worshippers with eyes closed and hands raised in praise under a large white tent at an evening service",
+      "isPlaceholder": false
+    },
+    {
+      "key": "home.community",
+      "file": "/media/home/community.jpg",
+      "width": 1800,
+      "height": 1202,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/group-of-friends-having-a-conversation-while-eating-together-6210500/",
+      "author": "PICHA",
+      "licence": "Pexels License",
+      "searchQuery": "Bible study group Africa home",
+      "usedOn": [
+        "/"
+      ],
+      "altText": "Four friends sitting on floor cushions around a low table, sharing a meal and conversation at home",
+      "isPlaceholder": false
+    },
+    {
+      "key": "home.give",
+      "file": "/media/home/give.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/children-in-classroom-holding-books-and-supplies-39523812/",
+      "author": "Constantin Amani",
+      "licence": "Pexels License",
+      "searchQuery": "African children holding Bibles school",
+      "usedOn": [
+        "/"
+      ],
+      "altText": "Schoolchildren at wooden desks in a brick classroom proudly holding up new books",
+      "isPlaceholder": false
+    },
+    {
+      "key": "newhere.hero",
+      "file": "/media/newhere/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/people-standing-in-the-church-during-a-ceremony-8270597/",
+      "author": "Deffo Manizo",
+      "licence": "Pexels License",
+      "searchQuery": "African church welcome greeters smiling",
+      "usedOn": [
+        "/new-here"
+      ],
+      "altText": "Smiling church members in colourful African print greeting one another as families gather after a service",
+      "isPlaceholder": false
+    },
+    {
+      "key": "visit.hero",
+      "file": "/media/visit/hero.jpg",
+      "width": 1500,
+      "height": 1000,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/lively-outdoor-african-family-gathering-30219174/",
+      "author": "Mad Knoxx Deluxe",
+      "licence": "Pexels License",
+      "searchQuery": "Kenya church congregation arriving Sunday",
+      "usedOn": [
+        "/new-here/plan-your-visit"
+      ],
+      "altText": "Families in their Sunday best gathering on a lawn beside a white tent on a bright morning",
+      "isPlaceholder": false
+    },
+    {
+      "key": "visit.expect",
+      "file": "/media/visit/expect.jpg",
+      "width": 1500,
+      "height": 1000,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/vibrant-outdoor-concert-with-diverse-audience-28437877/",
+      "author": "Speak Media Uganda",
+      "licence": "Pexels License",
+      "searchQuery": "African choir singing worship",
+      "usedOn": [
+        "/new-here/plan-your-visit"
+      ],
+      "altText": "A large crowd gathered on open ground before a tented stage where singers lead the music",
+      "isPlaceholder": false
+    },
+    {
+      "key": "nextsteps.hero",
+      "file": "/media/nextsteps/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/african-women-engaging-in-bible-study-together-30689318/",
+      "author": "Ninthgrid",
+      "licence": "Pexels License",
+      "searchQuery": "Bible study group Africa",
+      "usedOn": [
+        "/new-here/next-steps"
+      ],
+      "altText": "Three young women on a sofa reading and discussing an open Bible together",
+      "isPlaceholder": false
+    },
+    {
+      "key": "watch.hero",
+      "file": "/media/watch/hero.jpg",
+      "width": 1400,
+      "height": 1750,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/man-making-a-live-broadcasting-17823215/",
+      "author": "Chris Wade Ntezicimpa",
+      "licence": "Pexels License",
+      "searchQuery": "church livestream camera worship Africa",
+      "usedOn": [
+        "/watch"
+      ],
+      "altText": "A camera operator with a gimbal rig filming an outdoor event as a crowd looks on",
+      "isPlaceholder": false
+    },
+    {
+      "key": "getinvolved.hero",
+      "file": "/media/getinvolved/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-group-of-friends-laughing-together-9287491/",
+      "author": "Sadock Kaisi",
+      "licence": "Pexels License",
+      "searchQuery": "African friends community fellowship",
+      "usedOn": [
+        "/get-involved"
+      ],
+      "altText": "A group of young friends laughing together outdoors, one woman covering her smile with her hand",
+      "isPlaceholder": false
+    },
+    {
+      "key": "groups.egroups",
+      "file": "/media/groups/egroups.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-people-doing-bible-study-6860826/",
+      "author": "Tima Miroshnichenko",
+      "licence": "Pexels License",
+      "searchQuery": "Bible study group Africa living room",
+      "usedOn": [
+        "/get-involved/groups"
+      ],
+      "altText": "Three friends sitting on a living-room rug discussing the Bible, with a guitar nearby",
+      "isPlaceholder": false
+    },
+    {
+      "key": "groups.binti",
+      "file": "/media/groups/binti.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/women-sitting-and-praying-16341027/",
+      "author": "DIALO Photography",
+      "licence": "Pexels License",
+      "searchQuery": "African women praying together",
+      "usedOn": [
+        "/get-involved/groups"
+      ],
+      "altText": "Three women seated on the grass with heads bowed, praying together outdoors",
+      "isPlaceholder": false
+    },
+    {
+      "key": "groups.jabari",
+      "file": "/media/groups/jabari.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/group-of-men-laughing-12800847/",
+      "author": "Hillary Disantos",
+      "licence": "Pexels License",
+      "searchQuery": "African men fellowship",
+      "usedOn": [
+        "/get-involved/groups"
+      ],
+      "altText": "Men in colourful African print shirts laughing together while seated at a fellowship gathering",
+      "isPlaceholder": false
+    },
+    {
+      "key": "groups.support",
+      "file": "/media/groups/support.jpg",
+      "width": 1400,
+      "height": 1867,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/close-up-of-two-people-holding-hands-35558955/",
+      "author": "Abubakar Mamman",
+      "licence": "Pexels License",
+      "searchQuery": "support group conversation hands",
+      "usedOn": [
+        "/get-involved/groups"
+      ],
+      "altText": "Close-up of two people holding hands in a gesture of support, faces not shown",
+      "isPlaceholder": false
+    },
+    {
+      "key": "serve.hero",
+      "file": "/media/serve/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/volunteers-carrying-aid-supplies-in-remote-area-33749785/",
+      "author": "Speak Media Uganda",
+      "licence": "Pexels License",
+      "searchQuery": "community volunteers Africa",
+      "usedOn": [
+        "/get-involved/serve",
+        "/ministries"
+      ],
+      "altText": "Two volunteers in matching yellow T-shirts carrying a large sack of supplies across dry ground",
+      "isPlaceholder": false
+    },
+    {
+      "key": "kinara.hero",
+      "file": "/media/kinara/hero.jpg",
+      "width": 1800,
+      "height": 1735,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/engaging-public-speaker-in-educational-setting-31820975/",
+      "author": "Aristide Ouedraogo",
+      "licence": "Pexels License",
+      "searchQuery": "African leadership training classroom",
+      "usedOn": [
+        "/get-involved/kinara"
+      ],
+      "altText": "A trainer in an embroidered shirt teaching a seated group in a bright classroom",
+      "isPlaceholder": false
+    },
+    {
+      "key": "school.hero",
+      "file": "/media/school/hero.jpg",
+      "width": 1800,
+      "height": 1350,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-people-sitting-in-the-classroom-10614242/",
+      "author": "Unique Digitals",
+      "licence": "Pexels License",
+      "searchQuery": "adult Bible class Africa teaching",
+      "usedOn": [
+        "/get-involved/school-of-ministry"
+      ],
+      "altText": "Young adults seated along a classroom wall, writing notes on papers during a teaching session",
+      "isPlaceholder": false
+    },
+    {
+      "key": "logos.hero",
+      "file": "/media/logos/hero.jpg",
+      "width": 1400,
+      "height": 1867,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-man-reading-indoor-2325729/",
+      "author": "Oladimeji Ajegbile",
+      "licence": "Pexels License",
+      "searchQuery": "African student studying books",
+      "usedOn": [
+        "/get-involved/logos-scholarship"
+      ],
+      "altText": "A young man in glasses studying at a desk with an open Bible, notebook and tablet",
+      "isPlaceholder": false
+    },
+    {
+      "key": "ministries.hero",
+      "file": "/media/ministries/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/people-standing-in-front-of-a-church-10823589/",
+      "author": "Safari Consoler",
+      "licence": "Pexels License",
+      "searchQuery": "Kenya church congregation outdoors",
+      "usedOn": [
+        "/ministries"
+      ],
+      "altText": "Black-and-white photo of a crowd of adults and children gathered outside a small church with a cross",
+      "isPlaceholder": false
+    },
+    {
+      "key": "quest.hero",
+      "file": "/media/quest/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/smiling-boys-standing-with-arms-raised-in-classroom-19982406/",
+      "author": "illustrate Digital Ug",
+      "licence": "Pexels License",
+      "searchQuery": "African children Sunday school",
+      "usedOn": [
+        "/ministries/quest-children",
+        "/watch"
+      ],
+      "altText": "Smiling children in a Ugandan classroom eagerly raising their hands",
+      "isPlaceholder": false
+    },
+    {
+      "key": "quest.worship",
+      "file": "/media/quest/worship.jpg",
+      "width": 1800,
+      "height": 1356,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/children-learning-in-a-vibrant-classroom-setting-31773583/",
+      "author": "Prince Beguin",
+      "licence": "Pexels License",
+      "searchQuery": "African children crafts Sunday school",
+      "usedOn": [
+        "/ministries/quest-children"
+      ],
+      "altText": "Young children working with folders and pencils at tables in a colourful classroom",
+      "isPlaceholder": false
+    },
+    {
+      "key": "quest.community",
+      "file": "/media/quest/community.jpg",
+      "width": 1800,
+      "height": 1198,
+      "sourceSite": "Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/children-writing-in-books-feU8G7E5ODI",
+      "author": "Annie Spratt",
+      "licence": "Unsplash License",
+      "searchQuery": "African children reading books school",
+      "usedOn": [
+        "/ministries/quest-children"
+      ],
+      "altText": "Children in green school uniforms writing in exercise books at wooden desks",
+      "isPlaceholder": false
+    },
+    {
+      "key": "nextgen.hero",
+      "file": "/media/nextgen/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/people-dancing-during-daytime-9cx4-QowgLc",
+      "author": "Avel Chuklanov",
+      "licence": "Unsplash License",
+      "searchQuery": "African youth worship concert",
+      "usedOn": [
+        "/ministries/next-gen-youth",
+        "/watch"
+      ],
+      "altText": "An outdoor crowd raising their hands high in warm evening light",
+      "isPlaceholder": false
+    },
+    {
+      "key": "nextgen.clubxp",
+      "file": "/media/nextgen/clubxp.jpg",
+      "width": 1800,
+      "height": 1198,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/young-band-performing-outdoors-at-daytime-29807446/",
+      "author": "Phio Sefako",
+      "licence": "Pexels License",
+      "searchQuery": "African teens band worship",
+      "usedOn": [
+        "/ministries/next-gen-youth",
+        "/ministries"
+      ],
+      "altText": "Young guitarist in headphones playing with a band outdoors among the trees",
+      "isPlaceholder": false
+    },
+    {
+      "key": "nextgen.crossroads",
+      "file": "/media/nextgen/crossroads.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/two-hikers-walk-through-a-rocky-grassy-mountain-landscape-RANZo8EoEpg",
+      "author": "Michael Odida",
+      "licence": "Unsplash License",
+      "searchQuery": "African teenagers outdoor camp hiking",
+      "usedOn": [
+        "/ministries/next-gen-youth"
+      ],
+      "altText": "Two hikers with backpacks trekking through moorland on Mount Kenya",
+      "isPlaceholder": false
+    },
+    {
+      "key": "nextgen.vuma",
+      "file": "/media/nextgen/vuma.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/young-adults-studying-outdoors-together-39172884/",
+      "author": "Zingks photography",
+      "licence": "Pexels License",
+      "searchQuery": "African young adults mentoring discussion",
+      "usedOn": [
+        "/ministries/next-gen-youth"
+      ],
+      "altText": "A young woman taking notes while talking with two young people at an outdoor table",
+      "isPlaceholder": false
+    },
+    {
+      "key": "blitz.hero",
+      "file": "/media/blitz/hero.jpg",
+      "width": 1800,
+      "height": 1202,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/people-hiking-in-summer-15835855/",
+      "author": "Justin Muhinda",
+      "licence": "Pexels License",
+      "searchQuery": "African young adults hiking group",
+      "usedOn": [
+        "/ministries/blitz-young-adults"
+      ],
+      "altText": "Young friends in shuka wraps walking arm in arm up a grassy hill under a blue sky",
+      "isPlaceholder": false
+    },
+    {
+      "key": "prayer.hero",
+      "file": "/media/prayer/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/praying-on-the-bible-12999658/",
+      "author": "TEP RO",
+      "licence": "Pexels License",
+      "searchQuery": "hands praying Bible",
+      "usedOn": [
+        "/ministries/prayer",
+        "/ministries"
+      ],
+      "altText": "Hands clasped in prayer over an open Bible",
+      "isPlaceholder": false
+    },
+    {
+      "key": "discipleship.hero",
+      "file": "/media/discipleship/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/men-in-black-suit-holding-black-book-12243466/",
+      "author": "Samuel Peter",
+      "licence": "Pexels License",
+      "searchQuery": "mentoring Bible reading Africa",
+      "usedOn": [
+        "/ministries/discipleship",
+        "/ministries"
+      ],
+      "altText": "An older man sharing an open Bible with a smiling younger man outdoors at sunset",
+      "isPlaceholder": false
+    },
+    {
+      "key": "outreach.hero",
+      "file": "/media/outreach/hero.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/group-of-people-cleaning-pathway-in-uganda-37638737/",
+      "author": "Kalz Michael",
+      "licence": "Pexels License",
+      "searchQuery": "community outreach Africa church",
+      "usedOn": [
+        "/ministries/outreach",
+        "/ministries"
+      ],
+      "altText": "Volunteers carrying brooms walk along a dirt path through a green neighbourhood field in Uganda",
+      "isPlaceholder": false
+    },
+    {
+      "key": "outreach.prison",
+      "file": "/media/outreach/prison.jpg",
+      "width": 1200,
+      "height": 1800,
+      "sourceSite": "Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/brown-wooden-pew-bench-ry8c7ZWzu1s",
+      "author": "Josh Applegate",
+      "licence": "Unsplash License",
+      "searchQuery": "empty chapel benches Bible",
+      "usedOn": [
+        "/ministries/outreach"
+      ],
+      "altText": "Empty wooden benches casting long shadows in a quiet, sunlit chapel",
+      "isPlaceholder": false
+    },
+    {
+      "key": "outreach.sports",
+      "file": "/media/outreach/sports.jpg",
+      "width": 1200,
+      "height": 1800,
+      "sourceSite": "Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/a-group-of-young-men-playing-a-game-of-soccer-unPrQUcWfI4",
+      "author": "Yannaty Kouyate",
+      "licence": "Unsplash License",
+      "searchQuery": "football team Kenya youth",
+      "usedOn": [
+        "/ministries/outreach"
+      ],
+      "altText": "Young footballers in red kits practising ball skills on a sandy pitch",
+      "isPlaceholder": false
+    },
+    {
+      "key": "outreach.community",
+      "file": "/media/outreach/community.jpg",
+      "width": 1200,
+      "height": 1800,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/woman-cleaning-beach-from-rubbish-12079507/",
+      "author": "Twilight Kenya",
+      "licence": "Pexels License",
+      "searchQuery": "community clean-up volunteers Africa",
+      "usedOn": [
+        "/ministries/outreach"
+      ],
+      "altText": "Volunteers picking up litter during a beach clean-up in Lamu, Kenya",
+      "isPlaceholder": false
+    },
+    {
+      "key": "outreach.mission",
+      "file": "/media/outreach/mission.jpg",
+      "width": 1100,
+      "height": 1650,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/outdoor-education-session-with-children-in-africa-31747999/",
+      "author": "Swahili Studios",
+      "licence": "Pexels License",
+      "searchQuery": "African high school students assembly",
+      "usedOn": [
+        "/ministries/outreach",
+        "/ministries",
+        "/ministries/quest-children"
+      ],
+      "altText": "A woman speaking to a large group of seated schoolchildren under the trees outside their school",
+      "isPlaceholder": false
+    },
+    {
+      "key": "justice.hero",
+      "file": "/media/justice/hero.jpg",
+      "width": 1800,
+      "height": 1198,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-group-of-women-carrying-cardboard-boxes-on-their-heads-9090854/",
+      "author": "Lagos Food Bank Initiative",
+      "licence": "Pexels License",
+      "searchQuery": "food donation volunteers Africa",
+      "usedOn": [
+        "/ministries/social-justice",
+        "/ministries"
+      ],
+      "altText": "Women carry boxes of donated food on their heads along a dirt road during a community food distribution",
+      "isPlaceholder": false
+    },
+    {
+      "key": "justice.community",
+      "file": "/media/justice/community.jpg",
+      "width": 1500,
+      "height": 1000,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-group-of-people-sitting-around-a-tree-27471164/",
+      "author": "Speak Media Uganda",
+      "licence": "Pexels License",
+      "searchQuery": "African community meeting outdoors",
+      "usedOn": [
+        "/ministries/social-justice"
+      ],
+      "altText": "Villagers sit on the ground under a large tree listening to a speaker at an outdoor community meeting",
+      "isPlaceholder": false
+    },
+    {
+      "key": "justice.benevolence",
+      "file": "/media/justice/benevolence.jpg",
+      "width": 1400,
+      "height": 1540,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/community-food-distribution-event-34455714/",
+      "author": "Speak Media Uganda",
+      "licence": "Pexels License",
+      "searchQuery": "volunteer delivering groceries Africa",
+      "usedOn": [
+        "/ministries/social-justice"
+      ],
+      "altText": "A young volunteer hands out packs of rice to community members at a food distribution",
+      "isPlaceholder": false
+    },
+    {
+      "key": "justice.women",
+      "file": "/media/justice/women.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/photo-of-a-group-of-people-sitting-together-on-the-ground-in-a-village-20853361/",
+      "author": "illustrate Digital Ug",
+      "licence": "Pexels License",
+      "searchQuery": "African women savings group meeting",
+      "usedOn": [
+        "/ministries/social-justice",
+        "/ministries"
+      ],
+      "altText": "Women in colourful dresses and headscarves sit together on mats in the shade for a village group meeting",
+      "isPlaceholder": false
+    },
+    {
+      "key": "justice.compassion",
+      "file": "/media/justice/compassion.jpg",
+      "width": 1700,
+      "height": 1133,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/black-elderly-people-sitting-on-chairs-in-yard-of-hospital-in-poor-african-village-4483669/",
+      "author": "Denis Ngai",
+      "licence": "Pexels License",
+      "searchQuery": "volunteers elderly care Africa",
+      "usedOn": [
+        "/ministries/social-justice"
+      ],
+      "altText": "A volunteer tends to an elderly woman seated outdoors while other older residents wait on chairs nearby",
+      "isPlaceholder": false
+    },
+    {
+      "key": "counselling.hero",
+      "file": "/media/counselling/hero.jpg",
+      "width": 1800,
+      "height": 1350,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/armchairs-in-living-room-in-sunlight-26932519/",
+      "author": "Tom Schönmann",
+      "licence": "Pexels License",
+      "searchQuery": "calm counselling room chairs",
+      "usedOn": [
+        "/ministries/counselling-care",
+        "/ministries"
+      ],
+      "altText": "Two armchairs beside a small table in a calm room filled with soft sunlight",
+      "isPlaceholder": false
+    },
+    {
+      "key": "marketplace.hero",
+      "file": "/media/marketplace/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/casual-office-meeting-in-lagos-nigeria-30688593/",
+      "author": "Ninthgrid",
+      "licence": "Pexels License",
+      "searchQuery": "African professionals business meeting",
+      "usedOn": [
+        "/ministries/marketplace",
+        "/ministries"
+      ],
+      "altText": "Four young African professionals stand chatting and smiling around a small table in a modern office cafe",
+      "isPlaceholder": false
+    },
+    {
+      "key": "enzi.hero",
+      "file": "/media/enzi/hero.jpg",
+      "width": 1400,
+      "height": 1750,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/team-huddle-of-amputee-soccer-players-35142191/",
+      "author": "Chris wade NTEZICIMPA",
+      "licence": "Pexels License",
+      "searchQuery": "wheelchair user friends Africa inclusion",
+      "usedOn": [
+        "/ministries/enzi",
+        "/ministries"
+      ],
+      "altText": "Amputee football players on crutches huddling together as a team on the pitch",
+      "isPlaceholder": false
+    },
+    {
+      "key": "events.hero",
+      "file": "/media/events/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-woman-spreading-her-arms-in-prayer-13742659/",
+      "author": "Jean-Merci Nam",
+      "licence": "Pexels License",
+      "searchQuery": "outdoor church event Africa crowd",
+      "usedOn": [
+        "/events",
+        "/watch"
+      ],
+      "altText": "A woman worships with eyes closed and arms open among a large crowd at an outdoor gathering",
+      "isPlaceholder": false
+    },
+    {
+      "key": "resources.hero",
+      "file": "/media/resources/hero.jpg",
+      "width": 1400,
+      "height": 2100,
+      "sourceSite": "Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/an-open-book-with-a-pen-on-top-of-it-wAMtqrgeopM",
+      "author": "Kelly Sikkema",
+      "licence": "Unsplash License",
+      "searchQuery": "open Bible notebook devotional",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "An open Bible at the Psalms beside a notepad and pencil on a wooden table",
+      "isPlaceholder": false
+    },
+    {
+      "key": "blog.hero",
+      "file": "/media/blog/hero.jpg",
+      "width": 1800,
+      "height": 1202,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/person-standing-behind-a-podium-with-a-bible-8815042/",
+      "author": "Pavel Danilyuk",
+      "licence": "Pexels License",
+      "searchQuery": "African pastor preaching",
+      "usedOn": [
+        "/blog"
+      ],
+      "altText": "A preacher's hands rest on an open Bible on a pulpit with a microphone, seen from above",
+      "isPlaceholder": false
+    },
+    {
+      "key": "about.hero",
+      "file": "/media/about/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/faces-and-smiles-28102680/",
+      "author": "illustrate Digital Ug",
+      "licence": "Pexels License",
+      "searchQuery": "tent church outdoor Africa",
+      "usedOn": [
+        "/about"
+      ],
+      "altText": "A community gathers under an open-sided tarpaulin tent on bare ground on a bright, sunny day",
+      "isPlaceholder": false
+    },
+    {
+      "key": "beliefs.hero",
+      "file": "/media/beliefs/hero.jpg",
+      "width": 1300,
+      "height": 1950,
+      "sourceSite": "Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/an-open-bible-with-sunlight-streaming-through-blinds-MszZIWTVOi8",
+      "author": "Christopher Stites",
+      "licence": "Unsplash License",
+      "searchQuery": "open Bible soft light",
+      "usedOn": [
+        "/about/beliefs"
+      ],
+      "altText": "An open Bible lying on white linen in soft, slatted sunlight",
+      "isPlaceholder": false
+    },
+    {
+      "key": "compass.hero",
+      "file": "/media/compass/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/IJy2ZUex0-Y",
+      "author": "Denise Jans",
+      "licence": "Unsplash License",
+      "searchQuery": "compass on map",
+      "usedOn": [
+        "/about/compass"
+      ],
+      "altText": "A brass pocket compass with its lid open resting on an old printed map",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.hero",
+      "file": "/media/team/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-close-up-shot-of-a-person-s-hands-beside-a-glass-of-water-8134171/",
+      "author": "Alena Darmel",
+      "licence": "Pexels License",
+      "searchQuery": "team meeting table hands",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Close-up of hands gesturing across a wooden meeting table with a glass of water, laptop and coffee cup",
+      "isPlaceholder": false
+    },
+    {
+      "key": "banns.hero",
+      "file": "/media/banns/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Unsplash",
+      "sourceUrl": "https://unsplash.com/photos/gold-colored-wedding-rings-on-bible-scripture-H7glolsxHUU",
+      "author": "Virgil Cayasa",
+      "licence": "Unsplash License",
+      "searchQuery": "wedding rings Bible",
+      "usedOn": [
+        "/info-desk/marriage-banns"
+      ],
+      "altText": "Two gold wedding rings resting on a Bible cover beside lace, a blue ribbon and white roses",
+      "isPlaceholder": false
+    },
+    {
+      "key": "give.hero",
+      "file": "/media/give/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/traditional-wicker-church-offering-baskets-hung-on-wall-40993208/",
+      "author": "A G",
+      "licence": "Pexels License",
+      "searchQuery": "offering basket church giving",
+      "usedOn": [
+        "/give"
+      ],
+      "altText": "A row of long-handled wicker offering baskets hanging on a white church wall",
+      "isPlaceholder": false
+    },
+    {
+      "key": "give.ppi",
+      "file": "/media/give/ppi.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/young-african-girls-engaged-in-reading-in-liberia-28638752/",
+      "author": "B. Aristotlè Guweh Jr",
+      "licence": "Pexels License",
+      "searchQuery": "African children reading Bible classroom",
+      "usedOn": [
+        "/give"
+      ],
+      "altText": "Three schoolgirls in uniform lean in together to read a book at a classroom desk",
+      "isPlaceholder": false
+    },
+    {
+      "key": "contact.hero",
+      "file": "/media/contact/hero.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/smiling-woman-on-a-uniform-6300613/",
+      "author": "Mads Terkelsen",
+      "licence": "Pexels License",
+      "searchQuery": "African church welcome desk volunteer",
+      "usedOn": [
+        "/contact"
+      ],
+      "altText": "A smiling woman in a white uniform shirt waits to help visitors at a front desk",
+      "isPlaceholder": false
+    },
+    {
+      "key": "home.together",
+      "file": "/media/home/together.jpg",
+      "width": 1400,
+      "height": 1867,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-woman-in-brown-long-sleeves-hugging-a-woman-in-printed-long-sleeves-12639713/",
+      "author": "Gofiwa Kgang",
+      "licence": "Pexels License",
+      "searchQuery": "African church friends greeting hug",
+      "usedOn": [
+        "/"
+      ],
+      "altText": "Two young women laughing as they share a warm hug in late-afternoon sunlight",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.study-1",
+      "file": "/media/library/study-1.jpg",
+      "width": 1600,
+      "height": 2399,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/woman-engaged-in-reading-bible-with-pencil-29512721/",
+      "author": "K",
+      "licence": "Pexels License",
+      "searchQuery": "african bible study",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A woman in a bright pink dress reads an open Bible while holding a pencil among other people.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.study-2",
+      "file": "/media/library/study-2.jpg",
+      "width": 1600,
+      "height": 1068,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/focused-bible-study-session-with-notes-and-pens-30356541/",
+      "author": "Tosin Superson",
+      "licence": "Pexels License",
+      "searchQuery": "bible journal pen",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "Two people sit side by side writing handwritten notes in a notebook with pens during a Bible study.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.study-3",
+      "file": "/media/library/study-3.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/woman-in-blue-dress-shirt-sitting-beside-man-in-white-and-brown-plaid-button-up-shirt-6860458/",
+      "author": "Tima Miroshnichenko",
+      "licence": "Pexels License",
+      "searchQuery": "african bible study",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A young woman and a man in a plaid shirt sit on a sofa reading an open Bible together.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.study-4",
+      "file": "/media/library/study-4.jpg",
+      "width": 1600,
+      "height": 2400,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/man-in-aztec-print-polo-writing-on-notebook-6860820/",
+      "author": "Tima Miroshnichenko",
+      "licence": "Pexels License",
+      "searchQuery": "african bible study",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A young man in a patterned shirt writes notes at a wooden table beside an open Bible and a laptop.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.study-5",
+      "file": "/media/library/study-5.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/person-holding-a-pencil-while-reading-book-6860381/",
+      "author": "Tima Miroshnichenko",
+      "licence": "Pexels License",
+      "searchQuery": "black person reading bible",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "Close-up of hands holding a red pencil and following the text of an open Bible on a notebook.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.study-6",
+      "file": "/media/library/study-6.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/woman-in-blue-dress-shirt-reading-a-bible-6860490/",
+      "author": "Tima Miroshnichenko",
+      "licence": "Pexels License",
+      "searchQuery": "black person reading bible",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A young woman in a denim shirt sits at a table studying an open Bible.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.study-7",
+      "file": "/media/library/study-7.jpg",
+      "width": 1600,
+      "height": 2000,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/focused-young-woman-reading-the-bible-outdoors-34221789/",
+      "author": "Olukoya Isreal Ayomikun",
+      "licence": "Pexels License",
+      "searchQuery": "african bible study",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A young woman wearing glasses reads a Holy Bible outdoors against dry grass.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.study-8",
+      "file": "/media/library/study-8.jpg",
+      "width": 1600,
+      "height": 2135,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/man-reading-a-book-3118214/",
+      "author": "Oladimeji Ajegbile",
+      "licence": "Pexels License",
+      "searchQuery": "african bible study",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A young man in glasses studies a large open book at a desk, hand on his chin.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.prayer-1",
+      "file": "/media/library/prayer-1.jpg",
+      "width": 1600,
+      "height": 2400,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/man-focused-on-prayer-15933272/",
+      "author": "Korede Adenola",
+      "licence": "Pexels License",
+      "searchQuery": "african praying",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A young man with eyes closed holds his hands together in prayer.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.prayer-2",
+      "file": "/media/library/prayer-2.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/group-of-people-praying-in-the-living-room-6860385/",
+      "author": "Tima Miroshnichenko",
+      "licence": "Pexels License",
+      "searchQuery": "black people praying together",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A group of young adults sits in a circle in a living room holding hands in prayer, with Bibles on the rug.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.prayer-3",
+      "file": "/media/library/prayer-3.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/woman-in-white-jacket-kneeling-while-praying-6860467/",
+      "author": "Tima Miroshnichenko",
+      "licence": "Pexels License",
+      "searchQuery": "black woman kneeling praying",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A woman kneels beside a bed with her hands folded in prayer, a Bible resting on the bed.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.prayer-4",
+      "file": "/media/library/prayer-4.jpg",
+      "width": 1600,
+      "height": 2397,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/close-up-photo-of-woman-praying-6190656/",
+      "author": "Askar Abayev",
+      "licence": "Pexels License",
+      "searchQuery": "african praying",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A woman in a headwrap and colourful African print clothing prays with eyes closed and palms together.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.prayer-5",
+      "file": "/media/library/prayer-5.jpg",
+      "width": 1600,
+      "height": 2400,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/serene-woman-meditating-with-holy-bible-31449382/",
+      "author": "Vurzie Kim",
+      "licence": "Pexels License",
+      "searchQuery": "black woman reading bible",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A black-and-white portrait of a woman in glasses with eyes closed, holding a Holy Bible.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.prayer-6",
+      "file": "/media/library/prayer-6.jpg",
+      "width": 1600,
+      "height": 2381,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/glass-of-water-next-to-a-book-17787434/",
+      "author": "Ánh Đặng",
+      "licence": "Pexels License",
+      "searchQuery": "fasting water bible",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A glass of water stands beside an open book on a table in bright sunlight.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.family-1",
+      "file": "/media/library/family-1.jpg",
+      "width": 1600,
+      "height": 2400,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/happy-black-father-and-little-son-smiling-and-reading-textbook-together-7114217/",
+      "author": "Monstera Production",
+      "licence": "Pexels License",
+      "searchQuery": "african family reading bible together home",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A father and his young son sit together at home reading a book.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.family-2",
+      "file": "/media/library/family-2.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/mother-with-son-and-daughter-9872961/",
+      "author": "Ron Lach",
+      "licence": "Pexels License",
+      "searchQuery": "african mother reading to children",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A mother reads a book with her young son and daughter by a window at home.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.family-3",
+      "file": "/media/library/family-3.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/portrait-of-sitting-mother-with-daughter-and-son-9872952/",
+      "author": "Ron Lach",
+      "licence": "Pexels License",
+      "searchQuery": "african mother reading to children",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A mother sits with her daughter on her lap beside her son, who works at a desk by the window.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.kids-1",
+      "file": "/media/library/kids-1.jpg",
+      "width": 1600,
+      "height": 1065,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/faceless-african-american-siblings-drawing-on-blank-papers-at-home-4544797/",
+      "author": "Ketut Subiyanto",
+      "licence": "Pexels License",
+      "searchQuery": "african kids drawing",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "Overhead view of two children drawing on a long roll of paper with coloured pencils.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.kids-2",
+      "file": "/media/library/kids-2.jpg",
+      "width": 1600,
+      "height": 1280,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-cute-girl-in-orange-t-shirt-6869138/",
+      "author": "Andy Coffie",
+      "licence": "Pexels License",
+      "searchQuery": "african kids drawing",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A young girl in an orange T-shirt colours a drawing with a crayon at a table.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.kids-3",
+      "file": "/media/library/kids-3.jpg",
+      "width": 1600,
+      "height": 2400,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/children-sitting-at-table-and-coloring-pictures-7352901/",
+      "author": "Monstera Production",
+      "licence": "Pexels License",
+      "searchQuery": "african kids drawing",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "Two children sit at a low table in a living room colouring pictures.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.kids-4",
+      "file": "/media/library/kids-4.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/flat-lay-shot-of-art-materials-5208690/",
+      "author": "Karolina Grabowska",
+      "licence": "Pexels License",
+      "searchQuery": "craft supplies flat lay",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "Flat lay of craft supplies including scissors, paint pots, coloured pencils, brushes and notebooks on a pale blue surface.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.kids-5",
+      "file": "/media/library/kids-5.jpg",
+      "width": 1600,
+      "height": 1837,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/children-engaged-in-creative-art-activity-35225461/",
+      "author": "Ophelia Acquah",
+      "licence": "Pexels License",
+      "searchQuery": "black kids crafts",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "Children sit around a table painting and pressing shapes onto paper.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "library.kids-6",
+      "file": "/media/library/kids-6.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/cute-young-girl-showing-her-art-project-6963369/",
+      "author": "Andy Barbour",
+      "licence": "Pexels License",
+      "searchQuery": "black kids crafts",
+      "usedOn": [
+        "/resources"
+      ],
+      "altText": "A smiling girl holds up two finished paper crafts at a table.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "pub.hero",
+      "file": "/media/library/pub-hero.jpg",
+      "width": 1600,
+      "height": 2400,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/a-woman-in-black-dress-sitting-on-the-table-while-reading-a-book-7609958/",
+      "author": "cottonbro studio",
+      "licence": "Pexels License",
+      "searchQuery": "african woman reading magazine",
+      "usedOn": [
+        "/publications"
+      ],
+      "altText": "A woman sits on the edge of a table reading a printed booklet, with more papers beside her.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "pub.agm",
+      "file": "/media/library/pub-agm.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/audience-clapping-at-meeting-16856145/",
+      "author": "Domingos Henriques",
+      "licence": "Pexels License",
+      "searchQuery": "african conference audience",
+      "usedOn": [
+        "/publications"
+      ],
+      "altText": "Delegates seated in rows of chairs applaud during an indoor meeting.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "pub.compass",
+      "file": "/media/library/pub-compass.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/scenic-rural-road-in-mau-narok-kenya-s-countryside-30255133/",
+      "author": "Vince Pictures",
+      "licence": "Pexels License",
+      "searchQuery": "kenya road",
+      "usedOn": [
+        "/publications"
+      ],
+      "altText": "A paved country road curves ahead through farmland under a cloudy sky in Mau Narok, Kenya.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "pub.pocket-book",
+      "file": "/media/library/pub-pocket-book.jpg",
+      "width": 1600,
+      "height": 1067,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/bibles-and-a-notebook-8383420/",
+      "author": "Tara Winstead",
+      "licence": "Pexels License",
+      "searchQuery": "bible journal pen",
+      "usedOn": [
+        "/publications"
+      ],
+      "altText": "Two open Bibles, a small spiral notebook, glasses and fern leaves lie on a white quilt.",
+      "isPlaceholder": false
+    },
+    {
+      "key": "blog.index",
+      "file": "/media/library/blog-writing.jpg",
+      "width": 1600,
+      "height": 2400,
+      "sourceSite": "Pexels",
+      "sourceUrl": "https://www.pexels.com/photo/focused-black-left-handed-woman-writing-notes-4350108/",
+      "author": "Ketut Subiyanto",
+      "licence": "Pexels License",
+      "searchQuery": "woman writing notes table",
+      "usedOn": [
+        "/blog"
+      ],
+      "altText": "A woman in a white blouse writes notes in a notepad at a wooden table, with a glass of water beside her.",
+      "isPlaceholder": false,
+      "focus": "50% 48%"
+    }
+  ],
+  "note": "Every image is a placeholder until the church supplies its own photography. To swap: put the photo in public/media/{page}/, update `file`, `width`, `height`, `sourceSite`, `sourceUrl`, `author`, `licence`, `altText` and set `isPlaceholder` to false."
+}
