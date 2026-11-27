@@ -10,7 +10,6 @@ import { SiteFooter } from "@/components/layout/SiteFooter";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { ScrollReveal } from "@/components/layout/ScrollReveal";
-import { PageTransition } from "@/components/layout/PageTransition";
 import { site } from "@content/site";
 import "./motion.css";
 
@@ -53,16 +52,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <SkipLink />
           <SiteHeader nav={mainNav} />
           <Box as="main" id="main">
-            {/* Route changes animate the page body (see motion.css); the header and footer stay still.
-                Link clicks run the Dawn Light overlay instead ("dawn" transition type), so the body doesn’t also fade. */}
-            <ViewTransition default={{ dawn: "none", default: "page" }}>{children}</ViewTransition>
+            {/* Route changes animate the page body (see motion.css); the header and footer stay still */}
+            <ViewTransition default="page">{children}</ViewTransition>
           </Box>
           <SiteFooter />
           <ScrollReveal />
           <WhatsAppButton />
           <Toaster />
         </Provider>
-        <PageTransition />
       </body>
     </html>
   );

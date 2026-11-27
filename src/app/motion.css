@@ -13,22 +13,6 @@
 
 /* ---------------- Page transitions ---------------- */
 
-/* Halftone page transition (src/components/layout/PageTransition.tsx): brand colours.
-   Dots blend from the accent at the band's outer edge into the cover colour. */
-:root {
-  --dawn-cover: #FFFFFF;  /* white */
-  --dawn-accent: #F5C518; /* brand gold */
-}
-/* The overlay canvas gets its own view-transition layer while it runs, so it
-   stays on top and live while the page swaps underneath; no crossfade of its own */
-::view-transition-group(dawn-light),
-::view-transition-new(dawn-light) {
-  animation: none;
-}
-::view-transition-old(dawn-light) {
-  display: none;
-}
-
 /* The page body: the old page fades out quickly, the new one rises into place */
 ::view-transition-old(.page) {
   animation: vt-out 160ms cubic-bezier(0.4, 0, 1, 1) both;
