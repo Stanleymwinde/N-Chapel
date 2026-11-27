@@ -6,6 +6,11 @@ const moved = (source: string, destination: string) => ({ source, destination, s
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
+    // Photos uploaded in the Craft CMS (CRAFT_ASSETS_HOST: e.g. "localhost" for a local copy)
+    remotePatterns: [
+      { protocol: "https", hostname: "cms.nairobichapelngongroad.org" },
+      ...(process.env.CRAFT_ASSETS_HOST ? [{ protocol: "http" as const, hostname: process.env.CRAFT_ASSETS_HOST }] : []),
+    ],
   },
   experimental: {
     optimizePackageImports: ["@chakra-ui/react", "lucide-react"],

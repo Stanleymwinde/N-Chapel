@@ -3,8 +3,8 @@ import { Box, Container, Flex, Heading, HStack, Image, Stack, Text } from "@chak
 import { Heart } from "lucide-react";
 import { home } from "@content/home";
 import { isTodo, site } from "@content/site";
-import { events, type EventEntry } from "@content/events";
-import { latestSermon } from "@content/sermons";
+import { type EventEntry } from "@content/events";
+import { getEventEntries, getLatestSermon } from "@/lib/cms";
 import { formatRange, upcoming } from "@/lib/dates";
 import { HEADER_HEIGHT } from "@/lib/layout";
 import { pageMetadata } from "@/lib/metadata";
@@ -124,8 +124,8 @@ function eventDate(e: EventEntry): string {
   return e.time ? `${date}, ${e.time}` : date;
 }
 
-function Featured() {
-  const next = upcoming(events).slice(0, 4);
+async function Featured() {
+  const next = upcoming(await getEventEntries()).slice(0, 4);
   const used = new Set<string>();
   const imageFor = (e: EventEntry) => {
     const preferred = (e.ministry && home.featuredImages[e.ministry]) || "events.hero";
@@ -325,7 +325,8 @@ function Steps() {
 }
 
 /* 8. Latest sermon (Figma: 560px video beside the details, 48px apart) ------ */
-function LatestSermon() {
+async function LatestSermon() {
+  const latestSermon = await getLatestSermon();
   return (
     <Section id="latest-sermon" tone="warm" title="Watch the latest sermon">
       <Flex direction={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "48px" }} alignItems={{ lg: "center" }}>

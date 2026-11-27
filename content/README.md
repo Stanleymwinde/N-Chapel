@@ -1,6 +1,33 @@
 # Website content
 
-All the words on the site live in this folder as typed TypeScript files. There is no CMS. To add something, you add one entry to an array, save, and redeploy. If you make a mistake in a field (a typo in a type, a missing required field), `pnpm build` stops and tells you which line is wrong, so nothing broken can go live.
+All the words on the site live in this folder as typed TypeScript files. To add something, you add one entry to an array, save, and redeploy. If you make a mistake in a field (a typo in a type, a missing required field), `pnpm build` stops and tells you which line is wrong, so nothing broken can go live.
+
+## Content edited in Craft CMS
+
+The content that changes often is edited in Craft CMS at https://cms.nairobichapelngongroad.org/admin (project `../cms-nairobi-chapel`) and read through `src/lib/cms`:
+
+| On the site | In Craft |
+| --- | --- |
+| What's on (`events.ts`) | **Events** |
+| Sermons (`sermons.ts`) | **Sermons** |
+| Blog (`posts.ts`) | **Blog** |
+| Marriage banns (`banns.ts`) | **Weddings** |
+| Publications (`publications.ts`) | **Publications** |
+| Groups (`groups.ts`) | **Groups** |
+| Team members and Office Bearers (`about.ts` → `team`) | **People** |
+
+For each of these, **as soon as Craft has one entry, Craft's list replaces the file's list**, so move a whole collection at once. Until then, or if Craft can't be reached, the file here is used. Pages pick up Craft changes within 5 minutes (`CRAFT_REVALIDATE`), or straight away when Craft calls `/api/revalidate?secret=…`. Settings are in `.env.example`.
+
+Notes for editors in Craft:
+
+- **Events:** *Event Status* is Dated, Ongoing (every week) or Date to be announced. *Details* takes paragraphs separated by a blank line. *Link Label* + *Link URL* are the card's button; leave the URL empty while it isn't known. Disabled entries don't show.
+- **Sermons:** paste the YouTube link into *Video URL*. Newest *Sermon Date* shows on the home page.
+- **Blog:** the *Body* editor maps to the post layout: Heading 2/3 = section heading; Quote = pull quote, with a last line starting “—” as its reference; a fully bold paragraph = the emphasised line; Heading 4 (e.g. “Prayer”) followed by paragraphs = the closing prayer. *Post Date* is the published date.
+- **People:** *Team* chooses the section (Leadership, Adults, Next Gen, Missions, Worship, Support, Office Bearers). Within a team, people show in *Post Date* order, oldest first, so give the senior pastor the earliest date. Group titles and intros stay in `about.ts`.
+- **Groups:** the *Items* field holds the extra details (title + text). A *Link* sends people to a page instead of the join form.
+- **Publications:** upload the PDF to *Document*; its size is shown automatically. *Post Date* is the publish date.
+
+The rest of this folder (page wording, ministries, the Resource Library, site details) is still edited here.
 
 **Two rules for everything here:**
 

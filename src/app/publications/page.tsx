@@ -1,5 +1,6 @@
 import { Box, Container, Grid, Heading, Stack, Text } from "@chakra-ui/react";
-import { publications, type PublicationCategory } from "@content/publications";
+import { type PublicationCategory } from "@content/publications";
+import { getPublications } from "@/lib/cms";
 import { NextStepBand } from "@/components/NextStepBand";
 import { IndexHero } from "@/components/blog/IndexHero";
 import { PublicationCard } from "@/components/publications/PublicationCard";
@@ -19,7 +20,8 @@ const CATEGORIES: { key: PublicationCategory; title: string }[] = [
   { key: "Ministry", title: "Ministries" },
 ];
 
-export default function PublicationsPage() {
+export default async function PublicationsPage() {
+  const publications = await getPublications();
   const groups = CATEGORIES.map((c) => ({
     ...c,
     items: publications.filter((p) => p.category === c.key).sort((a, b) => b.publishDate.localeCompare(a.publishDate)),

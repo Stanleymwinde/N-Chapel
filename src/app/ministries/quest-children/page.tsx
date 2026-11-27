@@ -1,6 +1,6 @@
 import { Box, Grid, Heading, HStack, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { quest as m } from "@content/ministries/quest";
-import { events } from "@content/events";
+import { getEventEntries } from "@/lib/cms";
 import { upcoming } from "@/lib/dates";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
@@ -17,8 +17,8 @@ import { ChBlockquote, ChFigure, ChSpan } from "@/components/primitives";
 
 export const metadata = pageMetadata({ title: m.meta.title, description: m.meta.description, path: m.href });
 
-export default function QuestPage() {
-  const camps = upcoming(events.filter((e) => e.ministry === m.href));
+export default async function QuestPage() {
+  const camps = upcoming((await getEventEntries()).filter((e) => e.ministry === m.href));
   return (
     <>
       <MinistryHero

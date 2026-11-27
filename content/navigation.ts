@@ -1,6 +1,6 @@
 /** Header, mobile menu and footer navigation. */
-import { sortedPosts } from "./posts";
-import { publications } from "./publications";
+import { sortedPosts, type Post } from "./posts";
+import { publications, type Publication } from "./publications";
 
 export type NavLink = { label: string; href: string; description?: string };
 /** A titled column inside a dropdown (used by Resources). */
@@ -20,7 +20,7 @@ export type NavItem = {
  * themselves from content/posts.ts and content/publications.ts, so adding a
  * post or a publication updates the menu with no change here.
  */
-const resourcesGroups: NavGroup[] = [
+const resourcesGroupsFor = (postList: Post[], pubList: Publication[]): NavGroup[] => [
   {
     label: "Resource Library",
     href: "/resources",
@@ -36,7 +36,7 @@ const resourcesGroups: NavGroup[] = [
     label: "Blog",
     href: "/blog",
     links: [
-      ...sortedPosts()
+      ...sortedPosts(postList)
         .slice(0, 3)
         .map((p) => ({ label: p.title, href: `/blog/${p.slug}`, description: p.author })),
       { label: "View all posts", href: "/blog" },
@@ -46,7 +46,7 @@ const resourcesGroups: NavGroup[] = [
     label: "Publications",
     href: "/publications",
     links: [
-      ...[...publications]
+      ...[...pubList]
         .sort((a, b) => b.publishDate.localeCompare(a.publishDate))
         .map((p) => ({ label: p.title, href: `/publications/${p.slug}` })),
       { label: "All publications", href: "/publications" },
@@ -54,7 +54,8 @@ const resourcesGroups: NavGroup[] = [
   },
 ];
 
-export const mainNav: NavItem[] = [
+/** The header menu; Blog and Publications are filled from the given lists (Craft's or the /content files). */
+export const buildMainNav = (postList: Post[], pubList: Publication[]): NavItem[] => [
   {
     label: "New Here",
     href: "/new-here",
@@ -103,7 +104,7 @@ export const mainNav: NavItem[] = [
   {
     label: "Resources",
     href: "/resources",
-    groups: resourcesGroups,
+    groups: resourcesGroupsFor(postList, pubList),
   },
   {
     label: "About",
@@ -119,6 +120,8 @@ export const mainNav: NavItem[] = [
     ],
   },
 ];
+
+export const mainNav: NavItem[] = buildMainNav(sortedPosts(), publications);
 
 export const footerNav = [
   {

@@ -367,8 +367,8 @@ export const posts: Post[] = [
  * Newest first. Posts without a confirmed date keep the order they are
  * listed in above, after any dated posts.
  */
-export function sortedPosts(): Post[] {
-  return posts
+export function sortedPosts(list: Post[] = posts): Post[] {
+  return list
     .map((p, i) => ({ p, i }))
     .sort((a, b) => {
       if (a.p.publishDate && b.p.publishDate) return b.p.publishDate.localeCompare(a.p.publishDate);

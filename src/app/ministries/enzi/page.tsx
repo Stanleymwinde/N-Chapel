@@ -1,7 +1,7 @@
 import NextLink from "next/link";
 import { Box, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import { enzi as m } from "@content/ministries/enzi";
-import { getPublicationBySlug } from "@content/publications";
+import { getPublication as getPublicationBySlug } from "@/lib/cms";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
 import { Icon } from "@/components/icons";
@@ -24,8 +24,8 @@ function IconDisc({ name, dark }: { name: Parameters<typeof Icon>[0]["name"]; da
   );
 }
 
-export default function EnziPage() {
-  const pub = getPublicationBySlug("enzi-disability-ministry");
+export default async function EnziPage() {
+  const pub = await getPublicationBySlug("enzi-disability-ministry");
   const volunteerText = encodeURIComponent("Hello, my name is ______. 2Q (Enzi Volunteer)");
 
   return (

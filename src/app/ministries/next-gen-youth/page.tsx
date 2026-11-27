@@ -1,6 +1,6 @@
 import { Box, Stack, Text } from "@chakra-ui/react";
 import { nextGen as m } from "@content/ministries/next-gen";
-import { events } from "@content/events";
+import { getEventEntries } from "@/lib/cms";
 import { upcoming } from "@/lib/dates";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
@@ -12,8 +12,8 @@ import { AcronymList, MSection, SplitFeature } from "@/components/b/MinistryBloc
 
 export const metadata = pageMetadata({ title: m.meta.title, description: m.meta.description, path: m.href });
 
-export default function NextGenPage() {
-  const moran = upcoming(events).find((e) => /moran/i.test(e.title));
+export default async function NextGenPage() {
+  const moran = upcoming(await getEventEntries()).find((e) => /moran/i.test(e.title));
   const tones = ["white", "warm", "white"] as const;
   return (
     <>

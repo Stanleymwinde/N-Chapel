@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import { sortedPosts, type PostCategory } from "@content/posts";
+import { type Post, type PostCategory } from "@content/posts";
+import { getPosts } from "@/lib/cms";
 import { pageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { NextStepBand } from "@/components/NextStepBand";
@@ -16,7 +17,7 @@ export const metadata = pageMetadata({
 
 
 /* Shown before the filters hydrate (and without JavaScript): the same layout, unfiltered. */
-function StaticList({ posts }: { posts: ReturnType<typeof sortedPosts> }) {
+function StaticList({ posts }: { posts: Post[] }) {
   const [featured, ...rest] = posts;
   return (
     <Box display="grid" gap="28px">
@@ -32,8 +33,8 @@ function StaticList({ posts }: { posts: ReturnType<typeof sortedPosts> }) {
   );
 }
 
-export default function BlogPage() {
-  const posts = sortedPosts();
+export default async function BlogPage() {
+  const posts = await getPosts();
   const categories = Array.from(new Set(posts.map((p) => p.category))) as PostCategory[];
   const authors = Array.from(new Set(posts.map((p) => p.author))).sort((a, b) => a.localeCompare(b));
 

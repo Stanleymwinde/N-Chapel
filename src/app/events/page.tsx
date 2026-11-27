@@ -1,5 +1,6 @@
 import { Box, Container, Heading, Stack, Text } from "@chakra-ui/react";
-import { audienceFilters, publishedEvents } from "@content/events";
+import { audienceFilters } from "@content/events";
+import { getPublishedEvents } from "@/lib/cms";
 import { nairobiToday } from "@/lib/events";
 import { pageMetadata } from "@/lib/metadata";
 import { NextStepBand } from "@/components/NextStepBand";
@@ -15,7 +16,8 @@ export const metadata = pageMetadata({
 /** Re-render at least hourly so "today" (Nairobi time) is never a build-time date */
 export const revalidate = 3600;
 
-export default function EventsPage() {
+export default async function EventsPage() {
+  const publishedEvents = await getPublishedEvents();
   // The browser re-reads today as well, so a cached page can't show an ended event as upcoming.
   const today = nairobiToday();
 

@@ -1,5 +1,6 @@
 import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
-import { groupAreas, groupAreasTodo, groupAudiences, groups, groupsIntro, joinGroupAside, joinGroupForm } from "@content/groups";
+import { groupAreas, groupAreasTodo, groupAudiences, groupsIntro, joinGroupAside, makeJoinGroupForm } from "@content/groups";
+import { getGroups } from "@/lib/cms";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
 import { Form } from "@/components/Form";
@@ -16,9 +17,11 @@ export const metadata = pageMetadata({
   path: "/get-involved/groups",
 });
 
-const egroups = groups.find((g) => g.slug === "egroups");
 
-export default function GroupsPage() {
+export default async function GroupsPage() {
+  const groups = await getGroups();
+  const egroups = groups.find((g) => g.slug === "egroups");
+  const joinGroupForm = makeJoinGroupForm(groups);
   return (
     <>
       <LightHero

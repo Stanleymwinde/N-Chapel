@@ -2,7 +2,7 @@ import NextLink from "next/link";
 import { Box, Container, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import { ChevronDown, Landmark, Smartphone } from "lucide-react";
 import { give } from "@content/give";
-import { events } from "@content/events";
+import { getEventEntries } from "@/lib/cms";
 import { site } from "@content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
@@ -56,7 +56,8 @@ function WayIcon({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default function GivePage() {
+export default async function GivePage() {
+  const events = await getEventEntries();
   const { bank } = site.giving;
   const drive = events.find((e) => e.slug === "ppi-bible-drive");
   const fund = give.funds[0];

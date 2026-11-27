@@ -4,7 +4,8 @@ import NextLink from "next/link";
 import { notFound } from "next/navigation";
 import { Box, Container, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import { ArrowRight, BookOpen, ChevronDown, PlayCircle } from "lucide-react";
-import { readingTime, sortedPosts, type Post } from "@content/posts";
+import { readingTime, type Post } from "@content/posts";
+import { getPosts } from "@/lib/cms";
 import { getSeries } from "@content/library/series";
 import { seriesPhoto } from "@content/library/photos";
 import { pageMetadata } from "@/lib/metadata";
@@ -20,17 +21,18 @@ import { PostContents } from "@/components/blog/PostContents";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
 import { ChA, ChLi, ChOl, ChSpan, ChTime, ChUl } from "@/components/primitives";
 
-export const dynamicParams = false;
+/** Posts added in Craft after the build get their page on first visit. */
+export const dynamicParams = true;
 
-export function generateStaticParams() {
-  return sortedPosts().map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getPosts()).map((p) => ({ slug: p.slug }));
 }
 
-const find = (slug: string) => sortedPosts().find((p) => p.slug === slug);
+const find = async (slug: string) => (await getPosts()).find((p) => p.slug === slug);
 
 export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const post = find(slug);
+  const post = await find(slug);
   if (!post) return {};
   return pageMetadata({
     title: post.title,
@@ -233,7 +235,7 @@ function AuthorRow({ post, path, boxed }: { post: Post; path: string; boxed: boo
 
 export default async function BlogPostPage({ params }: PageProps<"/blog/[slug]">) {
   const { slug } = await params;
-  const all = sortedPosts();
+  const all = await getPosts();
   const post = all.find((p) => p.slug === slug);
   if (!post) notFound();
   const others = all.filter((p) => p.slug !== post.slug).slice(0, 2);

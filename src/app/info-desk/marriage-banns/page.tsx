@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { Box, Container, Grid, Heading, Stack, Text } from "@chakra-ui/react";
 import { Gem, ScrollText } from "lucide-react";
-import { banns, bannsPage } from "@content/banns";
+import { bannsPage } from "@content/banns";
+import { getBanns } from "@/lib/cms";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Section } from "@/components/layout/Section";
 import { HideWhenExpired } from "@/components/HideWhenExpired";
@@ -159,9 +160,9 @@ function BannCard({ partnerOne, partnerTwo, weddingDate, venue, photo, sample }:
   );
 }
 
-function Upcoming() {
+async function Upcoming() {
   const isProd = process.env.NODE_ENV === "production";
-  const current = banns
+  const current = (await getBanns())
     .filter((b) => !(isProd && b.sample))
     .filter((b) => !isExpired({ expires: b.weddingDate }))
     .sort((a, b) => a.weddingDate.localeCompare(b.weddingDate));

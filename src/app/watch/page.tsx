@@ -1,5 +1,6 @@
 import { Box, Container, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
-import { latestSermon, watchServices } from "@content/sermons";
+import { watchServices } from "@content/sermons";
+import { getLatestSermon } from "@/lib/cms";
 import { pageMetadata } from "@/lib/metadata";
 import { CHANNELS, formatVideoDate, getChannelVideos, splitVideos, thumb, watchUrl, type Episode } from "@/lib/youtube";
 import { LinkButton } from "@/components/Button";
@@ -116,6 +117,7 @@ function EpisodeCard({ e, look }: { e: Episode; look: Look }) {
 }
 
 export default async function WatchPage() {
+  const latestSermon = await getLatestSermon();
   const { services, episodes } = splitVideos(await getChannelVideos());
   const latest = services[0];
   const sameSunday = services.filter((s) => latest && s.series.toLowerCase() === latest.series.toLowerCase() && s.published.slice(0, 10) === latest.published.slice(0, 10) && s.id !== latest.id);

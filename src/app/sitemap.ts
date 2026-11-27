@@ -1,11 +1,9 @@
 import type { MetadataRoute } from "next";
 import { site } from "@content/site";
-import { publishedEvents } from "@content/events";
 import { resources } from "@content/library/resources";
 import { series } from "@content/library/series";
 import { seasons } from "@content/library/seasons";
-import { posts } from "@content/posts";
-import { publications } from "@content/publications";
+import { getPosts, getPublications, getPublishedEvents } from "@/lib/cms";
 import { parseDate } from "@/lib/dates";
 import { isUpcoming, nairobiToday } from "@/lib/events";
 
@@ -57,8 +55,9 @@ const staticRoutes = [
   "/credits",
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const [publishedEvents, posts, publications] = await Promise.all([getPublishedEvents(), getPosts(), getPublications()]);
   const url = (path: string) => `${site.url}${path === "/" ? "" : path}`;
   return [
     ...staticRoutes.map((path) => ({

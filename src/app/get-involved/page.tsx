@@ -1,6 +1,7 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import { getInvolved } from "@content/get-involved";
-import { groupAreas, groupAreasTodo, groupAudiences, groups } from "@content/groups";
+import { groupAreas, groupAreasTodo, groupAudiences } from "@content/groups";
+import { getGroups } from "@/lib/cms";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
 import { MinistryCard } from "@/components/Cards";
@@ -16,7 +17,8 @@ export const metadata = pageMetadata({
   path: "/get-involved",
 });
 
-export default function GetInvolvedPage() {
+export default async function GetInvolvedPage() {
+  const groups = await getGroups();
   return (
     <>
       <LightHero

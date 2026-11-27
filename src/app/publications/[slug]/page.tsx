@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { Box, Container, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
-import { publications, getPublicationBySlug } from "@content/publications";
+import { getPublications, getPublication as getPublicationBySlug } from "@/lib/cms";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { Section } from "@/components/layout/Section";
 import { LinkButton } from "@/components/Button";
@@ -12,15 +12,16 @@ import { PublicationCover } from "@/components/publications/PublicationCover";
 import { pagesLabel, publishedLabel, sizeLabel } from "@/components/publications/meta";
 import { pageMetadata } from "@/lib/metadata";
 
-export const dynamicParams = false;
+/** Publications added in Craft after the build get their page on first visit. */
+export const dynamicParams = true;
 
-export function generateStaticParams() {
-  return publications.map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getPublications()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const pub = getPublicationBySlug(slug);
+  const pub = await getPublicationBySlug(slug);
   if (!pub) return {};
   return pageMetadata({
     title: pub.title,
@@ -39,7 +40,7 @@ const COMPASS_SUMMARY = [
 
 export default async function PublicationPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const pub = getPublicationBySlug(slug);
+  const pub = await getPublicationBySlug(slug);
   if (!pub) notFound();
 
   const path = `/publications/${pub.slug}`;
@@ -52,7 +53,7 @@ export default async function PublicationPage({ params }: { params: Promise<{ sl
     { label: "File size", value: sizeLabel(pub) ?? "TBC" },
   ].filter((f): f is { label: string; value: string } => Boolean(f.value));
   const fileSize = sizeLabel(pub) ?? undefined;
-  const others = publications.filter((o) => o.slug !== pub.slug).sort((a, b) => b.publishDate.localeCompare(a.publishDate)).slice(0, 4);
+  const others = (await getPublications()).filter((o) => o.slug !== pub.slug).sort((a, b) => b.publishDate.localeCompare(a.publishDate)).slice(0, 4);
 
   return (
     <>

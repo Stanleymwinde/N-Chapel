@@ -1,5 +1,6 @@
 import { Box, Container, Grid, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
-import { team } from "@content/about";
+import { team, type TeamGroup, type TeamMember } from "@content/about";
+import { getTeam } from "@/lib/cms";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { NextStepBand } from "@/components/NextStepBand";
 import { Img } from "@/components/Img";
@@ -32,11 +33,9 @@ const gridProps = {
   rowGap: { base: "4", md: "6" },
 } as const;
 
-const [leadership, ...groups] = team.groups;
 
 /* Light hero: title, intro and head-count left; the team photo right */
-function Hero() {
-  const total = team.groups.reduce((n, g) => n + g.members.length, 0);
+function Hero({ total }: { total: number }) {
   return (
     <Box as="header" bg="bg.canvas" pt={{ base: "6", md: "10" }} pb={sectionPy}>
       <Container {...container}>
@@ -64,7 +63,7 @@ function Hero() {
 }
 
 /* Leadership: always shown, above the filter. The Senior Pastor leads. */
-function Leadership() {
+function Leadership({ leadership }: { leadership: TeamGroup }) {
   const [senior, ...others] = leadership.members;
   return (
     <Box as="section" id={leadership.id} aria-labelledby={`${leadership.id}-heading`} bg="accent.highlight" color="fg" py={sectionPy}>
@@ -88,8 +87,8 @@ function Leadership() {
 }
 
 /* Office Bearers: a name / role table */
-function OfficeBearers() {
-  const ob = team.officeBearers;
+function OfficeBearers({ members }: { members: TeamMember[] }) {
+  const ob = { ...team.officeBearers, members };
   return (
     <Box as="section" id="office-bearers" aria-labelledby="office-bearers-heading" bg="bg.warm" py={sectionPy}>
       <Container {...container}>
@@ -133,11 +132,14 @@ function OfficeBearers() {
   );
 }
 
-export default function TeamPage() {
+export default async function TeamPage() {
+  const data = await getTeam();
+  const [leadership, ...groups] = data.groups;
+  const total = data.groups.reduce((n, g) => n + g.members.length, 0);
   return (
     <>
-      <Hero />
-      <Leadership />
+      <Hero total={total} />
+      {leadership && <Leadership leadership={leadership} />}
 
       <TeamFilter options={groups.map((g) => ({ id: g.id, label: g.label ?? g.title, count: g.members.length }))}>
         {groups.map((g) => (
@@ -168,7 +170,7 @@ export default function TeamPage() {
         <Box h={{ base: "10", md: "12" }} aria-hidden="true" />
       </TeamFilter>
 
-      <OfficeBearers />
+      <OfficeBearers members={data.officeBearers} />
 
       <NextStepBand
         title="Want to talk to someone?"

@@ -141,7 +141,8 @@ export const groups: Group[] = [
 /** Groups people can join through the form (link-only cards are excluded). */
 export const joinableGroups = groups.filter((g) => !g.link);
 
-export const joinGroupForm: FormDefinition = {
+/** The join form, built from a list of groups (Craft's or the ones above). */
+export const makeJoinGroupForm = (list: Group[], areas: string[] = groupAreas): FormDefinition => ({
   id: "join-group",
   title: "Join a group",
   intro: "Tell us a little about you and a group leader will get in touch.",
@@ -157,13 +158,13 @@ export const joinGroupForm: FormDefinition = {
       label: "Community",
       type: "select",
       required: true,
-      options: [...joinableGroups.map((g) => g.name), "Not sure yet"],
+      options: [...list.filter((g) => !g.link).map((g) => g.name), "Not sure yet"],
     },
     {
       name: "area",
       label: "Area",
       type: "select",
-      options: [...groupAreas, "Not sure yet"],
+      options: [...areas, "Not sure yet"],
       helper: "Where you live or work, so we can suggest a group near you.",
     },
     {
@@ -174,4 +175,6 @@ export const joinGroupForm: FormDefinition = {
     },
     { name: "message", label: "Message", type: "textarea", helper: "Anything you'd like the group leader to know." },
   ],
-};
+});
+
+export const joinGroupForm: FormDefinition = makeJoinGroupForm(groups);

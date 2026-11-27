@@ -5,7 +5,7 @@ import { resources } from "@content/library/resources";
 import { getSeason, seasons, sortedSeasons } from "@content/library/seasons";
 import { seasonPhoto } from "@content/library/photos";
 import { MONTHS } from "@content/library/types";
-import { getPublicationBySlug } from "@content/publications";
+import { getPublication as getPublicationBySlug } from "@/lib/cms";
 import { pageMetadata } from "@/lib/metadata";
 import { RichText, plainText } from "@/components/RichText";
 import { LinkButton } from "@/components/Button";
@@ -36,7 +36,7 @@ export default async function SeasonPage({ params }: PageProps<"/resources/seaso
   const s = getSeason(slug);
   if (!s) notFound();
   const guides = resources.filter((r) => r.season === s.slug);
-  const pub = s.relatedPublicationSlug ? getPublicationBySlug(s.relatedPublicationSlug) : undefined;
+  const pub = s.relatedPublicationSlug ? await getPublicationBySlug(s.relatedPublicationSlug) : undefined;
 
   return (
     <>

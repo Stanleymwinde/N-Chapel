@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Box, Grid, HStack, Stack, Text } from "@chakra-ui/react";
 import { ShieldCheck } from "lucide-react";
-import { getEvent, publishedEvents } from "@content/events";
+import { getEvent, getPublishedEvents } from "@/lib/cms";
 import { site } from "@content/site";
 import type { Fact } from "@content/types";
 import { formatRange, parseDate } from "@/lib/dates";
@@ -17,20 +17,21 @@ import { PageHero } from "@/components/layout/PageHero";
 import { Prose, Section } from "@/components/layout/Section";
 import { AlertIndicator, AlertRoot, AlertTitle } from "@/components/primitives";
 
-export const dynamicParams = false;
+/** Events added in Craft after the build get their page on first visit. */
+export const dynamicParams = true;
 
 /** Re-render hourly so "this event has ended" follows today's date, not the build date */
 export const revalidate = 3600;
 
-export function generateStaticParams() {
-  return publishedEvents.map((e) => ({ slug: e.slug }));
+export async function generateStaticParams() {
+  return (await getPublishedEvents()).map((e) => ({ slug: e.slug }));
 }
 
 const find = getEvent;
 
 export async function generateMetadata({ params }: PageProps<"/events/[slug]">): Promise<Metadata> {
   const { slug } = await params;
-  const event = find(slug);
+  const event = await find(slug);
   if (!event) return {};
   return pageMetadata({
     title: event.title,
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }: PageProps<"/events/[slug]">):
 
 export default async function EventPage({ params }: PageProps<"/events/[slug]">) {
   const { slug } = await params;
-  const event = find(slug);
+  const event = await find(slug);
   if (!event) notFound();
 
   const past = !isUpcoming(event, nairobiToday());

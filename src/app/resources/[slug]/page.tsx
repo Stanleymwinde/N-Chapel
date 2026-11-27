@@ -7,7 +7,7 @@ import { getResource, monthLabel, resources, seriesResources, weekLabel } from "
 import { getSeries } from "@content/library/series";
 import { getSeason } from "@content/library/seasons";
 import { AUDIENCE_LABELS, TYPE_LABELS, type Resource } from "@content/library/types";
-import { getPublicationBySlug } from "@content/publications";
+import { getPublication as getPublicationBySlug } from "@/lib/cms";
 import { pageMetadata } from "@/lib/metadata";
 import { NextStepBand } from "@/components/NextStepBand";
 import { LinkButton } from "@/components/Button";
@@ -134,7 +134,7 @@ export default async function ResourcePage({ params }: PageProps<"/resources/[sl
   const prev = i > 0 ? weeks[i - 1] : undefined;
   const next = i >= 0 && i < weeks.length - 1 ? weeks[i + 1] : undefined;
 
-  const pub = season?.relatedPublicationSlug ? getPublicationBySlug(season.relatedPublicationSlug) : undefined;
+  const pub = season?.relatedPublicationSlug ? await getPublicationBySlug(season.relatedPublicationSlug) : undefined;
   const hasCraftContent = r.type === "kids-craft" && Boolean(r.craftPhoto || r.materials?.length || r.steps?.length);
   const meta = [s ? `${s.title} · ${weekLabel(r)}` : "", season && !s ? season.title : "", monthLabel(r), r.audience.map((a) => AUDIENCE_LABELS[a]).join(", ")].filter(Boolean);
 

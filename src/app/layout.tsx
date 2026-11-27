@@ -5,7 +5,8 @@ import { Box } from "@chakra-ui/react";
 import { Provider } from "@/components/ui/provider";
 import { Toaster } from "@/components/ui/toaster";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { mainNav } from "@content/navigation";
+import { buildMainNav } from "@content/navigation";
+import { getPosts, getPublications } from "@/lib/cms";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { SkipLink } from "@/components/layout/SkipLink";
@@ -44,7 +45,11 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+/** Pages refresh their Craft content in the background at most every 5 minutes. */
+export const revalidate = 300;
+
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const mainNav = buildMainNav(await getPosts(), await getPublications());
   return (
     <html lang="en-KE" className={`${jost.variable} ${jakarta.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body>

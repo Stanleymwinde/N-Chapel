@@ -1,6 +1,6 @@
 import { Box, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
 import { prayer as m } from "@content/ministries/prayer";
-import { events } from "@content/events";
+import { getEventEntries } from "@/lib/cms";
 import { formatRange, upcoming } from "@/lib/dates";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
@@ -15,8 +15,8 @@ import { ChDd, ChDt } from "@/components/primitives";
 
 export const metadata = pageMetadata({ title: m.meta.title, description: m.meta.description, path: m.href });
 
-export default function PrayerPage() {
-  const fasting = upcoming(events.filter((e) => e.ministry === m.href || /fasting/i.test(e.title)))[0];
+export default async function PrayerPage() {
+  const fasting = upcoming((await getEventEntries()).filter((e) => e.ministry === m.href || /fasting/i.test(e.title)))[0];
   return (
     <>
       <MinistryHero

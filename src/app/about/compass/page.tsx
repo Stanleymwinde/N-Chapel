@@ -1,6 +1,6 @@
 import { Box, Container, Grid, Heading, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { compass, type CompassArea } from "@content/about";
-import { getPublicationBySlug } from "@content/publications";
+import { getPublication as getPublicationBySlug } from "@/lib/cms";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { NextStepBand } from "@/components/NextStepBand";
 import { LinkButton } from "@/components/Button";
@@ -188,8 +188,8 @@ function Area({ a }: { a: CompassArea }) {
   );
 }
 
-export default function CompassPage() {
-  const doc = getPublicationBySlug(compass.publication);
+export default async function CompassPage() {
+  const doc = await getPublicationBySlug(compass.publication);
   return (
     <>
       <Hero />

@@ -242,7 +242,8 @@ export const getEvent = (slug: string) => publishedEvents.find((e) => e.slug ===
 
 export type EventEntry = ChurchEvent & { dateTbc?: string };
 
-export const events: EventEntry[] = publishedEvents
+/** Dated events in the ChurchEvent shape (used for Craft data too). */
+export const toEventEntries = (list: WhatsOnEvent[]): EventEntry[] => list
   .filter((e): e is WhatsOnEvent & { startDate: ISODate } => e.status === "dated" && Boolean(e.startDate))
   .map((e) => ({
     slug: e.slug,
@@ -262,5 +263,7 @@ export const events: EventEntry[] = publishedEvents
     endDate: e.endDate,
     expires: e.endDate ?? e.startDate,
   }));
+
+export const events: EventEntry[] = toEventEntries(publishedEvents);
 
 export const audienceFilters: Audience[] = ["Everyone", "Children", "Youth", "Women", "Men", "Families", "Parents"];
