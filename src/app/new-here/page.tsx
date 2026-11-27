@@ -1,13 +1,10 @@
-import { Box, Container, Grid, Heading, HStack, Text } from "@chakra-ui/react";
+import { Box, Grid, Heading, Text } from "@chakra-ui/react";
 import { newHere, questionsForm } from "@content/new-here";
 import { site } from "@content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
-import { Form } from "@/components/Form";
 import { Icon } from "@/components/icons";
-import { Squiggle } from "@/components/home/Squiggle";
-import { Circled } from "@/components/ministries/Circled";
-import { CentreHeader, SplitRow, WelcomeRibbons } from "@/components/new-here/NewHereParts";
+import { Ctas, enter, FormCard, Ringed, SplitRow, Swooshed, WelcomeRibbons, Wrap } from "@/components/new-here/NewHereParts";
 
 export const metadata = pageMetadata({
   title: "New here?",
@@ -22,57 +19,64 @@ const glance = [
   { icon: "baby" as const, label: "Kids", value: "Quest classes for ages 2–11", link: { label: "About Quest", href: "/ministries/quest-children" } },
 ];
 
+const rowHeading = { fontFamily: "heading", fontWeight: "700", fontSize: { base: "2.25rem", md: "2.75rem" }, lineHeight: "1.1", letterSpacing: "-0.01em" } as const;
+const rowText = { fontSize: "1.0625rem", lineHeight: "1.6", color: "fg.muted" } as const;
+
 export default function NewHerePage() {
   return (
     <>
-      <CentreHeader
-        crumbs={[{ label: "New Here" }]}
-        title={
-          <>
-            <Circled>New</Circled> to Nairobi Chapel?
-          </>
-        }
-        lead={newHere.welcome}
-      >
-        <HStack gap="3" flexWrap="wrap" justifyContent="center">
-          <LinkButton href="/new-here/plan-your-visit" variant="accent" size="lg" arrow>
-            Plan your visit
-          </LinkButton>
-          <LinkButton href="/watch" variant="secondary" size="lg">
-            Watch online
-          </LinkButton>
-        </HStack>
-      </CentreHeader>
+      {/* Hero: tinted band, title left, the three answers in a card */}
+      <Box as="header" bg="bg.tint" pt={{ base: "8", md: "10" }} pb={{ base: "16", md: "24" }}>
+        <Wrap display="flex" flexDirection="column" gap="6" alignItems="flex-start">
+          <Heading as="h1" fontFamily="heading" fontWeight="800" fontSize={{ base: "2.75rem", md: "4.25rem" }} lineHeight="1.05" letterSpacing="-0.01em" textWrap="balance" css={enter(0)}>
+            <Ringed variant="ellipse">New</Ringed>
+            <Box as="span" display="inline-block" w="22px" />
+            to Nairobi Chapel?
+          </Heading>
+          <Text fontSize={{ base: "1.125rem", md: "1.25rem" }} lineHeight="1.5" color="fg.muted" maxW="768px" css={enter(90)}>
+            {newHere.welcome}
+          </Text>
+          <Box css={enter(150)}>
+            <Ctas pt="2">
+              <LinkButton href="/new-here/plan-your-visit" variant="accent" arrow>
+                Plan your visit
+              </LinkButton>
+              <LinkButton href="/watch" variant="secondary" bg="bg.canvas">
+                Watch online
+              </LinkButton>
+            </Ctas>
+          </Box>
 
-      {/* At a glance: one card, three answers */}
-      <Box as="section" aria-label="At a glance" bg="bg.canvas" pb={{ base: "16", md: "24" }}>
-        <Container maxW="container" px={{ base: "5", md: "8" }}>
           <Grid
             as="dl"
+            aria-label="At a glance"
             m="0"
+            w="full"
             templateColumns={{ base: "1fr", md: "repeat(3, minmax(0, 1fr))" }}
-            maxW="64rem"
-            mx="auto"
-            borderRadius="xl"
+            gap={{ base: "6", md: "8" }}
+            p={{ base: "6", md: "8" }}
             bg="bg.canvas"
-            boxShadow="0 24px 60px -24px rgba(22, 18, 31, 0.3), 0 2px 6px rgba(22, 18, 31, 0.06)"
-            overflow="hidden"
+            borderWidth="1px"
+            borderColor="border"
+            borderRadius="20px"
+            boxShadow="0 12px 32px rgba(92, 41, 158, 0.08)"
+            css={enter(210)}
           >
-            {glance.map((g, i) => (
-              <Grid key={g.label} templateColumns="auto minmax(0, 1fr)" gap="4" p={{ base: "6", md: "7" }} borderTopWidth={{ base: i ? "1px" : "0", md: "0" }} borderLeftWidth={{ base: "0", md: i ? "1px" : "0" }} borderColor="border">
-                <Box display="inline-flex" alignItems="center" justifyContent="center" w="11" h="11" borderRadius="full" bg="accent.subtle" color="ink.900" aria-hidden="true">
+            {glance.map((g) => (
+              <Grid key={g.label} templateColumns="auto minmax(0, 1fr)" gap="4" alignItems="start">
+                <Box display="inline-flex" p="3" borderRadius="full" bg="bg.tint" color="brand.fg" aria-hidden="true">
                   <Icon name={g.icon} size={20} />
                 </Box>
-                <Box>
-                  <Text as="dt" fontSize="0.75rem" fontWeight="700" letterSpacing="0.08em" textTransform="uppercase" color="fg.muted" mb="1">
+                <Box display="grid" gap="1">
+                  <Text as="dt" fontSize="0.75rem" fontWeight="600" letterSpacing="0.08em" textTransform="uppercase" color="fg.muted" lineHeight="normal">
                     {g.label}
                   </Text>
-                  <Text as="dd" m="0" fontFamily="heading" fontWeight="600" fontSize="1.1875rem" lineHeight="1.3">
+                  <Text as="dd" m="0" fontWeight="600" fontSize="1.0625rem" lineHeight="1.35">
                     {g.value}
                   </Text>
                   {g.link && (
-                    <Box mt="2">
-                      <LinkButton href={g.link.href} variant="link" size="md">
+                    <Box as="dd" m="0">
+                      <LinkButton href={g.link.href} variant="link" arrow>
                         {g.link.label}
                       </LinkButton>
                     </Box>
@@ -81,60 +85,55 @@ export default function NewHerePage() {
               </Grid>
             ))}
           </Grid>
-        </Container>
+        </Wrap>
       </Box>
 
-      {/* Two rows of text beside a photograph */}
-      <Box as="section" aria-labelledby="first-visit" bg="bg.canvas" pb={{ base: "20", md: "28" }}>
-        <Container maxW="container" px={{ base: "5", md: "8" }} display="grid" gap={{ base: "20", md: "28" }}>
-          <SplitRow image="newhere.hero" imageAlt reverse>
-            <Heading as="h2" id="first-visit" fontFamily="heading" fontWeight="700" fontSize={{ base: "2rem", md: "2.75rem" }} lineHeight="1.1" letterSpacing="-0.015em">
+      {/* Your first visit: copy left, photo right */}
+      <Box as="section" aria-labelledby="first-visit" bg="bg.canvas" py={{ base: "16", md: "24" }}>
+        <Wrap>
+          <SplitRow image="newhere.hero" imageAlt>
+            <Heading as="h2" id="first-visit" {...rowHeading}>
               Your first visit
             </Heading>
-            <Text fontSize={{ base: "1.0625rem", md: "1.1875rem" }} lineHeight="1.75">
-              {newHere.visitIntro}
-            </Text>
-            <Text fontSize={{ base: "1.0625rem", md: "1.1875rem" }} lineHeight="1.75" fontWeight="600">
-              {newHere.saturday}
-            </Text>
-            <HStack gap="3" flexWrap="wrap" pt="1">
-              <LinkButton href="/new-here/plan-your-visit" size="lg">
-                Plan your visit
-              </LinkButton>
-              <LinkButton href={site.mapUrl} variant="secondary" size="lg">
+            <Text {...rowText}>{newHere.visitIntro}</Text>
+            <Text {...rowText}>{newHere.saturday}</Text>
+            <Ctas>
+              <LinkButton href="/new-here/plan-your-visit">Plan your visit</LinkButton>
+              <LinkButton href={site.mapUrl} variant="secondary">
                 Get directions
               </LinkButton>
-            </HStack>
+            </Ctas>
           </SplitRow>
+        </Wrap>
+      </Box>
 
-          <SplitRow image="nextsteps.hero" imageAlt>
-            <Heading as="h2" fontFamily="heading" fontWeight="700" fontSize={{ base: "2rem", md: "2.75rem" }} lineHeight="1.15" letterSpacing="-0.015em">
-              <Squiggle>Exploring faith</Squiggle>, or new to faith?
+      {/* Exploring faith: photo left, copy right, on warm */}
+      <Box as="section" aria-labelledby="exploring-faith" bg="bg.warm" py={{ base: "16", md: "24" }}>
+        <Wrap>
+          <SplitRow image="nextsteps.hero" imageAlt photoFirst>
+            <Heading as="h2" id="exploring-faith" {...rowHeading}>
+              <Swooshed>Exploring faith,</Swooshed>
+              <br />
+              or new to faith?
             </Heading>
-            <Text fontSize={{ base: "1.0625rem", md: "1.1875rem" }} lineHeight="1.75">
-              {newHere.faithIntro}
-            </Text>
-            <HStack gap="3" flexWrap="wrap" pt="1">
-              <LinkButton href="/new-here/next-steps" size="lg">
-                Take a next step
-              </LinkButton>
-              <LinkButton href="/about/beliefs" variant="secondary" size="lg">
+            <Text {...rowText}>{newHere.faithIntro}</Text>
+            <Ctas>
+              <LinkButton href="/new-here/next-steps">Take a next step</LinkButton>
+              <LinkButton href="/about/beliefs" variant="secondary" bg="bg.canvas">
                 What we believe
               </LinkButton>
-            </HStack>
+            </Ctas>
           </SplitRow>
-        </Container>
+        </Wrap>
       </Box>
 
       <WelcomeRibbons />
 
-      {/* Got questions? A real person replies */}
-      <Box as="section" id="questions" aria-label="Got questions?" bg="bg.warm" pb={{ base: "16", md: "24" }} scrollMarginTop="96px">
-        <Container maxW="44rem" px={{ base: "5", md: "8" }}>
-          <Box p={{ base: "6", md: "10" }} bg="bg.canvas" borderRadius="xl" boxShadow="0 24px 60px -30px rgba(22, 18, 31, 0.3)">
-            <Form form={questionsForm} plain />
-          </Box>
-        </Container>
+      {/* Got questions? */}
+      <Box as="section" id="questions" aria-label="Got questions?" bg="bg.tint" py={{ base: "16", md: "24" }} scrollMarginTop="96px">
+        <Wrap>
+          <FormCard form={questionsForm} large />
+        </Wrap>
       </Box>
     </>
   );

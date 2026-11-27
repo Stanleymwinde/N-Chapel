@@ -6,37 +6,34 @@ export const factListRecipe = defineSlotRecipe({
   slots: ["root", "item", "icon", "label", "value"],
   base: {
     root: { display: "grid", gap: "5", listStyle: "none", m: "0", p: "0" },
-    item: { display: "grid", gridTemplateColumns: "auto 1fr", columnGap: "3", rowGap: "0.5", alignItems: "start" },
+    item: { display: "grid", gridTemplateColumns: "auto 1fr", columnGap: "3", rowGap: "1", alignItems: "start" },
     icon: {
       display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      w: "10",
-      h: "10",
-      borderRadius: "full",
-      bg: "brand.subtle",
       color: "brand.fg",
       gridRow: "span 2",
-      "& svg": { width: "20px", height: "20px" },
+      "& svg": { width: "18px", height: "18px" },
     },
-    label: { textStyle: "eyebrow", color: "fg.muted", alignSelf: "end" },
+    label: { fontFamily: "body", fontSize: "0.6875rem", fontWeight: "500", lineHeight: "normal", letterSpacing: "0.08em", textTransform: "uppercase", color: "fg.muted" },
     value: {
-      textStyle: "body",
+      fontFamily: "body",
+      fontSize: "0.9375rem",
+      lineHeight: "normal",
       color: "fg",
       // standalone links get a 44px tap target
-      "& a": { color: "brand.fg", textDecoration: "underline", textUnderlineOffset: "0.2em", display: "inline-flex", alignItems: "center", minH: "44px" },
+      "& a": { color: "brand.fg", textDecoration: "underline", textUnderlineOffset: "0.2em", display: "inline-flex", alignItems: "center", minH: "24px" },
     },
   },
   variants: {
     layout: {
       stack: {},
       grid: { root: { gridTemplateColumns: { base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(4, 1fr)" }, gap: "6" } },
-      inline: { root: { gridTemplateColumns: { base: "1fr", md: "repeat(3, 1fr)" }, gap: "6" } },
+      // Figma "Info row": three items side by side, 64px apart, in a 1000px row
+      inline: { root: { gridTemplateColumns: { base: "1fr", md: "repeat(3, auto)" }, justifyContent: { md: "start" }, columnGap: "64px", rowGap: "5", maxW: "1000px", mx: "auto" } },
     },
     tone: {
       light: {},
       dark: {
-        icon: { bg: "whiteAlpha.200", color: "accent.highlight" },
+        icon: { color: "accent.highlight" },
         label: { color: "fg.invertedMuted" },
         value: { color: "fg.inverted", "& a": { color: "fg.inverted" } },
       },

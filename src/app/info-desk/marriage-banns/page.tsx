@@ -8,7 +8,7 @@ import { HideWhenExpired } from "@/components/HideWhenExpired";
 import { NextStepBand } from "@/components/NextStepBand";
 import { Img } from "@/components/Img";
 import { Squiggle } from "@/components/home/Squiggle";
-import { dateParts, formatLongDate, isExpired, parseDate } from "@/lib/dates";
+import { formatLongDate, isExpired } from "@/lib/dates";
 import { pageMetadata } from "@/lib/metadata";
 import { ChUl } from "@/components/primitives";
 
@@ -28,7 +28,7 @@ function Notice({ text }: { text: string }) {
   return (
     <>
       {text.slice(0, i)}
-      <Box as="strong" color="fg" fontWeight="700">
+      <Box as="strong" color="fg" fontWeight="600">
         {key}
       </Box>
       {text.slice(i + key.length)}
@@ -36,23 +36,25 @@ function Notice({ text }: { text: string }) {
   );
 }
 
-/* Light hero, in the About family */
+const sectionPy = { base: "16", md: "20", lg: "24" } as const;
+
+/* Light hero: title and intro left, the rings photo right */
 function Hero() {
   return (
-    <Box as="header" bg="bg.canvas" pt={{ base: "6", md: "10" }} pb={{ base: "12", md: "16" }}>
+    <Box as="header" bg="bg.canvas" pt={{ base: "6", md: "10" }} pb={sectionPy}>
       <Container {...container}>
-        <Breadcrumbs items={[{ label: "Info Desk" }, { label: "Marriage banns" }]} tone="light" />
-        <Grid mt={{ base: "6", md: "8" }} templateColumns={{ base: "1fr", md: "1.2fr 1fr" }} gap={{ base: "8", md: "12", lg: "16" }} alignItems="center">
-          <Stack gap={{ base: "5", md: "6" }}>
-            <Heading as="h1" fontFamily="heading" fontWeight="700" fontSize="clamp(2.75rem, 1.6rem + 4.4vw, 5rem)" lineHeight="1" letterSpacing="-0.02em">
+        <Breadcrumbs items={[{ label: "About", href: "/about" }, { label: "Marriage banns" }]} tone="light" />
+        <Grid mt={{ base: "6", md: "7" }} templateColumns={{ base: "1fr", md: "minmax(0, 1fr) minmax(0, 614px)" }} gap={{ base: "8", md: "10", lg: "57px" }} alignItems="center">
+          <Stack gap="5">
+            <Heading as="h1" fontFamily="heading" fontWeight="600" fontSize="clamp(2.75rem, 1.6rem + 3.8vw, 4.5rem)" lineHeight="1.05" letterSpacing="-0.02em">
               <Squiggle>{bannsPage.title}</Squiggle>
             </Heading>
-            <Text textStyle="lead" color="fg.muted" maxW="32rem">
+            <Text textStyle="lead" color="fg.muted" maxW="564px">
               {bannsPage.intro}
             </Text>
           </Stack>
-          <Box position="relative" aspectRatio={{ base: "16 / 9", md: "4 / 3" }} borderRadius="lg" overflow="hidden" bg="bg.tint">
-            <Img slot="banns.hero" priority sizes="(min-width: 768px) 520px, 100vw" />
+          <Box position="relative" aspectRatio="614 / 341" borderRadius="10px" overflow="hidden" bg="bg.tint">
+            <Img slot="banns.hero" priority sizes="(min-width: 768px) 614px, 100vw" />
           </Box>
         </Grid>
       </Container>
@@ -65,16 +67,16 @@ function Explanation() {
   const [celebration, ...notices] = bannsPage.explanation;
   return (
     <Section tone="warm" label="About marriage banns">
-      <Stack gap={{ base: "12", md: "16" }} alignItems="center">
+      <Stack gap={{ base: "10", md: "14" }} alignItems="center">
         <Text
-          maxW="48rem"
+          maxW="680px"
           textAlign="center"
           fontFamily="heading"
           fontWeight="500"
-          fontSize="clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem)"
-          lineHeight="1.35"
+          fontSize="clamp(1.5rem, 1.2rem + 1.1vw, 2rem)"
+          lineHeight="1.4"
           letterSpacing="-0.005em"
-          textWrap="balance"
+          whiteSpace="pre-line"
         >
           {celebration}
         </Text>
@@ -82,22 +84,22 @@ function Explanation() {
           <Grid
             key={n}
             w="100%"
-            maxW="44rem"
+            maxW="768px"
             templateColumns="auto 1fr"
             gap="5"
             alignItems="start"
-            p={{ base: "6", md: "8" }}
-            borderRadius="lg"
+            p={{ base: "5", md: "7" }}
+            borderRadius="10px"
             bg="bg.canvas"
             borderWidth="1px"
             borderColor="border"
-            borderLeftWidth="4px"
+            borderLeftWidth="3px"
             borderLeftColor="brand.solid"
           >
-            <Box w="11" h="11" borderRadius="md" bg="brand.subtle" color="brand.fg" display="flex" alignItems="center" justifyContent="center" aria-hidden="true">
-              <ScrollText size={22} />
+            <Box w="10" h="10" borderRadius="8px" bg="bg.tint" color="brand.fg" display="flex" alignItems="center" justifyContent="center" aria-hidden="true">
+              <ScrollText size={18} />
             </Box>
-            <Text color="fg.muted" fontSize={{ base: "1rem", md: "1.0625rem" }} lineHeight="1.7">
+            <Text color="fg.muted" fontSize="0.9375rem" lineHeight="1.6">
               <Notice text={n} />
             </Text>
           </Grid>
@@ -110,22 +112,19 @@ function Explanation() {
 /** "Dorothy", "Kelvin" → "D & K" */
 const coupleInitials = (first: string, second: string) => [first, second].map((n) => n.trim()[0]?.toUpperCase()).join(" & ");
 
-/* One bann: the couple's photo (or their initials), date badge, names */
+/* One bann (Figma "Bann card"): the couple's photo (or their initials), names, date */
 function BannCard({ partnerOne, partnerTwo, weddingDate, venue, photo, sample }: { partnerOne: string; partnerTwo: string; weddingDate: string; venue?: string; photo?: string; sample?: boolean }) {
-  const parts = dateParts(weddingDate);
-  const year = new Intl.DateTimeFormat("en-GB", { timeZone: "Africa/Nairobi", year: "numeric" }).format(parseDate(weddingDate));
   const couple = `${partnerOne} weds ${partnerTwo}`;
   return (
-    <Box as="article" h="100%" display="flex" flexDirection="column" borderRadius="lg" overflow="hidden" bg="bg.canvas" borderWidth="1px" borderColor="border">
-      {/* Photo frame */}
-      <Box position="relative" aspectRatio="4 / 5" bg="bg.tint" overflow="hidden">
+    <Box as="article" h="100%" display="flex" flexDirection="column" borderRadius="10px" overflow="hidden" bg="bg.canvas" borderWidth="1px" borderColor="border">
+      <Box position="relative" aspectRatio="317 / 385" bg="bg.tint" overflow="hidden">
         {photo ? (
           <Image
             src={photo}
             alt={sample ? "" : couple}
             fill
             unoptimized={photo.endsWith(".svg")}
-            sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+            sizes="(min-width: 1024px) 317px, (min-width: 640px) 50vw, 100vw"
             style={{ objectFit: "cover" }}
           />
         ) : (
@@ -136,48 +135,22 @@ function BannCard({ partnerOne, partnerTwo, weddingDate, venue, photo, sample }:
             </Text>
           </Stack>
         )}
+        {/* Dev-only samples are flagged so they can never pass for real banns */}
         {sample && (
           <Text position="absolute" top="4" right="4" px="2.5" py="1" borderRadius="full" bg="accent.highlight" color="accent.contrast" fontSize="0.75rem" fontWeight="700">
             Sample
           </Text>
         )}
-        {/* Date badge pinned to the photo */}
-        <Stack
-          position="absolute"
-          top="4"
-          left="4"
-          gap="0"
-          alignItems="center"
-          minW="68px"
-          py="2"
-          px="3"
-          borderRadius="md"
-          bg="brand.solid"
-          color="white"
-          boxShadow="card"
-          aria-hidden="true"
-        >
-          <Text fontSize="0.75rem" fontWeight="700" letterSpacing="0.08em">
-            {parts.month}
-          </Text>
-          <Text fontFamily="heading" fontWeight="700" fontSize="1.875rem" lineHeight="1">
-            {parts.day}
-          </Text>
-          <Text fontSize="0.75rem" opacity={0.85}>
-            {year}
-          </Text>
-        </Stack>
       </Box>
-      {/* Names and date */}
-      <Stack gap="2" p={{ base: "5", md: "6" }} flex="1">
-        <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize={{ base: "1.375rem", md: "1.5rem" }} lineHeight="1.25">
+      <Stack gap="2.5" px="22px" pt="22px" pb="6" flex="1">
+        <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize={{ base: "1.25rem", md: "1.3125rem" }} lineHeight="1.3">
           {partnerOne}{" "}
-          <Box as="span" fontStyle="italic" fontWeight="500" fontSize="0.72em" color="gold.600" px="0.5">
+          <Box as="span" fontFamily="body" fontWeight="400" fontSize="0.875rem" color="gold.600" px="1">
             weds
           </Box>{" "}
           {partnerTwo}
         </Heading>
-        <Text color="fg.muted">
+        <Text color="fg.muted" fontSize="1rem" lineHeight="1.5">
           Wedding on {formatLongDate(weddingDate)}
           {venue ? ` at ${venue}` : ""}
         </Text>
@@ -194,7 +167,11 @@ function Upcoming() {
     .sort((a, b) => a.weddingDate.localeCompare(b.weddingDate));
 
   return (
-    <Section id="upcoming" title="Upcoming weddings">
+    <Box as="section" id="upcoming" aria-labelledby="upcoming-heading" bg="bg.canvas" py={sectionPy}>
+      <Container {...container}>
+      <Heading as="h2" id="upcoming-heading" fontFamily="heading" fontWeight="600" fontSize="clamp(2.125rem, 1.6rem + 1.9vw, 3rem)" lineHeight="1.2" letterSpacing="-0.015em" mb="9">
+        Upcoming weddings
+      </Heading>
       {current.length === 0 ? (
         <Stack
           alignItems="center"
@@ -216,7 +193,7 @@ function Upcoming() {
           </Text>
         </Stack>
       ) : (
-        <ChUl listStyle="none" m="0" p="0" display="grid" gridTemplateColumns={{ base: "1fr", sm: "repeat(2, 1fr)", lg: "repeat(3, 1fr)" }} gap={{ base: "5", md: "6" }}>
+        <ChUl listStyle="none" m="0" p="0" display="grid" gridTemplateColumns={{ base: "1fr", sm: "repeat(2, minmax(0, 1fr))", lg: "repeat(3, minmax(0, 317px))" }} gap={{ base: "5", md: "6" }}>
           {current.map((b) => (
             <HideWhenExpired key={b.id} expires={b.weddingDate}>
               <li>
@@ -226,7 +203,8 @@ function Upcoming() {
           ))}
         </ChUl>
       )}
-    </Section>
+      </Container>
+    </Box>
   );
 }
 
@@ -239,8 +217,8 @@ export default function MarriageBannsPage() {
       <NextStepBand
         title="Preparing for marriage?"
         text="Talk to us about weddings and pastoral support."
-        primary={{ label: "Contact the church", href: "/contact" }}
-        secondary={{ label: "Counselling and care", href: "/ministries/counselling-care" }}
+        primary={{ label: "Plan your visit", href: "/new-here/plan-your-visit" }}
+        secondary={{ label: "Get counselling", href: "/ministries/counselling-care" }}
       />
     </>
   );

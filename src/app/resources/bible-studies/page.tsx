@@ -7,6 +7,9 @@ export const metadata = pageMetadata({
   path: "/resources/bible-studies",
 });
 
+/** "This week" is worked out from today's date, so re-render daily */
+export const revalidate = 86400;
+
 export default function Page() {
   return <SectionPage section="bible-study" />;
 }

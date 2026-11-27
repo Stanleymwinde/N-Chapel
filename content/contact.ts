@@ -2,7 +2,11 @@ import type { FormDefinition } from "./types";
 
 export const contact = {
   title: "Contact us",
-  intro: "Call, WhatsApp, email or drop by. We'd love to hear from you.",
+  intro: "Call, WhatsApp, email or drop by. We’d love to hear from you.",
+  waysTitle: "Other ways to reach us",
+  waysIntro: "Prefer to talk, message or visit? Pick whatever works for you.",
+  // Address line as given in the Figma design (content/site.ts still marks the landmark as to be confirmed)
+  addressLine: "Ngong Road, Nairobi, near Raila Odinga Stadium, off the Jamhuri Road area.",
   responsePromise: "[TODO: confirm response time, e.g. we reply within 2 working days]",
 };
 

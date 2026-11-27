@@ -4,7 +4,7 @@ import { sortedPosts, type PostCategory } from "@content/posts";
 import { pageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/layout/Section";
 import { NextStepBand } from "@/components/NextStepBand";
-import { LibraryHero } from "@/components/library/LibraryHero";
+import { IndexHero } from "@/components/blog/IndexHero";
 import { BlogFilters } from "@/components/blog/BlogFilters";
 import { PostCard } from "@/components/blog/PostCard";
 
@@ -19,9 +19,9 @@ export const metadata = pageMetadata({
 function StaticList({ posts }: { posts: ReturnType<typeof sortedPosts> }) {
   const [featured, ...rest] = posts;
   return (
-    <Box display="grid" gap={{ base: "8", md: "10" }}>
+    <Box display="grid" gap="28px">
       {featured && <PostCard post={featured} featured />}
-      <SimpleGrid as="ul" listStyle="none" m="0" p="0" columns={{ base: 1, sm: 2, lg: 3 }} gap="5">
+      <SimpleGrid as="ul" listStyle="none" m="0" p="0" columns={{ base: 1, sm: 2, lg: 3 }} gap="24px">
         {rest.map((p) => (
           <li key={p.slug}>
             <PostCard post={p} />
@@ -39,11 +39,9 @@ export default function BlogPage() {
 
   return (
     <>
-      <LibraryHero
-        crumbs={[{ label: "Blog" }]}
-        display
+      <IndexHero
         title="Blog"
-        intro="Sermon notes and devotionals from our pastors, to help you keep thinking about Sunday's message through the week."
+        intro="Sermon notes and devotionals from our pastors, to help you keep thinking about Sunday’s message through the week."
         image="blog.index"
       />
 

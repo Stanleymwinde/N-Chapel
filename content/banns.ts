@@ -4,8 +4,9 @@ export const bannsPage = {
   title: "Marriage banns",
   intro: "Couples planning to marry at Nairobi Chapel Ngong Road.",
   explanation: [
-    "God established marriage from the beginning as a holy, God-ordained vocation, and Nairobi Chapel celebrates and honours it.",
-    "If you have any legal objection to any of the couples below getting married, please inform the church in writing at least 14 days before the wedding.",
+    // First line, then the rest (Figma breaks after the first sentence)
+    "God takes marriage very seriously.\nHe established marriage from the beginning as an important part of His plan for us. Marriage is a holy, God-ordained vocation and at Nairobi Chapel, we celebrate and honour marriage.",
+    "If you have any legal reservations against any of these couples getting married, kindly inform the church in writing 14 days before the wedding.",
   ],
   emptyState: "No marriage banns are currently being published.",
 };
@@ -30,7 +31,7 @@ export const banns: BannsEntry[] = [
    * development (pnpm dev) and are hidden in production builds, so they can
    * never be published as real banns. Delete them once real banns exist.
    */
-  { id: "sample-1", partnerOne: "Amani Wanjiru", partnerTwo: "Baraka Otieno", weddingDate: "2027-01-16", photo: "/media/banns/couple-placeholder.svg", sample: true },
-  { id: "sample-2", partnerOne: "Zawadi Achieng", partnerTwo: "Imani Kiprop", weddingDate: "2027-02-13", photo: "/media/banns/couple-placeholder.svg", sample: true },
-  { id: "sample-3", partnerOne: "Neema Mwende", partnerTwo: "Jabali Mutua", weddingDate: "2027-03-20", photo: "/media/banns/couple-placeholder.svg", sample: true },
+  { id: "sample-1", partnerOne: "Amani Wanjiru", partnerTwo: "Baraka Otieno", weddingDate: "2027-01-16", photo: "/media/banns/sample-couple-1.jpg", sample: true },
+  { id: "sample-2", partnerOne: "Zawadi Achieng", partnerTwo: "Imani Kiprop", weddingDate: "2027-02-13", photo: "/media/banns/sample-couple-2.jpg", sample: true },
+  { id: "sample-3", partnerOne: "Neema Mwende", partnerTwo: "Jabali Mutua", weddingDate: "2027-03-20", photo: "/media/banns/sample-couple-3.jpg", sample: true },
 ];

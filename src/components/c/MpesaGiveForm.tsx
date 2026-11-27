@@ -18,21 +18,23 @@ type Phase =
   | { kind: "ended"; title: string; message: string };
 
 /** A choice that looks like a card but is a real radio input (keyboard and screen reader friendly). */
-function Choice({ name, value, checked, onChange, children }: { name: string; value: string; checked: boolean; onChange: () => void; children: React.ReactNode }) {
+function Choice({ name, value, checked, onChange, children, tall }: { name: string; value: string; checked: boolean; onChange: () => void; children: React.ReactNode; /** fund tiles (72px) rather than amount pills */ tall?: boolean }) {
   return (
     <chakra.label
       position="relative"
       display="flex"
       alignItems="center"
-      minH="12"
-      px="4"
-      py="2.5"
-      borderRadius="lg"
-      borderWidth="1.5px"
-      borderColor={checked ? "brand.solid" : "border"}
+      minH={tall ? "72px" : "40px"}
+      px={tall ? "14px" : "3"}
+      py={tall ? "14px" : "9px"}
+      borderRadius="8px"
+      borderWidth={checked ? "1.5px" : "1px"}
+      borderColor={checked ? "brand.solid" : "#D9D3DF"}
       bg={checked ? "brand.subtle" : "bg.canvas"}
       color="fg"
-      fontWeight="600"
+      fontSize="15px"
+      lineHeight="1.4"
+      fontWeight="400"
       cursor="pointer"
       transition={`border-color 150ms ease, background-color 150ms ease, transform 160ms ${ease}`}
       _active={{ transform: "scale(0.97)" }}
@@ -150,7 +152,7 @@ export function MpesaGiveForm({ paybill }: { paybill: string }) {
     const ok = phase.kind === "success";
     const waiting = phase.kind === "waiting";
     return (
-      <Stack ref={panelRef} tabIndex={-1} role="status" aria-live="polite" gap="5" alignItems="center" textAlign="center" p={{ base: "6", md: "8" }} bg="bg.warm" borderRadius="lg" outline="none">
+      <Stack ref={panelRef} data-anim="panel" tabIndex={-1} role="status" aria-live="polite" gap="5" alignItems="center" textAlign="center" p={{ base: "6", md: "8" }} bg="bg.warm" borderRadius="lg" outline="none">
         <Box
           display="inline-flex"
           alignItems="center"
@@ -169,7 +171,7 @@ export function MpesaGiveForm({ paybill }: { paybill: string }) {
               : undefined
           }
         >
-          {ok ? <CheckCircle2 size={32} /> : waiting ? <Smartphone size={30} /> : <CircleAlert size={30} />}
+          {ok ? <CheckCircle2 size={32} data-anim="check" /> : waiting ? <Smartphone size={30} /> : <CircleAlert size={30} />}
         </Box>
         <Stack gap="2" maxW="26rem">
           <Heading as="h4" fontFamily="heading" fontWeight="600" fontSize="1.5rem">
@@ -212,14 +214,14 @@ export function MpesaGiveForm({ paybill }: { paybill: string }) {
     ) : null;
 
   return (
-    <chakra.form ref={formRef} onSubmit={onSubmit} noValidate display="grid" gap="6">
+    <chakra.form ref={formRef} onSubmit={onSubmit} noValidate display="grid" gap="4" pt="3">
       <chakra.fieldset border="0" m="0" p="0" minW="0">
-        <chakra.legend fontWeight="700" mb="3">
+        <chakra.legend fontWeight="600" fontSize="15px" mb="3">
           I&apos;m giving towards
         </chakra.legend>
         <Grid templateColumns={{ base: "1fr 1fr", sm: "repeat(3, minmax(0, 1fr))" }} gap="2.5" data-field="reason" tabIndex={-1} outline="none" aria-describedby={errors.reason ? "reason-error" : undefined}>
           {GIVING_REASONS.map((r) => (
-            <Choice key={r.id} name="reason" value={r.id} checked={reason === r.id} onChange={() => (setReason(r.id), setErrors((e) => ({ ...e, reason: "" })))}>
+            <Choice key={r.id} tall name="reason" value={r.id} checked={reason === r.id} onChange={() => (setReason(r.id), setErrors((e) => ({ ...e, reason: "" })))}>
               {r.label}
             </Choice>
           ))}
@@ -228,10 +230,10 @@ export function MpesaGiveForm({ paybill }: { paybill: string }) {
       </chakra.fieldset>
 
       <chakra.fieldset border="0" m="0" p="0" minW="0">
-        <chakra.legend fontWeight="700" mb="3">
+        <chakra.legend fontWeight="600" fontSize="15px" mb="3">
           Amount (KSh)
         </chakra.legend>
-        <Grid templateColumns="repeat(4, minmax(0, 1fr))" gap="2.5">
+        <Grid templateColumns="repeat(4, minmax(0, 1fr))" gap="10px">
           {PRESETS.map((p) => (
             <Choice key={p} name="preset" value={String(p)} checked={preset === p} onChange={() => (setPreset(p), setErrors((e) => ({ ...e, amount: "" })))}>
               <Box as="span" w="full" textAlign="center">
@@ -277,10 +279,10 @@ export function MpesaGiveForm({ paybill }: { paybill: string }) {
       </chakra.fieldset>
 
       <Box>
-        <chakra.label htmlFor="give-phone" display="block" fontWeight="700" mb="1">
+        <chakra.label htmlFor="give-phone" display="block" fontWeight="600" fontSize="15px" mb="1">
           M-Pesa phone number
         </chakra.label>
-        <Text id="phone-hint" fontSize="0.9375rem" color="fg.muted" mb="3">
+        <Text id="phone-hint" fontSize="12px" color="fg.muted" mb="3">
           We&apos;ll send the M-Pesa prompt to this phone.
         </Text>
         <Input
@@ -292,12 +294,12 @@ export function MpesaGiveForm({ paybill }: { paybill: string }) {
           placeholder="0712 345 678"
           value={phone}
           onChange={(e) => (setPhone(e.target.value), setErrors((x) => ({ ...x, phone: "" })))}
-          h="12"
-          fontSize="1.125rem"
-          fontWeight="600"
-          borderWidth="1.5px"
-          borderColor={errors.phone ? "red.600" : "border.strong"}
-          borderRadius="lg"
+          h="42px"
+          px="3"
+          fontSize="15px"
+          borderWidth="1px"
+          borderColor={errors.phone ? "red.600" : "#D9D3DF"}
+          borderRadius="8px"
           aria-invalid={Boolean(errors.phone)}
           aria-describedby={errors.phone ? "phone-hint phone-error" : "phone-hint"}
         />
@@ -310,7 +312,7 @@ export function MpesaGiveForm({ paybill }: { paybill: string }) {
         </Box>
       )}
 
-      <Button type="submit" size="lg" w="full" loading={phase.kind === "sending"} loadingText="Sending prompt…">
+      <Button type="submit" w="full" py="12px" h="auto" loading={phase.kind === "sending"} loadingText="Sending prompt…">
         Send M-Pesa prompt{Number.isInteger(amount) && amount >= MIN_AMOUNT ? ` · KSh ${fmt(amount)}` : ""}
       </Button>
     </chakra.form>

@@ -6,15 +6,15 @@ import type { Fact, FaqItem, FormDefinition, PathwayStep } from "./types";
 
 export const newHere = {
   title: "New to Nairobi Chapel?",
-  // From the welcome copy on the church's current New Here page
-  welcome:
-    "However you found us, welcome. Here we walk together, pray together, laugh together and go through the seasons of life together, growing deeper together to reach wider together.",
+  // Figma "New Here — Desktop"
+  welcome: "However you found us, welcome. Whether you’re new to the city, new to church or just curious, there’s a place for you here.",
   visitIntro:
-    "Visiting a new church can feel daunting, so we've put everything you need in one place: service times, directions, what happens for your children, and answers to the questions people ask most.",
-  saturday: "Can't make it on a Sunday? Church @ 5 meets every Saturday from 5:00 to 6:45 PM.",
+    "Come as you are. Our welcome team will meet you at the gate, help you find parking and point you to a seat. Services last about 90 minutes, with worship, a message from the Bible and time to connect afterwards.",
+  // Figma says "our Sunday evening service"; Church @ 5 meets on Saturdays (see plan-your-visit), so the day is kept
+  saturday: "Prefer a smaller, quieter setting? Join us for Church @ 5, our Saturday evening service.",
   faithTitle: "Exploring faith, or new to faith?",
   faithIntro:
-    "If you have questions about Jesus, or you've recently decided to follow Him, we'd love to walk with you. Plug-In, the New Believers class and baptism are simple steps to take, one at a time.",
+    "Wherever you are on the journey, you’re welcome to ask questions, explore the Bible and discover who Jesus is, at your own pace and with people who care.",
   cards: [
     { title: "Plan your visit", summary: "Service times, directions, kids and what to expect.", href: "/new-here/plan-your-visit", image: "visit.hero" },
     { title: "Take a next step", summary: "Plug-In, the New Believers class, baptism, eGroups and serving.", href: "/new-here/next-steps", image: "nextsteps.hero" },
@@ -25,7 +25,7 @@ export const newHere = {
 export const questionsForm: FormDefinition = {
   id: "new-here-question",
   title: "Got questions?",
-  intro: "Ask us anything about visiting, faith or church life. A real person will reply.",
+  intro: "Ask us anything about visiting, and someone from our team will get back to you.",
   fields: [
     { name: "name", label: "Your name", type: "text", required: true, autoComplete: "name" },
     {

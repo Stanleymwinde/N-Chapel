@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Box, Field, NativeSelect, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import type { Group, GroupAudience } from "@content/types";
-import { GroupCard } from "../Cards";
+import { GroupTile } from "../get-involved/GroupTile";
 import { Button } from "../Button";
 import { RichText } from "../RichText";
 import { FilterBarChip, FilterBarChips, FilterBarControls, FilterBarCount, FilterBarRoot } from "../recipe-parts";
@@ -78,16 +78,16 @@ export function GroupFinder({ groups, audiences, areas, areasTodo, joinMode, hea
   const noAreas = areas.length === 0;
 
   return (
-    <Stack gap="8">
-      <FilterBarRoot role="search" aria-label="Filter groups">
+    <Stack gap="6">
+      <FilterBarRoot role="search" aria-label="Filter groups" p={{ base: "4", md: "18px" }} gap="3" borderRadius="12px">
         <Stack gap="3">
-          <Text id="who-label" textStyle="label" color="fg">
+          <Text id="who-label" fontSize="0.8125rem" fontWeight="500" lineHeight="normal" color="fg">
             Who it&apos;s for
           </Text>
           <FilterBarChips role="group" aria-labelledby="who-label">
             {[ALL, ...audiences].map((a) => (
               <li key={a}>
-                <FilterBarChip type="button" aria-pressed={who === a} onClick={() => update(a, area)}>
+                <FilterBarChip type="button" aria-pressed={who === a} onClick={() => update(a, area)} minH="41px" fontWeight="400">
                   {a === ALL ? "All groups" : a}
                 </FilterBarChip>
               </li>
@@ -96,9 +96,11 @@ export function GroupFinder({ groups, audiences, areas, areasTodo, joinMode, hea
         </Stack>
         <FilterBarControls>
           <Field.Root disabled={noAreas}>
-            <Field.Label textStyle="label">Area</Field.Label>
-            <NativeSelect.Root size="lg">
-              <NativeSelect.Field value={area} onChange={(e) => update(who, e.target.value)} bg="bg.canvas" borderColor="border.strong">
+            <Field.Label fontSize="0.8125rem" fontWeight="400" color="fg.muted" mb="1">
+              Area
+            </Field.Label>
+            <NativeSelect.Root size="md">
+              <NativeSelect.Field value={area} onChange={(e) => update(who, e.target.value)} bg="bg.canvas" borderColor="border" h="40px" fontSize="0.875rem" borderRadius="6px">
                 <option value="">All areas</option>
                 {areas.map((a) => (
                   <option key={a} value={a}>
@@ -109,13 +111,13 @@ export function GroupFinder({ groups, audiences, areas, areasTodo, joinMode, hea
               <NativeSelect.Indicator />
             </NativeSelect.Root>
             {noAreas && areasTodo && (
-              <Field.HelperText color="fg.muted">
+              <Field.HelperText color="fg" fontSize="0.6875rem" mt="2">
                 Area filtering is coming soon. <RichText text={areasTodo} />
               </Field.HelperText>
             )}
           </Field.Root>
         </FilterBarControls>
-        <FilterBarCount aria-live="polite" aria-atomic="true">
+        <FilterBarCount aria-live="polite" aria-atomic="true" fontSize="0.8125rem" fontWeight="400" color="fg">
           {results.length === 1 ? "1 group" : `${results.length} groups`}
           {who !== ALL ? ` for ${who.toLowerCase()}` : ""}
           {area ? ` in ${area}` : ""}
@@ -133,10 +135,9 @@ export function GroupFinder({ groups, audiences, areas, areasTodo, joinMode, hea
           </Stack>
         </Box>
       ) : (
-        <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} gap={{ base: "5", md: "6" }} onClick={onResultsClick}>
+        <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} gap="5" onClick={onResultsClick}>
           {results.map((g) => (
-            // Images are reserved for featured cards; the finder stays light on data
-            <GroupCard key={g.slug} group={{ ...g, image: undefined }} joinHref={joinHref(g)} headingLevel={headingLevel} />
+            <GroupTile key={g.slug} group={g} joinHref={joinHref(g)} headingLevel={headingLevel} />
           ))}
         </SimpleGrid>
       )}

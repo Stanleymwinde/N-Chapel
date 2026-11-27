@@ -7,6 +7,9 @@ export const metadata = pageMetadata({
   path: "/resources/family-worship",
 });
 
+/** "This week" is worked out from today's date, so re-render daily */
+export const revalidate = 86400;
+
 export default function Page() {
   return <SectionPage section="family-worship" />;
 }

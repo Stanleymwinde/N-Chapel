@@ -105,14 +105,18 @@ export const contentCardRecipe = defineSlotRecipe({
           // the title link covers the whole tile; its focus ring moves to the tile
           "&:has(a:focus-visible)": { outline: "3px solid", outlineColor: "brand.solid", outlineOffset: "4px", borderRadius: "md" },
         },
-        media: { aspectRatio: "4 / 3", borderRadius: "md" },
-        body: { px: "0", pt: "4", pb: "0", gap: "1.5" },
+        media: { aspectRatio: "4 / 3", borderRadius: "4px" },
+        body: { p: "0", pt: "4", gap: "1" },
+        eyebrow: { fontSize: "0.75rem", fontWeight: "500", textTransform: "none", letterSpacing: "0" },
         title: {
-          textStyle: "h3",
+          fontFamily: "heading",
+          fontWeight: "600",
+          fontSize: "1.25rem",
+          lineHeight: "normal",
           "& a::after": { content: '""', position: "absolute", inset: "0" },
           "& a:focus-visible": { outline: "none" },
         },
-        description: { textStyle: "small", fontSize: "0.9375rem" },
+        description: { fontFamily: "body", fontSize: "1rem", lineHeight: "1.45" },
       },
       sermon: {
         media: { aspectRatio: "16 / 9" },

@@ -31,6 +31,8 @@ type Props = {
   hideTitle?: boolean;
   /** no card frame: the form sits directly on its section (used on Contact) */
   plain?: boolean;
+  /** plain mode only: one field per row (Figma Contact form) */
+  stacked?: boolean;
 };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -60,7 +62,7 @@ function validate(field: FormField, value: string | boolean): string | null {
  * inputs, errors shown on blur and on submit, focus moved to the first error,
  * success panel announced to screen readers. Posts to /api/forms.
  */
-export function Form({ form, defaults, prefillFromQuery, hideTitle, plain }: Props) {
+export function Form({ form, defaults, prefillFromQuery, hideTitle, plain, stacked }: Props) {
   const [values, setValues] = useState<Values>(() => initialValues(form, defaults));
   const [errors, setErrors] = useState<Record<string, string | null>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -157,6 +159,7 @@ export function Form({ form, defaults, prefillFromQuery, hideTitle, plain }: Pro
     return (
       <Box
         ref={successRef}
+        data-anim="panel"
         tabIndex={-1}
         role="status"
         p={{ base: "6", md: "8" }}
@@ -167,7 +170,7 @@ export function Form({ form, defaults, prefillFromQuery, hideTitle, plain }: Pro
       >
         <Stack gap="3" alignItems="flex-start">
           <Box color="brand.fg" aria-hidden="true">
-            <CheckCircle2 size={32} />
+            <CheckCircle2 size={32} data-anim="check" />
           </Box>
           <Text textStyle="h4">{form.successMessage}</Text>
           <Button
@@ -220,7 +223,7 @@ export function Form({ form, defaults, prefillFromQuery, hideTitle, plain }: Pro
         )}
 
         {/* plain mode: short fields pair up two-across from tablet width */}
-        <Box display={plain ? "grid" : "contents"} gridTemplateColumns={{ base: "1fr", md: "1fr 1fr" }} columnGap="5" rowGap="5">
+        <Box display={plain ? "grid" : "contents"} gridTemplateColumns={stacked ? "1fr" : { base: "1fr", md: "1fr 1fr" }} columnGap="5" rowGap={stacked ? "22px" : "5"}>
         {form.fields.map((f, i) => {
           const id = `${form.id}-${f.name}`;
           const error = errors[f.name];

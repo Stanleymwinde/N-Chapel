@@ -34,11 +34,11 @@ export function FeaturedCarousel({ label, children }: { label: string; children:
         ))}
       </Box>
       {count > 1 && (
-        <HStack justifyContent="center" gap="2" mt="8">
-          <IconButton variant="secondary" size="md" borderRadius="full" aria-label="Previous featured event" onClick={() => go(index - 1)}>
+        <HStack justifyContent="center" gap="4" mt="8">
+          <IconButton variant="secondary" size="md" borderRadius="full" minW="36px" minH="36px" w="36px" h="36px" px="0" py="0" css={{ "& svg": { width: "16px", height: "16px" } }} aria-label="Previous featured event" onClick={() => go(index - 1)}>
             <ChevronLeft aria-hidden="true" />
           </IconButton>
-          <HStack gap="0">
+          <HStack gap="1">
             {slides.map((_, i) => (
               <Box
                 as="button"
@@ -46,8 +46,8 @@ export function FeaturedCarousel({ label, children }: { label: string; children:
                 onClick={() => go(i)}
                 aria-label={`Show featured event ${i + 1}`}
                 aria-current={i === index ? "true" : undefined}
-                w="44px"
-                h="44px"
+                w="24px"
+                h="24px"
                 display="inline-flex"
                 alignItems="center"
                 justifyContent="center"
@@ -55,18 +55,16 @@ export function FeaturedCarousel({ label, children }: { label: string; children:
                 borderRadius="full"
               >
                 <Box
-                  w={i === index ? "12px" : "8px"}
-                  h={i === index ? "12px" : "8px"}
+                  w={i === index ? "10px" : "7px"}
+                  h={i === index ? "10px" : "7px"}
                   borderRadius="full"
-                  borderWidth="2px"
-                  borderColor="brand.solid"
-                  bg={i === index ? "transparent" : "border.strong"}
+                  bg={i === index ? "brand.solid" : "ink.300"}
                   transition="width 150ms ease-out, height 150ms ease-out"
                 />
               </Box>
             ))}
           </HStack>
-          <IconButton variant="secondary" size="md" borderRadius="full" aria-label="Next featured event" onClick={() => go(index + 1)}>
+          <IconButton variant="secondary" size="md" borderRadius="full" minW="36px" minH="36px" w="36px" h="36px" px="0" py="0" css={{ "& svg": { width: "16px", height: "16px" } }} aria-label="Next featured event" onClick={() => go(index + 1)}>
             <ChevronRight aria-hidden="true" />
           </IconButton>
         </HStack>

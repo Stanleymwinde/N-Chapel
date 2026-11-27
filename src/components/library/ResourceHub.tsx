@@ -3,13 +3,13 @@
 import { useEffect, useMemo, useState } from "react";
 import NextLink from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Accordion, Box, Button, Field, Heading, HStack, Input, NativeSelect, SimpleGrid, Stack, Text } from "@chakra-ui/react";
+import { Accordion, Box, Field, Heading, HStack, Input, NativeSelect, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import { ChevronDown, Search } from "lucide-react";
 import type { LibraryAudience, Resource, Season, Series } from "@content/library/types";
-import { AUDIENCE_LABELS, MONTHS } from "@content/library/types";
+import { AUDIENCE_LABELS } from "@content/library/types";
 import { byNewest } from "@content/library/resources";
 import { getSection, SECTIONS, sectionFromParam, type SectionKey } from "@content/library/sections";
-import { QuestWeekCard, ResourceCard, SeasonCard, SeriesCard } from "./LibraryCards";
+import { ResourceCard, SeasonCard, SeriesCard } from "./LibraryCards";
 
 type Props = {
   series: Series[];
@@ -23,29 +23,35 @@ type Props = {
 
 const PAGE_SIZE = 24;
 const AUDIENCES = Object.keys(AUDIENCE_LABELS) as LibraryAudience[];
-/** Quest Kids: months shown before "Show earlier months" */
-const MONTHS_SHOWN = 6;
 
 const norm = (s: string) => s.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "");
 
-function Grid({ children, count }: { children: React.ReactNode; count?: number }) {
-  // Three items fill a three-column row instead of leaving a hole in four.
+function Grid({ children, cols = 4 }: { children: React.ReactNode; cols?: 3 | 4 }) {
   return (
-    <SimpleGrid as="ul" listStyle="none" m="0" p="0" columns={{ base: 1, sm: 2, lg: count === 3 ? 3 : 4 }} gap={{ base: "5", md: "6" }}>
+    <SimpleGrid as="ul" listStyle="none" m="0" p="0" columns={{ base: 1, sm: 2, lg: cols }} gap="6">
       {children}
     </SimpleGrid>
   );
 }
 
+/** Figma "Text link" style, used for "All seasons" and "Clear filters" */
+const textLink = {
+  color: "brand.fg",
+  fontWeight: "500",
+  textDecoration: "underline",
+  textUnderlineOffset: "0.2em",
+  _hover: { textDecorationThickness: "2px" },
+} as const;
+
 function Block({ id, title, more, children }: { id: string; title: string; more?: { href: string; label: string }; children: React.ReactNode }) {
   return (
     <Box as="section" aria-labelledby={id}>
-      <HStack justifyContent="space-between" alignItems="baseline" mb="5" gap="4" flexWrap="wrap">
-        <Heading as="h2" id={id} textStyle="h3">
+      <HStack justifyContent="space-between" alignItems="center" mb="5" gap="4" flexWrap="wrap">
+        <Heading as="h2" id={id} fontFamily="heading" fontWeight="600" fontSize="1.5rem" lineHeight="1.2" letterSpacing="-0.005em">
           {title}
         </Heading>
         {more && (
-          <Box asChild color="brand.fg" fontWeight="600" textDecoration="underline" textUnderlineOffset="0.25em" minH="44px" display="inline-flex" alignItems="center">
+          <Box asChild {...textLink} fontSize="0.875rem">
             <NextLink href={more.href}>{more.label}</NextLink>
           </Box>
         )}
@@ -60,64 +66,17 @@ type PfEntry = { kind: "season"; season: Season; guides: Resource[]; audiences: 
 const pfYm = (e: PfEntry) => (e.kind === "season" ? e.season.year * 100 + e.season.month : (e.r.year ?? 0) * 100 + (e.r.month ?? 0));
 
 function PfCard({ e }: { e: PfEntry }) {
-  return e.kind === "season" ? <SeasonCard season={e.season} audiences={e.audiences} guideCount={e.guides.length} /> : <ResourceCard r={e.r} />;
+  return e.kind === "season" ? <SeasonCard season={e.season} /> : <ResourceCard r={e.r} />;
 }
 
-/** Quest Kids, grouped by month (newest first), with the older months behind a button */
-function QuestMonths({ items }: { items: Resource[] }) {
-  const [all, setAll] = useState(false);
-  const groups = useMemo(() => {
-    const m = new Map<number, Resource[]>();
-    for (const r of items) {
-      const k = (r.year ?? 0) * 100 + (r.month ?? 0);
-      m.set(k, [...(m.get(k) ?? []), r]);
-    }
-    return [...m.entries()]
-      .sort(([a], [b]) => b - a)
-      .map(([k, list]) => ({
-        key: k,
-        label: k % 100 ? `${MONTHS[(k % 100) - 1]} ${Math.floor(k / 100)}` : "Undated",
-        // crafts by week, then the devotional
-        list: list.sort((a, b) => Number(a.type === "kids-devotional") - Number(b.type === "kids-devotional") || Number(a.week ?? 0) - Number(b.week ?? 0)),
-      }));
-  }, [items]);
-  const shown = all ? groups : groups.slice(0, MONTHS_SHOWN);
-  return (
-    <Stack gap={{ base: "10", md: "12" }}>
-      {shown.map((g) => (
-        <Box as="section" key={g.key} aria-labelledby={`qm-${g.key}`}>
-          <Heading as="h2" id={`qm-${g.key}`} textStyle="h3" mb="4">
-            {g.label}
-          </Heading>
-          <SimpleGrid as="ul" listStyle="none" m="0" p="0" columns={{ base: 2, sm: 3, md: 4, lg: 5 }} gap={{ base: "4", md: "5" }}>
-            {g.list.map((r) => (
-              <li key={r.slug}>
-                <QuestWeekCard r={r} />
-              </li>
-            ))}
-          </SimpleGrid>
-        </Box>
-      ))}
-      {groups.length > MONTHS_SHOWN && (
-        <Box>
-          <Button variant="secondary" aria-expanded={all} onClick={() => setAll((v) => !v)}>
-            {all ? "Show fewer months" : `Show earlier months (${groups.length - MONTHS_SHOWN})`}
-            <Box as="span" display="inline-flex" transition="transform 200ms cubic-bezier(0.23, 1, 0.32, 1)" transform={all ? "rotate(180deg)" : undefined}>
-              <ChevronDown aria-hidden="true" />
-            </Box>
-          </Button>
-        </Box>
-      )}
-    </Stack>
-  );
-}
+const field = { bg: "bg.canvas", borderColor: "border", h: "40px", fontSize: "0.8125rem", borderRadius: "6px", color: "fg" } as const;
+const fieldLabel = { fontSize: "0.75rem", fontWeight: "500", color: "fg", mb: "0" } as const;
 
 /**
  * Resource Library browser: Type / Audience / Series filters and a search box,
  * synced to the URL. On the hub, choosing a Type opens that section's page; on
- * a section page the Type comes from the route. With no other filters, the hub
- * shows the browse blocks and the past-series archive, and a section page shows
- * its own view (Quest Kids by month).
+ * a section page the Type comes from the route. With no filters, the hub shows
+ * the browse blocks and the past-series archive.
  */
 export function ResourceHub({ series, seasons, resources, section, featuredSlug }: Props) {
   const params = useSearchParams();
@@ -157,13 +116,9 @@ export function ResourceHub({ series, seasons, resources, section, featuredSlug 
     router.replace(`${pathname}${next.toString() ? `?${next}` : ""}`, { scroll: false });
   };
 
-  const inType = (t: Resource["type"]) => !typeSection || typeSection.types.includes(t);
+  const clear = () => (section ? router.push("/resources", { scroll: false }) : router.replace(pathname, { scroll: false }));
 
-  const weekCount = useMemo(() => {
-    const m = new Map<string, number>();
-    for (const r of resources) if (r.seriesSlug) m.set(r.seriesSlug, (m.get(r.seriesSlug) ?? 0) + 1);
-    return m;
-  }, [resources]);
+  const inType = (t: Resource["type"]) => !typeSection || typeSection.types.includes(t);
 
   const seasonInfo = useMemo(() => {
     const m = new Map<string, { audiences: LibraryAudience[]; guides: Resource[] }>();
@@ -220,9 +175,9 @@ export function ResourceHub({ series, seasons, resources, section, featuredSlug 
 
   const totalItems = otherItems.length;
   const pages = Math.max(1, Math.ceil(totalItems / PAGE_SIZE));
-  const pageItems = otherItems.slice((Math.min(page, pages) - 1) * PAGE_SIZE, Math.min(page, pages) * PAGE_SIZE);
+  const cur = Math.min(page, pages);
+  const pageItems = otherItems.slice((cur - 1) * PAGE_SIZE, cur * PAGE_SIZE);
   const count = results.matchSeries.length + (type === "prayer-fasting" ? pfMerged.length : results.matchSeasons.length) + totalItems;
-  const questView = type === "quest-kids" && !extra;
 
   // ---------- default (unfiltered hub) ----------
   const latestPf = useMemo(() => {
@@ -233,54 +188,50 @@ export function ResourceHub({ series, seasons, resources, section, featuredSlug 
     return all.sort((a, b) => pfYm(b) - pfYm(a)).slice(0, 4);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [seasons, resources, seasonInfo]);
-  const family = resources.filter((r) => r.type === "family-worship").sort(byNewest);
+  const family = resources.filter((r) => r.type === "family-worship").sort(byNewest).slice(0, 3);
   const kids = resources.filter((r) => (r.type === "kids-craft" || r.type === "kids-devotional") && !r.season).sort(byNewest).slice(0, 4);
   const past = useMemo(() => {
-    const EARLIER = "Earlier series";
+    const UNDATED = "Year to be confirmed";
     const groups = new Map<string, Series[]>();
     for (const s of series.filter((x) => x.slug !== featuredSlug).sort((a, b) => a.sortOrder - b.sortOrder)) {
-      const k = s.year ? String(s.year) : EARLIER;
+      const k = s.year ? String(s.year) : UNDATED;
       groups.set(k, [...(groups.get(k) ?? []), s]);
     }
-    return [...groups.entries()].sort(([a], [b]) => (a === EARLIER ? 1 : b === EARLIER ? -1 : Number(b) - Number(a)));
+    return [...groups.entries()].sort(([a], [b]) => (a === UNDATED ? 1 : b === UNDATED ? -1 : Number(b) - Number(a)));
   }, [series, featuredSlug]);
 
-  const selectStyle = { bg: "bg.canvas", borderColor: "border.strong" } as const;
-  const showSeriesFilter = !type || type === "bible-study";
-  const sectionName = typeSection?.title;
-
   return (
-    <Stack gap={{ base: "10", md: "14" }} data-no-reveal={hydrated ? undefined : ""}>
+    <Stack gap="14" data-no-reveal={hydrated ? undefined : ""}>
       {/* Filter bar */}
-      <Box as="form" role="search" aria-label="Filter the resource library" onSubmit={(e) => e.preventDefault()} p={{ base: "4", md: "5" }} borderRadius="lg" bg="bg.warm" borderWidth="1px" borderColor="border">
-        <SimpleGrid columns={{ base: 1, md: 2, lg: showSeriesFilter ? 4 : 3 }} gap="4" alignItems="end">
-          <Field.Root>
-            <Field.Label fontWeight="600">Search</Field.Label>
+      <Box as="form" role="search" aria-label="Filter the resource library" onSubmit={(e) => e.preventDefault()} p="18px" borderRadius="10px" bg="bg.warm" borderWidth="1px" borderColor="border">
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} gap="14px" alignItems="end">
+          <Field.Root gap="2">
+            <Field.Label {...fieldLabel}>Search</Field.Label>
             <Box position="relative" w="100%">
-              <Box position="absolute" left="3" top="50%" transform="translateY(-50%)" color="fg.muted" aria-hidden="true" zIndex="1">
-                <Search size={18} />
+              <Box position="absolute" left="12px" top="50%" transform="translateY(-50%)" color="fg.muted" aria-hidden="true" zIndex="1" display="flex">
+                <Search size={14} />
               </Box>
-              <Input type="search" size="lg" ps="10" placeholder="Title, book or month" value={q} onChange={(e) => set("q", e.target.value)} {...selectStyle} />
+              <Input type="search" ps="34px" placeholder="Title, book or month" value={q} onChange={(e) => set("q", e.target.value)} {...field} _placeholder={{ color: "fg.muted" }} />
             </Box>
           </Field.Root>
-          <Field.Root>
-            <Field.Label fontWeight="600">Type</Field.Label>
-            <NativeSelect.Root size="lg">
-              <NativeSelect.Field value={type} onChange={(e) => set("type", e.target.value)} {...selectStyle}>
+          <Field.Root gap="2">
+            <Field.Label {...fieldLabel}>Type</Field.Label>
+            <NativeSelect.Root>
+              <NativeSelect.Field value={type} onChange={(e) => set("type", e.target.value)} {...field}>
                 <option value="">All types</option>
                 {SECTIONS.map((t) => (
                   <option key={t.key} value={t.key}>
-                    {t.title}
+                    {t.label}
                   </option>
                 ))}
               </NativeSelect.Field>
               <NativeSelect.Indicator />
             </NativeSelect.Root>
           </Field.Root>
-          <Field.Root>
-            <Field.Label fontWeight="600">Audience</Field.Label>
-            <NativeSelect.Root size="lg">
-              <NativeSelect.Field value={audience} onChange={(e) => set("audience", e.target.value)} {...selectStyle}>
+          <Field.Root gap="2">
+            <Field.Label {...fieldLabel}>Audience</Field.Label>
+            <NativeSelect.Root>
+              <NativeSelect.Field value={audience} onChange={(e) => set("audience", e.target.value)} {...field}>
                 <option value="">Everyone</option>
                 {AUDIENCES.map((a) => (
                   <option key={a} value={a}>
@@ -291,87 +242,71 @@ export function ResourceHub({ series, seasons, resources, section, featuredSlug 
               <NativeSelect.Indicator />
             </NativeSelect.Root>
           </Field.Root>
-          {showSeriesFilter && (
-            <Field.Root>
-              <Field.Label fontWeight="600">Series</Field.Label>
-              <NativeSelect.Root size="lg">
-                <NativeSelect.Field value={seriesSlug} onChange={(e) => set("series", e.target.value)} {...selectStyle}>
-                  <option value="">All series</option>
-                  {[...series].sort((a, b) => a.sortOrder - b.sortOrder).map((s) => (
-                    <option key={s.slug} value={s.slug}>
-                      {s.title}
-                    </option>
-                  ))}
-                </NativeSelect.Field>
-                <NativeSelect.Indicator />
-              </NativeSelect.Root>
-            </Field.Root>
-          )}
+          <Field.Root gap="2" disabled={Boolean(type && type !== "bible-study")}>
+            <Field.Label {...fieldLabel}>Series</Field.Label>
+            <NativeSelect.Root>
+              <NativeSelect.Field value={seriesSlug} onChange={(e) => set("series", e.target.value)} {...field}>
+                <option value="">All series</option>
+                {[...series].sort((a, b) => a.sortOrder - b.sortOrder).map((s) => (
+                  <option key={s.slug} value={s.slug}>
+                    {s.title}
+                  </option>
+                ))}
+              </NativeSelect.Field>
+              <NativeSelect.Indicator />
+            </NativeSelect.Root>
+          </Field.Root>
         </SimpleGrid>
-        <HStack justifyContent="space-between" mt="4" gap="3" flexWrap="wrap">
-          <Text fontSize="0.9375rem" color="fg.muted" aria-live="polite" aria-atomic="true">
-            {extra || (type && !section) ? `${count} result${count === 1 ? "" : "s"}` : section ? `Showing everything in ${sectionName}` : "Showing everything"}
+        <HStack justifyContent="space-between" mt="14px" gap="3" flexWrap="wrap" fontSize="0.8125rem">
+          <Text color="fg.muted" aria-live="polite" aria-atomic="true">
+            {filtered ? `${count} result${count === 1 ? "" : "s"}` : "Showing everything"}
           </Text>
-          {(extra || (type && !section)) && (
-            <Button variant="link" onClick={() => router.replace(pathname, { scroll: false })}>
-              Clear filters
-            </Button>
+          {filtered && (
+            <Box asChild {...textLink} cursor="pointer" bg="transparent" p="0" border="0">
+              <button type="button" onClick={clear}>
+                Clear filters
+              </button>
+            </Box>
           )}
         </HStack>
       </Box>
 
-      {questView ? (
-        <QuestMonths items={resources.filter((r) => r.type === "kids-craft" || r.type === "kids-devotional")} />
-      ) : filtered ? (
-        <Stack gap={{ base: "10", md: "12" }}>
+      {filtered ? (
+        <Stack gap="14">
           {results.seriesOnly && (
-            <Box>
-              <Text color="fg.muted">
-                Showing every week of{" "}
-                <Box asChild color="brand.fg" fontWeight="600" textDecoration="underline" textUnderlineOffset="0.2em">
-                  <NextLink href={`/resources/series/${results.seriesOnly.slug}`}>{results.seriesOnly.title}</NextLink>
-                </Box>
-                .
-              </Text>
-            </Box>
+            <Text color="fg.muted">
+              Showing every week of{" "}
+              <Box asChild {...textLink} fontWeight="600">
+                <NextLink href={`/resources/series/${results.seriesOnly.slug}`}>{results.seriesOnly.title}</NextLink>
+              </Box>
+              .
+            </Text>
           )}
           {results.matchSeries.length > 0 && (
             <Block id="r-series" title="Bible study series">
               <Grid>
                 {results.matchSeries.map((s) => (
                   <li key={s.slug}>
-                    <SeriesCard s={s} weekCount={weekCount.get(s.slug) ?? 0} />
+                    <SeriesCard s={s} />
                   </li>
                 ))}
               </Grid>
             </Block>
           )}
-          {type === "prayer-fasting"
-            ? pfMerged.length > 0 && (
-                <Block id="r-pf" title="Guides, newest first">
-                  <Grid>
-                    {pfMerged.map((e) => (
-                      <li key={e.kind === "season" ? e.season.slug : e.r.slug}>
-                        <PfCard e={e} />
-                      </li>
-                    ))}
-                  </Grid>
-                </Block>
-              )
-            : results.matchSeasons.length > 0 && (
-                <Block id="r-seasons" title="Prayer & fasting seasons">
-                  <Grid>
-                    {results.matchSeasons.map((e) => (
-                      <li key={e.kind === "season" ? e.season.slug : ""}>
-                        <PfCard e={e} />
-                      </li>
-                    ))}
-                  </Grid>
-                </Block>
-              )}
+          {(type === "prayer-fasting" ? pfMerged : results.matchSeasons).length > 0 && (
+            <Block id="r-pf" title="Prayer & fasting seasons">
+              <Grid>
+                {(type === "prayer-fasting" ? pfMerged : results.matchSeasons).map((e) => (
+                  <li key={e.kind === "season" ? e.season.slug : e.r.slug}>
+                    <PfCard e={e} />
+                  </li>
+                ))}
+              </Grid>
+            </Block>
+          )}
           {totalItems > 0 && (
-            <Block id="r-items" title={results.seriesOnly ? "Weeks" : type && section ? typeSection!.title : "Resources"}>
-              <Grid count={totalItems}>
+            <Block id="r-items" title={results.seriesOnly ? "Weeks" : "Resources"}>
+              <Grid>
                 {pageItems.map((r) => (
                   <li key={r.slug}>
                     <ResourceCard r={r} />
@@ -379,12 +314,33 @@ export function ResourceHub({ series, seasons, resources, section, featuredSlug 
                 ))}
               </Grid>
               {pages > 1 && (
-                <HStack as="nav" aria-label="Pages" justifyContent="center" gap="2" mt="8" flexWrap="wrap">
-                  {Array.from({ length: pages }, (_, i) => i + 1).map((n) => (
-                    <Button key={n} size="md" variant={n === Math.min(page, pages) ? "primary" : "secondary"} aria-current={n === Math.min(page, pages) ? "page" : undefined} onClick={() => set("page", String(n))}>
-                      {n}
-                    </Button>
-                  ))}
+                <HStack as="nav" aria-label="Pages" justifyContent="center" gap="10px" mt="9" flexWrap="wrap">
+                  {Array.from({ length: pages }, (_, i) => i + 1).map((n) => {
+                    const on = n === cur;
+                    return (
+                      <Box
+                        asChild
+                        key={n}
+                        w="36px"
+                        h="36px"
+                        borderRadius="full"
+                        borderWidth="1.5px"
+                        borderColor="brand.solid"
+                        bg={on ? "brand.solid" : "bg.canvas"}
+                        color={on ? "white" : "brand.fg"}
+                        fontSize="0.875rem"
+                        fontWeight="500"
+                        cursor="pointer"
+                        transition="background-color 150ms ease"
+                        _hover={on ? undefined : { bg: "brand.subtle" }}
+                        _focusVisible={{ outline: "3px solid", outlineColor: "brand.solid", outlineOffset: "2px" }}
+                      >
+                        <button type="button" aria-current={on ? "page" : undefined} aria-label={`Page ${n}`} onClick={() => set("page", String(n))}>
+                          {n}
+                        </button>
+                      </Box>
+                    );
+                  })}
                 </HStack>
               )}
             </Block>
@@ -399,8 +355,8 @@ export function ResourceHub({ series, seasons, resources, section, featuredSlug 
           )}
         </Stack>
       ) : (
-        <Stack gap={{ base: "12", md: "16" }}>
-          <Block id="b-seasons" title="Prayer & fasting" more={{ href: "/resources/prayer-fasting", label: "All prayer & fasting" }}>
+        <Stack gap="14">
+          <Block id="b-seasons" title="Prayer & fasting" more={{ href: "/resources/prayer-fasting", label: "All seasons" }}>
             <Grid>
               {latestPf.map((e) => (
                 <li key={e.kind === "season" ? e.season.slug : e.r.slug}>
@@ -410,7 +366,7 @@ export function ResourceHub({ series, seasons, resources, section, featuredSlug 
             </Grid>
           </Block>
           <Block id="b-family" title="Family worship" more={{ href: "/resources/family-worship", label: "All family worship" }}>
-            <Grid count={family.length}>
+            <Grid cols={3}>
               {family.map((r) => (
                 <li key={r.slug}>
                   <ResourceCard r={r} />
@@ -418,7 +374,7 @@ export function ResourceHub({ series, seasons, resources, section, featuredSlug 
               ))}
             </Grid>
           </Block>
-          <Block id="b-kids" title="Quest Kids" more={{ href: "/resources/quest-kids", label: "All Quest Kids crafts" }}>
+          <Block id="b-kids" title="Quest Kids" more={{ href: "/resources/quest-kids", label: "All Quest Kids resources" }}>
             <Grid>
               {kids.map((r) => (
                 <li key={r.slug}>
@@ -430,29 +386,31 @@ export function ResourceHub({ series, seasons, resources, section, featuredSlug 
 
           {/* Past series archive, collapsed by year */}
           <Box as="section" aria-labelledby="b-past">
-            <Heading as="h2" id="b-past" textStyle="h3" mb="5">
+            <Heading as="h2" id="b-past" fontFamily="heading" fontWeight="600" fontSize="1.5rem" lineHeight="1.2" letterSpacing="-0.005em" mb="14px">
               Past series
             </Heading>
-            <Accordion.Root multiple collapsible variant="plain" borderTopWidth="1px" borderColor="border">
+            <Accordion.Root multiple collapsible variant="plain">
               {past.map(([year, list]) => (
                 <Accordion.Item key={year} value={year} borderBottomWidth="1px" borderColor="border">
-                  <Accordion.ItemTrigger minH="56px" py="3" cursor="pointer" fontWeight="600" fontSize="1.0625rem" justifyContent="space-between">
+                  <Accordion.ItemTrigger py="4" minH="44px" cursor="pointer" fontSize="0.9375rem" justifyContent="space-between">
                     <span>
-                      {year}{" "}
+                      <Text as="span" fontWeight="500">
+                        {year}
+                      </Text>{" "}
                       <Text as="span" color="fg.muted" fontWeight="400">
                         ({list.length} series)
                       </Text>
                     </span>
-                    <Accordion.ItemIndicator>
-                      <ChevronDown aria-hidden="true" />
+                    <Accordion.ItemIndicator color="fg.muted">
+                      <ChevronDown size={16} aria-hidden="true" />
                     </Accordion.ItemIndicator>
                   </Accordion.ItemTrigger>
                   <Accordion.ItemContent>
-                    <Accordion.ItemBody pb="6">
+                    <Accordion.ItemBody pt="2" pb="6">
                       <Grid>
                         {list.map((s) => (
                           <li key={s.slug}>
-                            <SeriesCard s={s} weekCount={weekCount.get(s.slug) ?? 0} />
+                            <SeriesCard s={s} />
                           </li>
                         ))}
                       </Grid>

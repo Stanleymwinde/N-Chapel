@@ -6,8 +6,7 @@ import { Form } from "@/components/Form";
 import { MinistryClosing } from "@/components/ministries/MinistryClosing";
 import { MinistryHero } from "@/components/ministries/MinistryHero";
 import { MoreMinistries } from "@/components/ministries/MoreMinistries";
-import { Section } from "@/components/layout/Section";
-import { ScriptureQuote, SplitFeature } from "@/components/b/MinistryBlocks";
+import { MSection, ScriptureQuote, SplitFeature } from "@/components/b/MinistryBlocks";
 
 export const metadata = pageMetadata({ title: m.meta.title, description: m.meta.description, path: m.href });
 
@@ -25,35 +24,35 @@ export default function OutreachPage() {
       />
 
       {m.scripture && (
-        <Section id="great-commission" compact label="The Great Commission">
-          <ScriptureQuote scripture={m.scripture} />
-        </Section>
+        <MSection id="great-commission" afterHero label="The Great Commission">
+          <ScriptureQuote scripture={m.scripture} wide />
+        </MSection>
       )}
 
-      <Section id="areas" tone="warm" title="Where we serve">
-        <Stack gap={{ base: "14", md: "20" }}>
+      <MSection id="areas" tone="warm" title="Where we serve" gap="10">
+        <Stack gap={{ base: "14", md: "18" }}>
           {m.areas.map((a, i) => (
             <SplitFeature key={a.id} block={a} reverse={i % 2 === 1} />
           ))}
         </Stack>
-      </Section>
+      </MSection>
 
-      <Section id="quote" tone="night" compact label="A word on evangelism">
-        <ScriptureQuote scripture={{ text: m.quote.text, reference: m.quote.author }} tone="dark" />
-      </Section>
+      <MSection id="quote" tone="ink" label="A word on evangelism">
+        <ScriptureQuote scripture={{ text: m.quote.text, reference: m.quote.author }} tone="dark" wide />
+      </MSection>
 
-      <Section id="join" title="Join an outreach team" intro="Tell us where you'd like to serve and someone from the outreach team will get in touch.">
-        <Box>
+      <MSection id="join" title="Join an outreach team" intro="Tell us where you'd like to serve and someone from the outreach team will get in touch." headGap="3.5" gap="8">
+        <Box maxW="744px">
           <Form form={m.joinForm} hideTitle />
         </Box>
-        <Text mt="6" color="fg.muted">
+        <Text mt="6" fontSize="0.9375rem" color="fg.muted">
           Prefer to talk first? WhatsApp us on 0701 777 888.
         </Text>
-      </Section>
+      </MSection>
 
       <MoreMinistries current={m.href} />
 
-      <MinistryClosing {...m.nextStep} />
+      <MinistryClosing {...m.nextStep} variant="design" />
     </>
   );
 }

@@ -11,53 +11,54 @@ type Props = {
   title: string;
   href: string;
   summary: string;
-  /** bold practical lines, e.g. date / time / venue */
-  details: string[];
+  /** bold practical line, e.g. the date */
+  date: string;
+  /** smaller underlined line under the date, e.g. venue or time */
+  extra?: string[];
   cta: string;
   /** image on the right instead of the left */
   reverse?: boolean;
 };
 
-/** Large featured row: 16:9 image beside heading, summary, bold details and a link. */
-export function FeatureRow({ image, eyebrow, title, href, summary, details, cta, reverse }: Props) {
+/** Figma "Event card": 442×294 photo beside eyebrow, 28px title, 20px summary, date, venue and a text link. */
+export function FeatureRow({ image, eyebrow, title, href, summary, date, extra = [], cta, reverse }: Props) {
   return (
-    <Grid as="article" templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={{ base: "6", lg: "12" }} alignItems="center">
+    <Grid as="article" templateColumns={{ base: "1fr", lg: "442px 1fr" }} gap={{ base: "6", lg: "40px" }} alignItems="center">
       <Box
         position="relative"
-        aspectRatio="16 / 9"
-        borderRadius="md"
+        aspectRatio="442 / 294"
+        borderRadius="6px"
         overflow="hidden"
         bg="bg.tint"
         order={{ base: 0, lg: reverse ? 1 : 0 }}
       >
-        <Img slot={image} sizes="(min-width: 1024px) 640px, 100vw" decorative />
+        <Img slot={image} sizes="(min-width: 1024px) 442px, 100vw" decorative />
       </Box>
-      <Stack gap="4" maxW="prose">
+      <Stack gap="10px" alignItems="flex-start">
         {eyebrow && (
-          <Text textStyle="small" fontWeight="600" color="brand.fg">
+          <Text fontSize="0.9375rem" fontWeight="500" color="brand.fg" whiteSpace="pre-wrap">
             {eyebrow}
           </Text>
         )}
-        <Heading as="h3" textStyle="h3">
+        <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize={{ base: "1.5rem", md: "1.75rem" }} lineHeight="1.2">
           <ChA asChild textDecoration="none" _hover={{ color: "brand.fg" }}>
             <NextLink href={href}>{title}</NextLink>
           </ChA>
         </Heading>
-        <Text color="fg.muted" textStyle="small" fontSize="0.9375rem">
+        <Text color="fg.muted" fontSize={{ base: "1.125rem", md: "1.25rem" }} lineHeight="1.5">
           <RichText text={summary} />
         </Text>
-        <Stack gap="0.5" fontWeight="700" textStyle="small" fontSize="0.9375rem">
-          {details.map((d) => (
-            <Text key={d}>
-              <RichText text={d} />
-            </Text>
-          ))}
-        </Stack>
-        <Box pt="1">
-          <LinkButton href={href} variant="link" aria-label={`${cta}: ${title}`}>
-            {cta}
-          </LinkButton>
-        </Box>
+        <Text fontWeight="600" fontSize="0.9375rem">
+          <RichText text={date} />
+        </Text>
+        {extra.map((d) => (
+          <Text key={d} fontSize="0.8125rem" fontWeight="500" textDecoration="underline" textUnderlineOffset="0.2em">
+            <RichText text={d} />
+          </Text>
+        ))}
+        <LinkButton href={href} variant="link" aria-label={`${cta}: ${title}`}>
+          {cta}
+        </LinkButton>
       </Stack>
     </Grid>
   );

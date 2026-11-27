@@ -29,7 +29,14 @@ function Mark({ color }: { color: string }) {
  * draws a book-like typographic cover: a spine shadow on the left, category
  * and year at the top, the title, and the church's mark at the foot.
  */
-export function PublicationCover({ pub, size = "md", priority }: { pub: Publication; size?: "sm" | "md" | "lg"; priority?: boolean }) {
+export function PublicationCover({ pub, size = "md", priority, design = "book" }: {
+  pub: Publication;
+  size?: "sm" | "md" | "lg";
+  priority?: boolean;
+  /** "flat": the Figma publication cover (photo, dark wash, rule, title, accent bar; no spine or mark) */
+  design?: "book" | "flat";
+}) {
+  if (design === "flat") return <FlatCover pub={pub} size={size === "sm" ? "sm" : "lg"} priority={priority} />;
   const hasCover = pub.coverImage && pub.coverImage !== "TODO";
   const t = tones[pub.category];
   // On a photo, text is always white; the category tone survives as the rule and the foot band.
@@ -60,6 +67,7 @@ export function PublicationCover({ pub, size = "md", priority }: { pub: Publicat
       overflow="hidden"
       bg={t.bg}
       boxShadow="0 1px 2px rgba(20,16,30,0.08), 0 12px 28px -12px rgba(20,16,30,0.35)"
+      data-tilt=""
       aria-hidden="true"
       borderBottomWidth={pub.photo ? (size === "sm" ? "4px" : "6px") : undefined}
       borderBottomColor={t.bg}
@@ -101,6 +109,62 @@ export function PublicationCover({ pub, size = "md", priority }: { pub: Publicat
         pointerEvents="none"
       />
     </Box>
+    </ViewTransition>
+  );
+}
+
+/**
+ * Figma "Cover": a photo under a dark wash, the kicker at the top, a short
+ * rule and the title at the foot, and an accent bar along the bottom edge.
+ * sm = 150 × 165 (cards), lg = 414 × 444 (publication page). Used by the
+ * publication cards and pages; the Enzi page keeps the "book" design.
+ */
+function FlatCover({ pub, size, priority }: { pub: Publication; size: "sm" | "lg"; priority?: boolean }) {
+  const hasCover = pub.coverImage && pub.coverImage !== "TODO";
+  const t = tones[pub.category];
+  const sm = size === "sm";
+  const photo = hasCover ? pub.coverImage : pub.photo;
+  return (
+    <ViewTransition name={`pub-${pub.slug}`} share="morph" default="none">
+      <Box
+        position="relative"
+        aspectRatio={sm ? "150 / 165" : "414 / 444"}
+        borderRadius={sm ? "4px" : "12px"}
+        overflow="hidden"
+        bg="night.700"
+        boxShadow={sm ? "0 6px 14px rgba(28,23,38,0.18)" : "0 12px 28px rgba(28,23,38,0.22)"}
+        data-tilt=""
+        aria-hidden="true"
+      >
+        {photo && <Img slot={photo} priority={priority} decorative sizes={sm ? "150px" : "(min-width: 768px) 414px, 90vw"} />}
+        {!hasCover && (
+          <>
+            <Box position="absolute" inset="0" bgGradient="to-b" gradientFrom={sm ? "rgba(20,15,26,0.55)" : "rgba(20,15,26,0.6)"} gradientVia={sm ? "rgba(20,15,26,0.55)" : "rgba(20,15,26,0.5)"} gradientTo="rgba(20,15,26,0.85)" />
+            <Box
+              position="absolute"
+              inset="0"
+              display="flex"
+              flexDirection="column"
+              justifyContent="space-between"
+              ps={sm ? "16px" : "28px"}
+              pe={sm ? "14px" : "24px"}
+              py={sm ? "16px" : "28px"}
+              color="white"
+            >
+              <Text fontSize={sm ? "0.5rem" : "0.6875rem"} lineHeight={sm ? "1.5" : "normal"} fontWeight="600" letterSpacing={sm ? "0.06em" : "0.08em"} textTransform="uppercase" maxW={sm ? "95px" : undefined}>
+                {pub.category} · {pub.year}
+              </Text>
+              <Box display="flex" flexDirection="column" gap={sm ? "8px" : "14px"}>
+                <Box w={sm ? "22px" : "32px"} h={sm ? "2px" : "3px"} bg={sm ? "accent.highlight" : t.rule} />
+                <Text fontFamily="heading" fontWeight="700" fontSize={sm ? "0.75rem" : { base: "1.5rem", md: "1.6875rem" }} lineHeight={sm ? "1.15" : "1.12"} maxW={sm ? "95px" : "250px"} lineClamp={sm ? 4 : 5}>
+                  {pub.title}
+                </Text>
+              </Box>
+            </Box>
+          </>
+        )}
+        {pub.category !== "Strategy" && <Box position="absolute" left="0" right="0" bottom="0" h={sm ? "3px" : "5px"} bg={t.bg} />}
+      </Box>
     </ViewTransition>
   );
 }

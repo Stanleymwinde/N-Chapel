@@ -43,7 +43,7 @@ export const discipleship: MinistryBase & {
       cta: "Find a group",
     },
     {
-      title: "Marketplace Ministry",
+      title: "9to5 Marketplace Ministry",
       summary: "Equipping professionals to represent God's kingdom at work.",
       href: "/ministries/marketplace",
       cta: "Explore Marketplace",

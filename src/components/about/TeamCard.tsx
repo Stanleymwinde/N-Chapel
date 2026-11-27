@@ -8,33 +8,33 @@ import { ChA } from "@/components/primitives";
 /** "Rev. Liz Mangeli" → "LM" (titles skipped) */
 export const initials = (name: string) =>
   name
-    .replace(/^(Rev\.|Dr\.|Pastor)\s+/i, "")
+    .replace(/^(Rev\.?|Dr\.?|Pastor)\s+/i, "")
     .split(/\s+/)
     .map((p) => p[0])
     .slice(0, 2)
     .join("")
     .toUpperCase();
 
-/* 4:5 portrait: a consented photo when supplied (faces kept near the top), else initials */
-function Portrait({ m, sizes, big }: { m: TeamMember; sizes: string; big?: boolean }) {
+/* Photo tile: a consented photo when supplied (faces kept near the top), else initials */
+function Portrait({ m, sizes, aspect, big }: { m: TeamMember; sizes: string; aspect: string; big?: boolean }) {
   return (
     <Box
       position="relative"
-      aspectRatio="4 / 5"
-      borderRadius="lg"
+      aspectRatio={aspect}
+      borderRadius="12px"
       overflow="hidden"
       bg="bg.muted"
       color="fg.muted"
       display="flex"
       alignItems="center"
       justifyContent="center"
+      flexShrink={0}
       aria-hidden="true"
-      css={{ "& img": { objectFit: "cover", objectPosition: "top" } }}
     >
       {m.photo ? (
         <Img slot={m.photo} fill sizes={sizes} decorative />
       ) : (
-        <Text fontFamily="heading" fontWeight="700" fontSize={big ? "clamp(3rem, 2rem + 3vw, 4.5rem)" : "clamp(2rem, 1.5rem + 1.6vw, 2.75rem)"} letterSpacing="0.02em">
+        <Text fontFamily="heading" fontWeight="700" fontSize={big ? "clamp(3rem, 2rem + 3vw, 4.5rem)" : "clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem)"} letterSpacing="0.02em">
           {initials(m.name)}
         </Text>
       )}
@@ -42,7 +42,7 @@ function Portrait({ m, sizes, big }: { m: TeamMember; sizes: string; big?: boole
   );
 }
 
-/* Quiet email link; its accessible name is "Email {name}" */
+/* Quiet email link (Figma "Email": 12px mail icon, 13px underlined); its accessible name is "Email {name}" */
 function EmailLink({ m }: { m: TeamMember }) {
   if (!m.email) return null;
   return (
@@ -51,10 +51,11 @@ function EmailLink({ m }: { m: TeamMember }) {
       display="inline-flex"
       alignItems="center"
       gap="1.5"
-      minH="44px"
+      minH="36px"
       alignSelf="flex-start"
-      color="fg.muted"
-      fontSize="0.9375rem"
+      color="ink.700"
+      fontSize="0.8125rem"
+      lineHeight="20px"
       textDecoration="underline"
       textUnderlineOffset="0.2em"
       transition="color 150ms ease"
@@ -62,32 +63,39 @@ function EmailLink({ m }: { m: TeamMember }) {
       title={m.email}
       aria-label={`Email ${m.name}`}
     >
-      <Mail size={16} aria-hidden="true" style={{ flexShrink: 0 }} />
+      <Mail size={12} aria-hidden="true" style={{ flexShrink: 0 }} />
       Email
     </ChA>
   );
 }
 
-/** One person: name, then ministry, then title (no title line when unconfirmed) */
+/* Name, ministry (two lines reserved so cards line up) and title */
+function Details({ m }: { m: TeamMember }) {
+  return (
+    <Stack gap="1">
+      <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize="1.0625rem" lineHeight="22px" letterSpacing="-0.01em">
+        {m.name}
+      </Heading>
+      <Text fontSize="0.875rem" lineHeight="20px" color="ink.700" minH="40px">
+        {m.ministry}
+      </Text>
+      {m.role && (
+        <Text fontSize="0.84375rem" lineHeight="19px" fontWeight="500" color="brand.fg">
+          {m.role}
+        </Text>
+      )}
+    </Stack>
+  );
+}
+
+/** One person (Figma member card): cream card, photo tile, name, ministry, title, email */
 export function TeamCard({ m }: { m: TeamMember }) {
   return (
-    <Stack gap="0" h="full">
-      <Portrait m={m} sizes="(min-width: 1280px) 220px, (min-width: 1024px) 230px, (min-width: 768px) 30vw, 50vw" />
-      <Stack gap="1" mt="4" flex="1">
-        <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize={{ base: "1.125rem", md: "1.25rem" }} lineHeight="1.25">
-          {m.name}
-        </Heading>
-        {m.ministry && (
-          <Text fontSize={{ base: "0.9375rem", md: "1rem" }} lineHeight="1.45">
-            {m.ministry}
-          </Text>
-        )}
-        {m.role && (
-          <Text fontSize="0.9375rem" fontWeight="600" color="brand.fg">
-            {m.role}
-          </Text>
-        )}
-        <Box mt="auto" pt="1">
+    <Stack gap="3.5" h="full" pt="2.5" px="2.5" pb="18px" bg="bg.warm" borderWidth="1px" borderColor="ink.100" borderRadius="16px">
+      <Portrait m={m} aspect="197 / 210" sizes="(min-width: 1280px) 200px, (min-width: 1024px) 230px, (min-width: 768px) 30vw, 50vw" />
+      <Stack gap="0" flex="1" justifyContent="space-between" px="1">
+        <Details m={m} />
+        <Box pt="2">
           <EmailLink m={m} />
         </Box>
       </Stack>
@@ -95,26 +103,60 @@ export function TeamCard({ m }: { m: TeamMember }) {
   );
 }
 
-/** The Senior Pastor: photo left, name, title and a short welcome */
+/** A leader beside the Senior Pastor (Figma: white card, photo left) */
+export function LeaderCard({ m }: { m: TeamMember }) {
+  return (
+    <Box display="flex" gap="18px" h="full" minH="176px" ps="3.5" pe="18px" py="3.5" bg="bg.canvas" borderRadius="18px">
+      <Box w="118px" flexShrink={0}>
+        <Portrait m={m} aspect="118 / 148" sizes="118px" />
+      </Box>
+      <Stack gap="0" flex="1" minW="0" justifyContent="space-between" pt="1.5" pb="1">
+        <Details m={m} />
+        <EmailLink m={m} />
+      </Stack>
+    </Box>
+  );
+}
+
+/** The Senior Pastor: photo left; eyebrow, name, title, welcome quote and email right */
 export function FeaturedTeamCard({ m, welcome }: { m: TeamMember; welcome?: string }) {
   return (
-    <Grid templateColumns={{ base: "1fr", sm: "minmax(0, 240px) 1fr", md: "minmax(0, 300px) 1fr" }} gap={{ base: "5", sm: "8", md: "12" }} alignItems="center">
-      <Box maxW={{ base: "260px", sm: "none" }}>
-        <Portrait m={m} big sizes="(min-width: 768px) 300px, 260px" />
+    <Grid
+      templateColumns={{ base: "1fr", md: "minmax(0, 300px) 1fr", lg: "360px 1fr" }}
+      gap={{ base: "6", md: "10", lg: "11" }}
+      alignItems="center"
+      ps={{ base: "4", md: "6" }}
+      pe={{ base: "4", md: "10" }}
+      py={{ base: "4", md: "6" }}
+      bg="bg.canvas"
+      borderRadius="24px"
+    >
+      <Box maxW={{ base: "320px", md: "none" }}>
+        <Portrait m={m} big aspect="1 / 1" sizes="(min-width: 1024px) 360px, 320px" />
       </Box>
-      <Stack gap="3" maxW="36rem">
-        <Heading as="h3" fontFamily="heading" fontWeight="700" fontSize="clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem)" lineHeight="1.1" letterSpacing="-0.01em">
-          {m.name}
-        </Heading>
-        {m.role && (
-          <Text fontSize="1.125rem" fontWeight="600" color="brand.fg">
-            {m.role}
-          </Text>
-        )}
+      <Stack gap="22px" alignItems="flex-start">
+        <Text fontSize="0.75rem" fontWeight="600" letterSpacing="0.08em" textTransform="uppercase" color="brand.fg">
+          A word from our Senior Pastor
+        </Text>
+        <Stack gap="2">
+          <Heading as="h3" fontFamily="heading" fontWeight="700" fontSize="clamp(1.75rem, 1.4rem + 1.2vw, 2.125rem)" lineHeight="1.1" letterSpacing="-0.01em">
+            {m.name}
+          </Heading>
+          {m.role && (
+            <Text fontSize="1rem" lineHeight="20px" fontWeight="600" color="brand.fg">
+              {m.role}
+            </Text>
+          )}
+        </Stack>
         {welcome && (
-          <Text fontSize={{ base: "1.0625rem", md: "1.1875rem" }} lineHeight="1.6">
-            <RichText text={welcome} />
-          </Text>
+          <Box as="figure" m="0" w="full" display="flex" flexDirection="column" gap="2.5" px="26px" pt="22px" pb="6" bg="bg.warm" borderRadius="16px">
+            <Text aria-hidden="true" fontFamily="heading" fontWeight="700" fontSize="4rem" lineHeight="40px" h="40px" color="accent.highlight">
+              “
+            </Text>
+            <Text as="blockquote" m="0" maxW="540px" fontWeight="500" fontSize={{ base: "1.125rem", md: "1.3125rem" }} lineHeight="1.45" color="fg">
+              <RichText text={welcome} />
+            </Text>
+          </Box>
         )}
         <EmailLink m={m} />
       </Stack>

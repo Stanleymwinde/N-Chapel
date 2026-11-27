@@ -46,9 +46,26 @@ export function Circled({ children }: { children: React.ReactNode }) {
  * "Learn more" with a small ringed chevron, as on the reference site. Render it
  * inside a link (it is a span); the ring fills gold when the link is hovered.
  */
-export function LearnMore({ label = "Learn more" }: { label?: string }) {
+export function LearnMore({
+  label = "Learn more",
+  size = "md",
+}: {
+  label?: string;
+  /** "sm" = Figma "Learn more": 14px medium label, 26px ring */
+  size?: "md" | "sm";
+}) {
+  const sm = size === "sm";
   return (
-    <Box as="span" className="learn-more" display="inline-flex" alignItems="center" gap="2.5" fontSize="0.9375rem" fontWeight="700" color="fg">
+    <Box
+      as="span"
+      className="learn-more"
+      display="inline-flex"
+      alignItems="center"
+      gap="2.5"
+      fontSize={sm ? "0.875rem" : "0.9375rem"}
+      fontWeight={sm ? "500" : "700"}
+      color="fg"
+    >
       {label}
       <Box
         as="span"
@@ -57,11 +74,11 @@ export function LearnMore({ label = "Learn more" }: { label?: string }) {
         display="inline-flex"
         alignItems="center"
         justifyContent="center"
-        w="7"
-        h="7"
+        w={sm ? "26px" : "7"}
+        h={sm ? "26px" : "7"}
         borderRadius="full"
         borderWidth="1.5px"
-        borderColor="ink.300"
+        borderColor={sm ? "border" : "ink.300"}
         transition="background-color 150ms ease, border-color 150ms ease, transform 200ms cubic-bezier(0.23, 1, 0.32, 1)"
       >
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

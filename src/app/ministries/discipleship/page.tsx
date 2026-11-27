@@ -8,7 +8,7 @@ import { MinistryClosing } from "@/components/ministries/MinistryClosing";
 import { RichText } from "@/components/RichText";
 import { MinistryHero } from "@/components/ministries/MinistryHero";
 import { MoreMinistries } from "@/components/ministries/MoreMinistries";
-import { Section } from "@/components/layout/Section";
+import { MSection } from "@/components/b/MinistryBlocks";
 import { ChA, ChLi, ChOl } from "@/components/primitives";
 
 export const metadata = pageMetadata({ title: m.meta.title, description: m.meta.description, path: m.href });
@@ -21,17 +21,18 @@ export default function DiscipleshipPage() {
         crumb="Discipleship"
       />
 
-      <Section id="pathways" title="Ways to grow" intro="Each of these has its own page with times and how to join.">
-        <ChOl listStyle="none" m="0" p="0" display="grid" gridTemplateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} columnGap="10" borderTopWidth="2px" borderColor="fg">
+      <MSection id="pathways" title="Ways to grow" intro="Each of these has its own page with times and how to join." afterHero headGap="3.5" gap="9">
+        <ChOl listStyle="none" m="0" p="0" display="grid" gridTemplateColumns={{ base: "1fr", md: "repeat(2, minmax(0, 1fr))" }} columnGap="34px" borderTopWidth="1.5px" borderColor="fg">
           {m.pathways.map((p) => (
             <ChLi key={p.title} borderBottomWidth="1px" borderColor="border">
               <ChA
                 asChild
                 display="grid"
                 gridTemplateColumns="1fr auto"
-                gap="4"
+                gap="5"
                 alignItems="center"
-                py="5"
+                minH={{ md: "107px" }}
+                py="18px"
                 textDecoration="none"
                 color="fg"
                 css={{
@@ -42,51 +43,54 @@ export default function DiscipleshipPage() {
               >
                 <NextLink href={p.href} aria-label={`${p.cta}: ${p.title}`}>
                   <span>
-                    <Heading as="h3" textStyle="h4" mb="1" transition="color 150ms ease-out">
+                    <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize="1rem" mb="1" transition="color 150ms ease-out">
                       {p.title}
                     </Heading>
-                    <Text as="span" display="block" color="fg.muted">
+                    <Text as="span" display="block" fontSize="0.9375rem" lineHeight="1.55" color="fg.muted">
                       {p.summary}
                     </Text>
                   </span>
                   <Box color="brand.fg" aria-hidden="true">
-                    <ArrowRight size={22} />
+                    <ArrowRight size={16} />
                   </Box>
                 </NextLink>
               </ChA>
             </ChLi>
           ))}
         </ChOl>
-      </Section>
+      </MSection>
 
-      <Section id="plug-in-video" tone="warm">
-        <Grid templateColumns={{ base: "1fr", lg: "1.4fr 1fr" }} gap={{ base: "8", lg: "12" }} alignItems="center">
-          <LiteYouTube id={m.plugInVideo.id} title={m.plugInVideo.title} poster="school.hero" />
+      <MSection id="plug-in-video" tone="warm">
+        <Grid templateColumns={{ base: "1fr", lg: "672px minmax(0, 1fr)" }} gap={{ base: "8", lg: "56px" }} alignItems="center">
+          {/* Figma: a 672 × 315 frame with a 10px radius */}
+          <Box css={{ "& > *": { aspectRatio: { base: "16 / 9", lg: "672 / 315" }, borderRadius: "10px" } }}>
+            <LiteYouTube id={m.plugInVideo.id} title={m.plugInVideo.title} poster="school.hero" />
+          </Box>
           <Stack gap="4">
-            <Heading as="h2" textStyle="h2">
+            <Heading as="h2" textStyle="h2" maxW="20rem">
               New here? Start with Plug-In
             </Heading>
-            <Text color="fg.muted">
+            <Text fontSize={{ base: "1rem", md: "1.0625rem" }} lineHeight="1.6" color="fg.muted" maxW="456px">
               Plug-In is a 10-week course that helps you connect to God, to community, to church and to your destiny.
             </Text>
           </Stack>
         </Grid>
-      </Section>
+      </MSection>
 
-      <Section id="depth" title="DEPTH teaching">
-        <Stack gap="4" maxW="prose">
-          <Text textStyle="lead" color="fg.muted">
+      <MSection id="depth" title="DEPTH teaching" headGap="22px" gap="22px">
+        <Stack gap="22px" maxW="888px">
+          <Text fontSize={{ base: "1.0625rem", md: "1.1875rem" }} lineHeight="1.6" color="fg.muted">
             {m.depth.summary}
           </Text>
-          <Text>
+          <Text fontSize="0.9375rem" color="fg.muted">
             <RichText text={m.depth.courses} />
           </Text>
         </Stack>
-      </Section>
+      </MSection>
 
       <MoreMinistries current={m.href} />
 
-      <MinistryClosing {...m.nextStep} />
+      <MinistryClosing {...m.nextStep} variant="design" />
     </>
   );
 }

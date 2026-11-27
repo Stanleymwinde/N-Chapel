@@ -94,11 +94,12 @@ function DesktopItem({
     alignItems: "center",
     gap: "1",
     minH: "44px",
-    px: { xl: "2", "2xl": "2.5" },
+    px: "2",
     whiteSpace: "nowrap" as const,
     borderRadius: "md",
     fontWeight: "600",
-    fontSize: { xl: "0.875rem", "2xl": "0.9375rem" },
+    // 14px at every width (Figma nav); growing at 2xl pushed Give out of the bar
+    fontSize: "0.875rem",
     color: overlay ? "fg.inverted" : active ? "brand.fg" : "fg",
     textDecoration: "none",
     position: "relative" as const,
@@ -106,7 +107,7 @@ function DesktopItem({
     bg: "transparent",
     _hover: { color: overlay ? "accent.highlight" : "brand.fg" },
     _after: active
-      ? { content: '""', position: "absolute", left: { xl: "2", "2xl": "2.5" }, right: { xl: "2", "2xl": "2.5" }, bottom: "4px", height: "3px", borderRadius: "full", bg: "accent.highlight" }
+      ? { content: '""', position: "absolute", left: "2", right: "2", bottom: "4px", height: "3px", borderRadius: "full", bg: "accent.highlight" }
       : undefined,
   };
 
@@ -450,7 +451,7 @@ export function SiteHeader({ nav }: { nav: NavItem[] }) {
                 ))}
               </chakra.ul>
             </chakra.nav>
-            <HStack gap="2">
+            <HStack gap="2" flexShrink={0}>
               <Stack direction="row" gap="2" display={{ base: "none", xl: "flex" }}>
                 <Box display={{ base: "none", "2xl": "block" }}>
                   <LinkButton href="/new-here" variant="secondary">

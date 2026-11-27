@@ -63,7 +63,7 @@ export function MinistryCard({ title, summary, href, image, who, when, cta, head
         )}
         <CardBody>
           {who && (
-            <CardEyebrow textTransform="none" letterSpacing="0" fontSize="0.875rem">
+            <CardEyebrow>
               <RichText text={who} />
             </CardEyebrow>
           )}

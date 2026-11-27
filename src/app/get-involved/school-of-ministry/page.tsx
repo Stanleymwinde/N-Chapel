@@ -1,10 +1,10 @@
-import { Grid, Text } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { schoolOfMinistry } from "@content/get-involved";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
-import { FactList } from "@/components/FactList";
 import { Form } from "@/components/Form";
 import { NextStepBand } from "@/components/NextStepBand";
+import { FormWithAside, IntroWithFacts } from "@/components/get-involved/GetInvolvedParts";
 import { LightHero } from "@/components/layout/LightHero";
 import { Section } from "@/components/layout/Section";
 
@@ -22,26 +22,26 @@ export default function SchoolOfMinistryPage() {
         title={schoolOfMinistry.title}
         intro={schoolOfMinistry.intro}
         image="school.hero"
+        titleMaxW="360px"
         breadcrumbs={[{ label: "Get involved", href: "/get-involved" }, { label: "School of Ministry" }]}
         actions={
           <LinkButton href="#register" variant="primary" size="lg">
             Register your interest
           </LinkButton>
         }
+        flushBottom
       />
 
       <Section id="details" title="Course details">
-        <Grid templateColumns={{ base: "1fr", lg: "1fr 1.2fr" }} gap={{ base: "8", lg: "16" }} alignItems="start">
-          <Text textStyle="lead" color="fg.muted" maxW="prose">
-            Whether you&apos;re taking your first steps in ministry or have served for years, School of Ministry gives you practical tools
-            to lead and serve well.
-          </Text>
-          <FactList facts={schoolOfMinistry.facts} />
-        </Grid>
+        <Box mt={{ md: "-2" }}>
+          <IntroWithFacts text={schoolOfMinistry.overview} facts={schoolOfMinistry.facts} />
+        </Box>
       </Section>
 
-      <Section id="register" tone="warm" title="Register your interest" intro="We'll let you know when the next intake opens.">
-        <Form form={schoolOfMinistry.form} hideTitle />
+      <Section id="register" tone="warm" title="Register your interest" intro="We’ll let you know when the next intake opens.">
+        <FormWithAside aside={{ ...schoolOfMinistry.formAside, imageHeight: 366 }}>
+          <Form form={schoolOfMinistry.form} hideTitle />
+        </FormWithAside>
       </Section>
 
       <NextStepBand

@@ -24,6 +24,7 @@ export default function GetInvolvedPage() {
         intro={getInvolved.intro}
         image="getinvolved.hero"
         breadcrumbs={[{ label: "Get involved" }]}
+        flushBottom
         actions={
           <>
             <LinkButton href="/get-involved/groups" variant="primary" size="lg">

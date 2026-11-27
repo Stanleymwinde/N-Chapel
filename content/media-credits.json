@@ -97,6 +97,36 @@
       "isPlaceholder": false
     },
     {
+      "key": "newhere.visit-worship",
+      "file": "/media/newhere/visit-worship.jpg",
+      "width": 1536,
+      "height": 1024,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "usedOn": [
+        "/new-here/plan-your-visit"
+      ],
+      "altText": "Children and adults raising their hands in worship at an outdoor service in front of a tented stage",
+      "isPlaceholder": false
+    },
+    {
+      "key": "newhere.visit-map",
+      "file": "/media/newhere/visit-map.png",
+      "width": 957,
+      "height": 540,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "usedOn": [
+        "/new-here/plan-your-visit"
+      ],
+      "altText": "Street map of Ngong Road, Nairobi, with a pin on Nairobi Chapel",
+      "isPlaceholder": false
+    },
+    {
       "key": "nextsteps.hero",
       "file": "/media/nextsteps/hero.jpg",
       "width": 1800,
@@ -336,6 +366,21 @@
         "/ministries/quest-children"
       ],
       "altText": "Children in green school uniforms writing in exercise books at wooden desks",
+      "isPlaceholder": false
+    },
+    {
+      "key": "quest.ages",
+      "file": "/media/quest/ages.jpg",
+      "width": 1672,
+      "height": 941,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "usedOn": [
+        "/ministries/quest-children"
+      ],
+      "altText": "Smiling young children sitting together on a church pew",
       "isPlaceholder": false
     },
     {
@@ -688,6 +733,21 @@
       "isPlaceholder": false
     },
     {
+      "key": "events.moran",
+      "file": "/media/events/moran.jpg",
+      "width": 1800,
+      "height": 1200,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "usedOn": [
+        "/events"
+      ],
+      "altText": "A young woman fills in a form at an outdoor table while two young people sit with their backs to the camera",
+      "isPlaceholder": false
+    },
+    {
       "key": "resources.hero",
       "file": "/media/resources/hero.jpg",
       "width": 1400,
@@ -736,6 +796,36 @@
       "isPlaceholder": false
     },
     {
+      "key": "about.hero-tent",
+      "file": "/media/about/hero-tent.jpg",
+      "width": 1114,
+      "height": 1412,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "usedOn": [
+        "/about"
+      ],
+      "altText": "Children and families seated on mats under a tree before a tent draped in blue and white, as a leader speaks",
+      "isPlaceholder": false
+    },
+    {
+      "key": "contact.map",
+      "file": "/media/contact/map.jpg",
+      "width": 1491,
+      "height": 838,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "usedOn": [
+        "/contact"
+      ],
+      "altText": "Street map showing Nairobi Chapel on Jamhuri Road, beside Jamhuri Sports Ground",
+      "isPlaceholder": false
+    },
+    {
       "key": "beliefs.hero",
       "file": "/media/beliefs/hero.jpg",
       "width": 1300,
@@ -781,6 +871,421 @@
         "/about/team"
       ],
       "altText": "Close-up of hands gesturing across a wooden meeting table with a glass of water, laptop and coffee cup",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.hero-group",
+      "file": "/media/team/hero-group.jpg",
+      "width": 1672,
+      "height": 941,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Five young church staff smile and talk together around a laptop at a table, with a lit cross on the wall behind them",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.nick-korir",
+      "file": "/media/team/nick-korir.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Rev. Nick Korir",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.bella-mburu",
+      "file": "/media/team/bella-mburu.jpg",
+      "width": 822,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Rev. Bella Mburu",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.liz-mangeli",
+      "file": "/media/team/liz-mangeli.jpg",
+      "width": 718,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Rev. Liz Mangeli",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.sue-nziuko",
+      "file": "/media/team/sue-nziuko.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Sue Nziuko",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.jush-korir",
+      "file": "/media/team/jush-korir.jpg",
+      "width": 815,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Jush Korir",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.sam-odero",
+      "file": "/media/team/sam-odero.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Rev. Sam Odero",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.richard-chogo",
+      "file": "/media/team/richard-chogo.jpg",
+      "width": 779,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Richard Chogo",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.james-muchai",
+      "file": "/media/team/james-muchai.jpg",
+      "width": 734,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of James Muchai",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.mutheu-mbathi",
+      "file": "/media/team/mutheu-mbathi.jpg",
+      "width": 799,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Mutheu Mbathi",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.mercy-ngure",
+      "file": "/media/team/mercy-ngure.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Mercy Ngure",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.javellin-kiende",
+      "file": "/media/team/javellin-kiende.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Javellin Kiende",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.alfrida-aluoch",
+      "file": "/media/team/alfrida-aluoch.jpg",
+      "width": 792,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Alfrida Aluoch",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.kelvin-rapando",
+      "file": "/media/team/kelvin-rapando.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Kelvin Rapando",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.eunice-nyoro",
+      "file": "/media/team/eunice-nyoro.jpg",
+      "width": 795,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Eunice Nyoro",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.festus-omoto",
+      "file": "/media/team/festus-omoto.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Festus Omoto",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.gloria-osumba",
+      "file": "/media/team/gloria-osumba.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Gloria Osumba",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.faith-onyango",
+      "file": "/media/team/faith-onyango.jpg",
+      "width": 823,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Faith Onyango",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.karimi-rimbui",
+      "file": "/media/team/karimi-rimbui.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Karimi Rimbui",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.kelai-wanjiru",
+      "file": "/media/team/kelai-wanjiru.jpg",
+      "width": 667,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Kelai Wanjiru",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.kidane-adala",
+      "file": "/media/team/kidane-adala.jpg",
+      "width": 768,
+      "height": 768,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Kidane Adala",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.bernice-kinuthia",
+      "file": "/media/team/bernice-kinuthia.jpg",
+      "width": 667,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Bernice Kinuthia",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.andruga-sefu",
+      "file": "/media/team/andruga-sefu.jpg",
+      "width": 746,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Andruga Sefu",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.richard-mbukha",
+      "file": "/media/team/richard-mbukha.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Richard Mbukha",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.simon-kimani",
+      "file": "/media/team/simon-kimani.jpg",
+      "width": 900,
+      "height": 900,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Simon Kimani",
+      "isPlaceholder": false
+    },
+    {
+      "key": "team.allan-wafula",
+      "file": "/media/team/allan-wafula.jpg",
+      "width": 859,
+      "height": 1000,
+      "sourceSite": "Figma design",
+      "sourceUrl": null,
+      "author": null,
+      "licence": null,
+      "focus": "50% 20%",
+      "usedOn": [
+        "/about/team"
+      ],
+      "altText": "Portrait of Allan Wafula",
       "isPlaceholder": false
     },
     {

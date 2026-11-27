@@ -56,19 +56,19 @@ export function ScrollRow({
   };
 
   return (
-    <Box as="section" aria-labelledby={id} py={{ base: "16", md: "24" }}>
+    <Box as="section" aria-labelledby={id} pt="0" pb={{ base: "16", md: "24" }}>
       <Container maxW="container" px={{ base: "5", md: "8" }}>
-        <HStack justifyContent="space-between" alignItems="flex-end" gap="4" mb={{ base: "8", md: "10" }} flexWrap="wrap">
+        <HStack justifyContent="space-between" alignItems="center" gap="4" mb="8" flexWrap="wrap">
           <Heading as="h2" id={id} textStyle="h2" color="brand.fg">
             {title}
           </Heading>
           <HStack gap="3">
             {link}
             <HStack gap="2" display={{ base: "none", md: "flex" }}>
-              <IconButton variant="secondary" borderRadius="full" aria-label="Scroll back" onClick={() => step(-1)} disabled={atStart}>
+              <IconButton variant="secondary" borderRadius="full" minW="36px" minH="36px" w="36px" h="36px" px="0" py="0" css={{ "& svg": { width: "16px", height: "16px" } }} aria-label="Scroll back" onClick={() => step(-1)} disabled={atStart}>
                 <ChevronLeft aria-hidden="true" />
               </IconButton>
-              <IconButton variant="secondary" borderRadius="full" aria-label="Scroll forward" onClick={() => step(1)} disabled={atEnd}>
+              <IconButton variant="secondary" borderRadius="full" minW="36px" minH="36px" w="36px" h="36px" px="0" py="0" css={{ "& svg": { width: "16px", height: "16px" } }} aria-label="Scroll forward" onClick={() => step(1)} disabled={atEnd}>
                 <ChevronRight aria-hidden="true" />
               </IconButton>
             </HStack>
@@ -84,12 +84,12 @@ export function ScrollRow({
         m="0"
         display="grid"
         gridAutoFlow="column"
-        gridAutoColumns={{ base: "78%", sm: "44%", lg: "calc((min(100vw, 1200px) - 64px - 48px) / 3.4)" }}
+        gridAutoColumns={{ base: "78%", sm: "44%", lg: "280px" }}
         gap={{ base: "4", md: "6" }}
         overflowX="auto"
         scrollSnapType="x mandatory"
-        scrollPaddingInline={{ base: "20px", md: "32px", lg: "max(32px, calc((100vw - 1200px) / 2 + 32px))" }}
-        paddingInlineStart={{ base: "20px", md: "32px", lg: "max(32px, calc((100vw - 1200px) / 2 + 32px))" }}
+        scrollPaddingInline={{ base: "20px", md: "32px", lg: "max(32px, calc((100vw - 1264px) / 2 + 32px))" }}
+        paddingInlineStart={{ base: "20px", md: "32px", lg: "max(32px, calc((100vw - 1264px) / 2 + 32px))" }}
         paddingInlineEnd={{ base: "20px", md: "32px" }}
         pt="1"
         pb="4"

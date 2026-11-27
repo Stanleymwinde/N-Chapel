@@ -3,13 +3,11 @@ import { serve } from "@content/get-involved";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
 import { Form } from "@/components/Form";
-import { PdfDownload } from "@/components/share/PdfPreview";
 import { NextStepBand } from "@/components/NextStepBand";
-import { Pathway } from "@/components/Pathway";
-import { RichText } from "@/components/RichText";
+import { FormWithAside, SignUpSteps } from "@/components/get-involved/GetInvolvedParts";
+import { TeamFinder } from "@/components/get-involved/TeamFinder";
 import { LightHero } from "@/components/layout/LightHero";
 import { Section } from "@/components/layout/Section";
-import { ChLi, ChUl } from "@/components/primitives";
 
 export const metadata = pageMetadata({
   title: "Serve on a team",
@@ -23,7 +21,7 @@ export default function ServePage() {
     <>
       <LightHero
         title={serve.title}
-        intro="Find a team where your time, talents and gifts make Sunday, and every day, better for others."
+        intro={serve.heroIntro}
         image="serve.hero"
         breadcrumbs={[{ label: "Get involved", href: "/get-involved" }, { label: "Serve on a team" }]}
         actions={
@@ -33,63 +31,37 @@ export default function ServePage() {
         }
       />
 
-      <Section id="teams" title="Teams you can join">
-        <Grid templateColumns={{ base: "1fr", lg: "1fr 1.4fr" }} gap={{ base: "8", lg: "16" }} alignItems="start">
-          <Stack gap="4" maxW="prose">
-            <Text as="blockquote" textStyle="h3" fontWeight="600" color="fg" borderInlineStartWidth="4px" borderColor="accent.highlight" pl="5">
-              {serve.intro}
-            </Text>
-            <Text color="fg.muted">
-              {serve.scripture.reference}. {serve.source}
-            </Text>
-          </Stack>
-          <Box>
-            <ChUl listStyle="none" m="0" p="0" display="grid" gridTemplateColumns={{ base: "1fr", sm: "repeat(2, 1fr)" }} borderTopWidth="1px" borderColor="border">
-              {serve.teams.map((t) => (
-                <ChLi key={t} py="4" borderBottomWidth="1px" borderColor="border" textStyle="h4" pr="4">
-                  {t}
-                </ChLi>
-              ))}
-            </ChUl>
-            <Text textStyle="small" color="fg.muted" mt="4">
-              <RichText text={serve.teamsTodo} />
-            </Text>
-          </Box>
-        </Grid>
-      </Section>
+      <Box as="section" id="how" aria-labelledby="how-heading" bg="bg.warm" py={{ base: "16", md: "20", lg: "24" }}>
+        <Box maxW="container" mx="auto" px={{ base: "5", md: "8" }}>
+          <Grid templateColumns={{ base: "minmax(0, 1fr)", lg: "minmax(0, 508px) minmax(0, 620px)" }} justifyContent="space-between" gap={{ base: "10", lg: "8" }} alignItems="start">
+            <Stack gap="5">
+              <Text fontSize="0.78125rem" fontWeight="600" letterSpacing="0.08em" textTransform="uppercase" color="brand.fg" lineHeight="normal">
+                {serve.eyebrow}
+              </Text>
+              <Heading as="h2" id="how-heading" fontFamily="heading" fontWeight="700" fontSize={{ base: "2.25rem", md: "3rem" }} lineHeight="1.08" maxW="22rem">
+                {serve.heading}
+              </Heading>
+              <Box as="figure" m="0" borderInlineStartWidth="3px" borderColor="accent.highlight" ps="18px" display="grid" gap="2">
+                <Text as="blockquote" m="0" fontWeight="500" fontSize={{ base: "1.0625rem", md: "1.125rem" }} lineHeight="1.55" color="ink.700">
+                  “{serve.intro}”
+                </Text>
+                <Text as="figcaption" fontSize="0.8125rem" color="fg.muted" lineHeight="normal">
+                  {serve.scripture.reference} · {serve.source}
+                </Text>
+              </Box>
+              <SignUpSteps steps={serve.steps} />
+            </Stack>
+            <TeamFinder teams={serve.teams} areas={serve.teamAreas} guide={serve.document} formId="serve-form" note={serve.teamsTodo} />
+          </Grid>
+        </Box>
+      </Box>
 
-      <Section id="how" tone="warm" title="How to sign up">
-        <Pathway steps={serve.steps} />
-      </Section>
-
-      <Section id="serving-opportunities" title="Serving Opportunities" compact>
-        <Stack gap="4" maxW="prose" alignItems="flex-start">
-          <Heading as="h3" textStyle="h4">
-            {serve.document.title}
-          </Heading>
-          <Text color="fg.muted">{serve.document.description}</Text>
-          <PdfDownload pdfUrl={serve.document.pdfUrl} title={serve.document.title} fileSize={serve.document.fileSize} />
-        </Stack>
-      </Section>
-
-      <Section id="serve-form" title="Tell us you'd like to serve">
-        <Grid templateColumns={{ base: "1fr", lg: "1.5fr 1fr" }} gap={{ base: "8", lg: "12" }} alignItems="start">
-          <Form form={serve.form} hideTitle />
-          <Stack gap="3" p={{ base: "5", md: "6" }} borderRadius="lg" bg="bg.tint">
-            <Heading as="h3" textStyle="h4">
-              New to Nairobi Chapel?
-            </Heading>
-            <Text color="fg.muted">
-              Plug-In, our 10-week course, includes a six-month internship serving as a greeter, usher, in outreach, or in adult, youth and
-              children&apos;s ministries. It&apos;s a great way to start.
-            </Text>
-            <Box>
-              <LinkButton href="/new-here/next-steps" variant="link">
-                Learn about Plug-In
-              </LinkButton>
-            </Box>
-          </Stack>
-        </Grid>
+      <Section id="serve-form" title="Tell us you’d like to serve">
+        <Box mt={{ md: "-3" }}>
+          <FormWithAside formWidth={708} aside={{ ...serve.formAside, imageHeight: 489 }}>
+            <Form form={serve.form} prefillFromQuery={{ team: "team" }} hideTitle />
+          </FormWithAside>
+        </Box>
       </Section>
 
       <NextStepBand

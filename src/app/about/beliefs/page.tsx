@@ -22,23 +22,25 @@ const articles = beliefs.items.map((b) => ({ ...b, id: slug(b.title) }));
 /** "John 3:5–8; John 16:8–11" → ["John 3:5–8", "John 16:8–11"] */
 const splitRefs = (refs: string) => refs.split(/;\s*/).filter(Boolean);
 
-/* Light hero, in the same family as the About page */
+/* Light hero: title, swoosh and intro left; the open Bible right (Figma rotates the portrait photo to landscape) */
 function Hero() {
   return (
-    <Box as="header" bg="bg.canvas" pt={{ base: "6", md: "10" }} pb={{ base: "12", md: "16" }} borderBottomWidth="1px" borderColor="border">
+    <Box as="header" bg="bg.canvas" pt={{ base: "6", md: "10" }} pb={{ base: "12", md: "16", lg: "24" }} borderBottomWidth="1px" borderColor="border">
       <Container {...container}>
         <Breadcrumbs items={[{ label: "About", href: "/about" }, { label: "What we believe" }]} tone="light" />
-        <Grid mt={{ base: "6", md: "8" }} templateColumns={{ base: "1fr", md: "1.2fr 1fr" }} gap={{ base: "8", md: "12", lg: "16" }} alignItems="center">
-          <Stack gap={{ base: "5", md: "6" }}>
-            <Heading as="h1" fontFamily="heading" fontWeight="700" fontSize="clamp(2.75rem, 1.6rem + 4.4vw, 5rem)" lineHeight="1" letterSpacing="-0.02em">
+        <Grid mt={{ base: "6", md: "8" }} templateColumns={{ base: "1fr", md: "minmax(0, 528fr) minmax(0, 586fr)" }} gap={{ base: "8", md: "12", lg: "94px" }} alignItems="center">
+          <Stack gap="5">
+            <Heading as="h1" fontFamily="heading" fontWeight="600" fontSize="clamp(2.75rem, 1.7rem + 3.6vw, 4.25rem)" lineHeight="1.05" letterSpacing="-0.02em">
               <Squiggle>{beliefs.title}</Squiggle>
             </Heading>
-            <Text textStyle="lead" color="fg.muted" maxW="34rem">
+            <Text textStyle="lead" lineHeight="1.55" color="fg.muted" maxW="528px">
               {beliefs.intro}
             </Text>
           </Stack>
-          <Box position="relative" aspectRatio={{ base: "16 / 9", md: "4 / 3" }} borderRadius="lg" overflow="hidden" bg="bg.tint">
-            <Img slot="beliefs.hero" priority sizes="(min-width: 768px) 520px, 100vw" />
+          <Box position="relative" aspectRatio="586.5 / 469" borderRadius="10px" overflow="hidden" bg="bg.tint">
+            <Box position="absolute" top="50%" left="50%" w="79.97%" h="125.05%" transform="translate(-50%, -50%) rotate(-90deg)">
+              <Img slot="beliefs.hero" priority sizes="(min-width: 768px) 470px, 80vw" />
+            </Box>
           </Box>
         </Grid>
       </Container>
@@ -85,71 +87,53 @@ function MobileJump() {
   );
 }
 
-/* One article: outlined numeral, title, lead summary, grouped Scripture pills */
-function Article({ a, n }: { a: (typeof articles)[number]; n: number }) {
+/* One article: outlined numeral beside the title, the summary, grouped Scripture chips */
+function Article({ a, n, last }: { a: (typeof articles)[number]; n: number; last: boolean }) {
   return (
-    <ChLi id={a.id} scrollMarginTop="160px" py={{ base: "10", md: "14" }} borderTopWidth="1px" borderColor="border" _first={{ borderTopWidth: "0", pt: "0" }}>
-      <Grid templateColumns={{ base: "1fr", md: "120px 1fr" }} gap={{ base: "3", md: "6" }} alignItems="start">
-        <Text
+    <ChLi id={a.id} scrollMarginTop="160px" display="flex" flexDirection="column" gap="18px" py={{ base: "10", md: "12" }} borderBottomWidth={last ? "0" : "1px"} borderColor="border" _first={{ pt: "0" }}>
+      <Heading as="h2" display="flex" alignItems="center" gap={{ base: "4", md: "5" }} fontFamily="heading" fontWeight="600" fontSize="clamp(1.875rem, 1.45rem + 1.4vw, 2.5rem)" lineHeight="1.2" letterSpacing="-0.01em">
+        <Box
+          as="span"
           aria-hidden="true"
-          fontFamily="heading"
-          fontWeight="700"
-          fontSize={{ base: "3.5rem", md: "4.5rem" }}
-          lineHeight="0.9"
-          whiteSpace="nowrap"
+          flexShrink={0}
+          fontWeight="300"
+          fontSize="clamp(2.5rem, 1.9rem + 2vw, 3.375rem)"
+          lineHeight="1"
+          letterSpacing="0.02em"
           color="transparent"
-          css={{ WebkitTextStroke: "1.5px var(--chakra-colors-purple-700)" }}
+          css={{ WebkitTextStroke: "1px var(--chakra-colors-purple-700)" }}
         >
           {String(n).padStart(2, "0")}
-        </Text>
-        <Stack gap="5" maxW="prose">
-          <Heading as="h2" textStyle="h2">
-            <span className="sr-only">{n}. </span>
-            {a.title}
+        </Box>
+        <span className="sr-only">{n}. </span>
+        {a.title}
+      </Heading>
+      <Text fontSize={{ base: "1.125rem", md: "1.25rem" }} lineHeight="1.6" color="fg">
+        {a.summary}
+      </Text>
+      {a.scriptures.length > 0 && (
+        <Stack gap="3.5" px="5" pt="18px" pb="5" borderRadius="8px" bg="bg.warm" borderWidth="1px" borderColor="border">
+          <Heading as="h3" fontFamily="body" fontSize="0.6875rem" lineHeight="1.2" fontWeight="600" letterSpacing="0.08em" textTransform="uppercase" color="fg">
+            Scripture
           </Heading>
-          <Text fontSize={{ base: "1.125rem", md: "1.25rem" }} lineHeight="1.65" color="fg">
-            {a.summary}
-          </Text>
-          {a.scriptures.length > 0 && (
-            <Box mt="2" p={{ base: "5", md: "6" }} borderRadius="lg" bg="bg.warm" borderWidth="1px" borderColor="border">
-              <Heading as="h3" fontFamily="body" fontSize="0.875rem" fontWeight="700" letterSpacing="0.06em" textTransform="uppercase" color="fg.muted" mb="4">
-                Scripture
-              </Heading>
-              <Stack gap="4">
-                {a.scriptures.map((g) => (
-                  <Box key={(g.label ?? "") + g.references}>
-                    {g.label && (
-                      <Text fontWeight="700" color="brand.fg" fontSize="0.9375rem" mb="2">
-                        {g.label}
-                      </Text>
-                    )}
-                    <ChUl listStyle="none" m="0" p="0" display="flex" flexWrap="wrap" gap="2">
-                      {splitRefs(g.references).map((r) => (
-                        <Box
-                          as="li"
-                          key={r}
-                          px="3"
-                          py="1"
-                          borderRadius="full"
-                          bg="bg.canvas"
-                          borderWidth="1px"
-                          borderColor="purple.200"
-                          fontSize="0.875rem"
-                          fontWeight="500"
-                          color="ink.700"
-                          whiteSpace="nowrap"
-                        >
-                          {r}
-                        </Box>
-                      ))}
-                    </ChUl>
+          {a.scriptures.map((g) => (
+            <Stack key={(g.label ?? "") + g.references} gap="2">
+              {g.label && (
+                <Text fontWeight="500" color="brand.fg" fontSize="0.75rem">
+                  {g.label}
+                </Text>
+              )}
+              <ChUl listStyle="none" m="0" p="0" display="flex" flexWrap="wrap" gap="2">
+                {splitRefs(g.references).map((r) => (
+                  <Box as="li" key={r} px="2.5" py="5px" borderRadius="full" bg="bg.canvas" borderWidth="1px" borderColor="border" fontSize="0.6875rem" lineHeight="1.3" color="fg" whiteSpace="nowrap">
+                    {r}
                   </Box>
                 ))}
-              </Stack>
-            </Box>
-          )}
+              </ChUl>
+            </Stack>
+          ))}
         </Stack>
-      </Grid>
+      )}
     </ChLi>
   );
 }
@@ -159,17 +143,17 @@ export default function BeliefsPage() {
     <>
       <Hero />
 
-      <Box as="section" aria-label="Statement of faith" py={{ base: "12", md: "20" }}>
+      <Box as="section" aria-label="Statement of faith" pt={{ base: "12", lg: "0" }} pb={{ base: "16", md: "20", lg: "24" }}>
         <Container {...container}>
-          <Grid templateColumns={{ base: "1fr", lg: "240px 1fr" }} gap={{ base: "0", lg: "16" }} alignItems="start">
+          <Grid templateColumns={{ base: "1fr", lg: "312px minmax(0, 1fr)" }} gap={{ base: "0", lg: "16", xl: "124px" }} alignItems="start">
             <Box display={{ base: "none", lg: "block" }} alignSelf="stretch">
-              <ArticleIndex items={articles.map(({ id, title }) => ({ id, title }))} label="Statement of faith" />
+              <ArticleIndex items={articles.map(({ id, title }) => ({ id, title }))} label="Statement of faith" variant="contents" />
             </Box>
             <Box>
               <MobileJump />
               <ChOl listStyle="none" m="0" p="0">
                 {articles.map((a, i) => (
-                  <Article key={a.id} a={a} n={i + 1} />
+                  <Article key={a.id} a={a} n={i + 1} last={i === articles.length - 1} />
                 ))}
               </ChOl>
             </Box>
@@ -180,8 +164,8 @@ export default function BeliefsPage() {
       <NextStepBand
         title="Ready to take a step of faith?"
         text="The New Believers class and baptism are simple next steps, and a facilitator walks with you."
-        primary={{ label: "See next steps", href: "/new-here/next-steps" }}
-        secondary={{ label: "Talk to us", href: "/contact" }}
+        primary={{ label: "Plan your visit", href: "/new-here/plan-your-visit" }}
+        secondary={{ label: "Get counselling", href: "/ministries/counselling-care" }}
       />
     </>
   );

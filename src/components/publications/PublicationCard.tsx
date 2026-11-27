@@ -7,21 +7,25 @@ import { PublicationCover } from "./PublicationCover";
 import { pagesLabel, sizeLabel } from "./meta";
 
 /**
- * Publication card: a book-like cover beside its title, line and facts.
- * The whole card is the link; the cover lifts 2px and the arrow steps on hover.
+ * Publication card (Figma "Publication"): a 150px cover beside its kicker,
+ * title, line and facts. The whole card is the link; the cover lifts and
+ * the arrow steps on hover. `roomy` is the wider card under a publication
+ * (19px title, 14px line).
  */
-export function PublicationCard({ pub, headingLevel = "h3" }: { pub: Publication; headingLevel?: "h2" | "h3" | "h4" }) {
+export function PublicationCard({ pub, headingLevel = "h3", roomy }: { pub: Publication; headingLevel?: "h2" | "h3" | "h4"; roomy?: boolean }) {
   const facts = [pagesLabel(pub), sizeLabel(pub)].filter(Boolean).join(" · ");
   return (
     <ChA
       asChild
       display="grid"
-      gridTemplateColumns={{ base: "112px 1fr", md: "144px 1fr" }}
-      gap={{ base: "5", md: "6" }}
+      gridTemplateColumns={{ base: "112px 1fr", sm: "150px 1fr" }}
+      gap="20px"
       alignItems="center"
       h="100%"
-      p={{ base: "4", md: "5" }}
-      borderRadius="lg"
+      ps="16px"
+      pe="18px"
+      py="18px"
+      borderRadius="10px"
       bg="bg.canvas"
       borderWidth="1px"
       borderColor="border"
@@ -35,33 +39,34 @@ export function PublicationCard({ pub, headingLevel = "h3" }: { pub: Publication
           "&:hover": { borderColor: "var(--chakra-colors-border-strong)" },
           "&:hover .cover": { transform: "translateY(-3px)" },
           "&:hover .arrow": { transform: "translateX(3px)" },
+          "&:hover .read-more": { textDecoration: "underline" },
         },
         "@media (prefers-reduced-motion: reduce)": { "&:hover .cover, &:hover .arrow": { transform: "none" } },
       }}
     >
       <NextLink href={`/publications/${pub.slug}`}>
         <Box className="cover">
-          <PublicationCover pub={pub} size="sm" />
+          <PublicationCover pub={pub} size="sm" design="flat" />
         </Box>
-        <Stack gap="2" minW="0">
-          <Text fontSize="0.8125rem" fontWeight="700" letterSpacing="0.06em" textTransform="uppercase" color="brand.fg">
+        <Stack gap="8px" minW="0">
+          <Text fontSize="0.6875rem" fontWeight="600" letterSpacing="0.06em" textTransform="uppercase" color="brand.fg" lineHeight="normal">
             {pub.category} · {pub.year}
           </Text>
-          <Heading as={headingLevel} fontFamily="heading" fontWeight="650" fontSize={{ base: "1.125rem", md: "1.25rem" }} lineHeight="1.25">
+          <Heading as={headingLevel} fontFamily="heading" fontWeight="600" fontSize={roomy ? "1.1875rem" : "1.0625rem"} lineHeight="1.25">
             {pub.title}
           </Heading>
-          <Text color="fg.muted" fontSize="0.9375rem" lineClamp={3}>
+          <Text color="fg.muted" fontSize={roomy ? "0.875rem" : "0.8125rem"} lineHeight="1.55" lineClamp={3}>
             {pub.description}
           </Text>
-          <HStack columnGap="4" rowGap="1" pt="1" fontSize="0.875rem" flexWrap="wrap">
-            <HStack gap="1.5" fontWeight="600" color="brand.fg" whiteSpace="nowrap">
+          <HStack columnGap="14px" rowGap="6px" pt="2px" flexWrap="wrap" lineHeight="normal">
+            <HStack className="read-more" gap="5px" fontSize="0.8125rem" fontWeight="500" color="brand.fg" whiteSpace="nowrap">
               <span>Read more</span>
               <Box as="span" className="arrow" display="inline-flex">
-                <ArrowRight size={16} aria-hidden="true" />
+                <ArrowRight size={12} aria-hidden="true" />
               </Box>
             </HStack>
             {facts && (
-              <Text as="span" color="fg.muted" whiteSpace="nowrap">
+              <Text as="span" fontSize="0.75rem" color="fg.muted" whiteSpace="nowrap">
                 {facts}
               </Text>
             )}

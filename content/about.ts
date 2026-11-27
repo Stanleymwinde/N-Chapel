@@ -121,9 +121,9 @@ export const about = {
     { title: "Publications", summary: "Booklets and documents from the church.", href: "/publications", cta: "Browse publications", image: "resources.hero" },
     { title: "Marriage banns", summary: "Upcoming weddings announced to the church.", href: "/info-desk/marriage-banns", cta: "See the banns", image: "banns.hero" },
     // PDFs from the church's current About page; they open in a new tab
-    { title: "Our history", summary: "From the Arboretum in 1952 to Ngong Road.", href: "/pdfs/nairobi-chapel-history.pdf", cta: "Read the history (PDF, 7.5 MB)", image: "visit.hero", pdf: true },
-    { title: "Our Constitution", summary: "The church's constitution and rules.", href: "/pdfs/nairobi-chapel-constitution.pdf", cta: "Read the Constitution (PDF, 96 KB)", image: "library.study-8", pdf: true },
-  ] as { title: string; summary: string; href: string; cta: string; image: string; pdf?: boolean }[],
+    { title: "Our history", summary: "From the Arboretum in 1952 to Ngong Road.", href: "/pdfs/nairobi-chapel-history.pdf", cta: "Read the history", image: "visit.hero", pdf: true, size: "7.5 MB" },
+    { title: "Our Constitution", summary: "The church's constitution and rules.", href: "/pdfs/nairobi-chapel-constitution.pdf", cta: "Read the Constitution", image: "library.study-8", pdf: true, size: "96 KB" },
+  ] as { title: string; summary: string; href: string; cta: string; image: string; pdf?: boolean; size?: string }[],
 };
 
 /* ------------------------------------------------------------------ */
@@ -285,6 +285,8 @@ export type TeamGroup = {
   /** also the URL hash used by the filter (#adults, #next-generation, …) */
   id: string;
   title: string;
+  /** shorter name for the filter chip (defaults to the title) */
+  label?: string;
   intro?: string;
   /** the matching ministry page, when one exists */
   link?: { label: string; href: string };
@@ -304,24 +306,25 @@ const teamGroups: TeamGroup[] = [
     id: "leadership",
     title: "Leadership",
     members: [
-      { id: "nick-korir", name: "Rev. Nick Korir", role: "Senior Pastor", email: email("nickkorir") },
-      { id: "bella-mburu", name: "Rev. Bella Mburu", role: "Executive Pastor", ministry: "Next Generation", email: email("bellamburu") },
+      { id: "nick-korir", name: "Rev. Nick Korir", role: "Senior Pastor", email: email("nickkorir"), photo: "team.nick-korir" },
+      { id: "bella-mburu", name: "Rev. Bella Mburu", role: "Executive Pastor", ministry: "Next Generation", email: email("bellamburu"), photo: "team.bella-mburu" },
       // TODO(content): confirm spelling with church — “Mangeli” (2026 bulletin) vs “Mang’eli” (old site)
-      { id: "liz-mangeli", name: "Rev. Liz Mangeli", role: "Executive Pastor", ministry: "Adults", email: email("lizmangeli") },
-      { id: "sue-nziuko", name: "Sue Nziuko", role: "Executive Assistant", email: email("suenziuko") },
+      { id: "liz-mangeli", name: "Rev. Liz Mangeli", role: "Executive Pastor", ministry: "Adults", email: email("lizmangeli"), photo: "team.liz-mangeli" },
+      { id: "sue-nziuko", name: "Sue Nziuko", role: "Executive Assistant", email: email("suenziuko"), photo: "team.sue-nziuko" },
     ],
   },
   {
     id: "adults",
-    title: "Adults, discipleship & care",
-    intro: "Walking with adults through discipleship, small groups, marriage, prayer and care.",
+    title: "Adults, discipleship and care",
+    label: "Adults, discipleship & care",
+    intro: "Pastoring adults through discipleship, eGroups, marriage and care.",
     link: { label: "Discipleship", href: "/ministries/discipleship" },
     members: [
-      { id: "jush-korir", name: "Jush Korir", role: "Pastor", ministry: "Discipleship", email: email("juliakorir") },
-      { id: "james-muchai", name: "James Muchai", role: "Pastor", ministry: "Small Groups (eGroups)", email: email("jamesgatuha") },
-      { id: "sam-odero", name: "Rev. Sam Odero", role: "Pastor", ministry: "Prayer & Adult Care", email: email("samuelodero") },
-      { id: "richard-chogo", name: "Richard Chogo", role: "Pastor", ministry: "Marriage Ministry", email: email("richardchogo") },
-      { id: "mutheu-mbathi", name: "Mutheu Mbathi", role: "Pastor", ministry: "Assimilation & Support Communities", email: email("mutheum") },
+      { id: "jush-korir", name: "Jush Korir", role: "Pastor", ministry: "Discipleship", email: email("juliakorir"), photo: "team.jush-korir" },
+      { id: "james-muchai", name: "James Muchai", role: "Pastor", ministry: "Small Groups (eGroups)", email: email("jamesgatuha"), photo: "team.james-muchai" },
+      { id: "sam-odero", name: "Rev. Sam Odero", role: "Pastor", ministry: "Prayer & Adult Care", email: email("samuelodero"), photo: "team.sam-odero" },
+      { id: "richard-chogo", name: "Richard Chogo", role: "Pastor", ministry: "Marriage Ministry", email: email("richardchogo"), photo: "team.richard-chogo" },
+      { id: "mutheu-mbathi", name: "Mutheu Mbathi", role: "Pastor", ministry: "Assimilation & Support Communities", email: email("mutheum"), photo: "team.mutheu-mbathi" },
       { id: "mimo-kadu", name: "Mimo Kadu", role: "Pastor", ministry: "Women’s Ministry", email: email("mimokadu") },
       { id: "gedion-kadu", name: "Gedion Kadu", role: "Pastor", ministry: "Men’s Ministry", email: email("kadu") },
       { id: "tatiana-gitonga", name: "Tatiana Gitonga", role: "Pastor", ministry: "Marketplace Ministry & Volunteers", email: email("tatianawairimu") },
@@ -333,14 +336,14 @@ const teamGroups: TeamGroup[] = [
   {
     id: "next-generation",
     title: "Next Generation",
-    intro: "Caring for children, teens and young adults, from Quest to BLITZ.",
+    intro: "Helping children, teens and young adults grow in faith.",
     link: { label: "Next Gen", href: "/ministries/next-gen-youth" },
     members: [
-      { id: "mercy-ngure", name: "Mercy Ngure", role: "Pastor", ministry: "Children’s Ministry", email: email("mercyn") },
-      { id: "alfrida-aluoch", name: "Alfrida Aluoch", role: "Pastor", ministry: "Children’s Ministry", email: email("alfridaaluoch") },
-      { id: "javellin-kiende", name: "Javellin Kiende", role: "Pastor", ministry: "Quest Children’s Ministry", email: email("javellinkiende") },
-      { id: "kelvin-rapando", name: "Kelvin Rapando", role: "Pastor", ministry: "Quest Children’s Ministry", email: email("kelvinrapando") },
-      { id: "eunice-nyoro", name: "Eunice Nyoro", role: "Administrator", ministry: "Quest Children’s Ministry", email: email("eunicenyoro") },
+      { id: "mercy-ngure", name: "Mercy Ngure", role: "Pastor", ministry: "Children’s Ministry", email: email("mercyn"), photo: "team.mercy-ngure" },
+      { id: "alfrida-aluoch", name: "Alfrida Aluoch", role: "Pastor", ministry: "Children’s Ministry", email: email("alfridaaluoch"), photo: "team.alfrida-aluoch" },
+      { id: "javellin-kiende", name: "Javellin Kiende", role: "Pastor", ministry: "Quest Children’s Ministry", email: email("javellinkiende"), photo: "team.javellin-kiende" },
+      { id: "kelvin-rapando", name: "Kelvin Rapando", role: "Pastor", ministry: "Quest Children’s Ministry", email: email("kelvinrapando"), photo: "team.kelvin-rapando" },
+      { id: "eunice-nyoro", name: "Eunice Nyoro", role: "Administrator", ministry: "Quest Children’s Ministry", email: email("eunicenyoro"), photo: "team.eunice-nyoro" },
       { id: "emmanuel-akhonya", name: "Emmanuel Akhonya", role: "Pastor", ministry: "Crossroads Ministry", email: email("emmanuelakhonya") },
       { id: "jem-ameka", name: "Jem Ameka", role: "Pastor", ministry: "Teens Ministry", email: email("jemameka") },
       { id: "hez-mahehu", name: "Hez Mahehu", role: "Pastor", ministry: "Youth Ministry", email: email("hezmahehu") },
@@ -352,42 +355,46 @@ const teamGroups: TeamGroup[] = [
   },
   {
     id: "missions",
-    title: "Missions & outreach",
-    intro: "Serving our neighbours and taking the gospel beyond our walls.",
+    title: "Missions, outreach and social justice",
+    label: "Missions & outreach",
+    intro: "Taking the gospel and practical love beyond our walls.",
     link: { label: "Outreach", href: "/ministries/outreach" },
     members: [
-      { id: "festus-omoto", name: "Festus Omoto", role: "Pastor", ministry: "Missions, Outreach & Social Justice", email: email("festusomoto") },
-      { id: "gloria-osumba", name: "Gloria Osumba", role: "Social Worker", ministry: "Missions, Outreach & Social Justice", email: email("gloriaosumba") },
-      { id: "faith-onyango", name: "Faith Onyango", role: "Administrator", ministry: "Outreach & Missions", email: email("faithonyango") },
+      { id: "festus-omoto", name: "Festus Omoto", role: "Pastor", ministry: "Missions, Outreach & Social Justice", email: email("festusomoto"), photo: "team.festus-omoto" },
+      { id: "gloria-osumba", name: "Gloria Osumba", role: "Social Worker", ministry: "Missions, Outreach & Social Justice", email: email("gloriaosumba"), photo: "team.gloria-osumba" },
+      { id: "faith-onyango", name: "Faith Onyango", role: "Administrator", ministry: "Outreach & Missions", email: email("faithonyango"), photo: "team.faith-onyango" },
     ],
   },
   {
     id: "worship-media",
-    title: "Worship, media & production",
+    title: "Worship, media and production",
+    label: "Worship, media & production",
     intro: "Leading worship and making every service and stream run well.",
     members: [
-      { id: "karimi-rimbui", name: "Karimi Rimbui", role: "Director", ministry: "Worship & Creative", email: email("karimirimbui") },
-      { id: "kelai-wanjiru", name: "Kelai Wanjiru", role: "Director", ministry: "Digital Media & Communications", email: email("kelaiwanjiru") },
-      { id: "kidane-adala", name: "Kidane Adala", role: "Director", ministry: "Services & Production", email: email("kidaneadala") },
+      { id: "karimi-rimbui", name: "Karimi Rimbui", role: "Director", ministry: "Worship & Creative", email: email("karimirimbui"), photo: "team.karimi-rimbui" },
+      { id: "kelai-wanjiru", name: "Kelai Wanjiru", role: "Director", ministry: "Digital Media & Communications", email: email("kelaiwanjiru"), photo: "team.kelai-wanjiru" },
+      { id: "kidane-adala", name: "Kidane Adala", role: "Director", ministry: "Services & Production", email: email("kidaneadala"), photo: "team.kidane-adala" },
       // TODO(content): confirm title with church
       { id: "gibson-gitonga", name: "Gibson Gitonga", ministry: "Services & Production (Next Gen)", email: email("gibsongitonga") },
       // TODO(content): confirm title with church — the old site says “Production Assistant”
-      { id: "andruga-sefu", name: "Andruga Sefu", ministry: "Services & Production", email: email("andrugavuni") },
+      { id: "andruga-sefu", name: "Andruga Sefu", ministry: "Services & Production", email: email("andrugavuni"), photo: "team.andruga-sefu" },
       // TODO(content): not in 2026 bulletin, confirm with church
-      { id: "bernice-kinuthia", name: "Bernice Kinuthia", role: "Coordinator", ministry: "Services & Production", email: email("bernicekinuthia"), published: false },
+      { id: "bernice-kinuthia", name: "Bernice Kinuthia", role: "Coordinator", ministry: "Services & Production", email: email("bernicekinuthia"), published: false, photo: "team.bernice-kinuthia" },
     ],
   },
   {
     // Shown (with its filter option) automatically once anyone here is published
     id: "support",
     title: "Ministry support staff",
+    label: "Ministry support",
+    intro: "Keeping the church running well behind the scenes.",
     members: [
       // TODO(content): not in 2026 bulletin, confirm with church
-      { id: "richard-mbukha", name: "Richard Mbukha", role: "Ministry Support Staff", published: false },
+      { id: "richard-mbukha", name: "Richard Mbukha", role: "Ministry Support Staff", published: false, photo: "team.richard-mbukha" },
       // TODO(content): not in 2026 bulletin, confirm with church
-      { id: "simon-kimani", name: "Simon Kimani", role: "Ministry Support Staff", published: false },
+      { id: "simon-kimani", name: "Simon Kimani", role: "Ministry Support Staff", published: false, photo: "team.simon-kimani" },
       // TODO(content): not in 2026 bulletin, confirm with church
-      { id: "allan-wafula", name: "Allan Wafula", role: "Ministry Support Staff", published: false },
+      { id: "allan-wafula", name: "Allan Wafula", role: "Ministry Support Staff", published: false, photo: "team.allan-wafula" },
     ],
   },
 ];
@@ -404,17 +411,25 @@ export const team = {
   allGroups: teamGroups,
   /** what the page renders: Leadership first, then the filterable groups */
   groups: publishedGroups,
-  // TODO(content): 1–2 sentence welcome from Rev. Nick Korir
-  welcome: "[TODO: 1–2 sentence welcome from Rev. Nick Korir]",
+  // Welcome text from the Figma design
+  welcome:
+    "God has called each of us, every member, every generation, to be disciples who make disciples. I'm grateful to journey with you as we grow D.E.E.P. and reach W.I.D.E. together",
   /**
    * Office Bearers (moved here from the old "Our Publications" page).
-   * Names and roles are not yet known: add them as `members` entries
-   * (name + role) once the church supplies them. Never invent people.
+   * Names, roles and intro as given in the Figma design.
    */
   officeBearers: {
     title: "Office Bearers",
-    intro: "[TODO: one-line description of the office bearers' role]",
-    members: [] as TeamMember[],
+    intro:
+      "Our office bearers are elders elected by the members to lead the Elders’ Court, which oversees the spiritual direction, governance and finances of Nairobi Chapel.",
+    members: [
+      { id: "janet-mutinda", name: "Dr Janet Mutinda", role: "Chairperson" },
+      { id: "luke-jaoko", name: "Rev Luke Jaoko", role: "Vice Chairperson" },
+      { id: "leah-kiguatha-muteru", name: "Leah Kiguatha Muteru", role: "Secretary" },
+      { id: "jacqueline-nyagah", name: "Jacqueline Nyagah", role: "Vice Secretary" },
+      { id: "michael-murimi", name: "Michael Murimi", role: "Treasurer" },
+      { id: "lydia-koros", name: "Lydia Koros", role: "Assistant Treasurer" },
+    ] as TeamMember[],
     placeholder: "[TODO: names and roles of the Nairobi Chapel Office Bearers (from the Office Bearers document)]",
   },
 };
@@ -441,6 +456,7 @@ export const financials = {
   glance: {
     title: "2025 at a glance",
     note: "Financial year ended 31 December 2025, consolidated for all Nairobi Chapel congregations",
+    scope: "Nairobi Chapel Ngong Road is one of 28 congregations included in these accounts.",
     /** the four headline figures shown large */
     headline: ["Total income", "Total expenditure", "Surplus", "Total assets"],
     rows: [
@@ -549,6 +565,8 @@ export const financials = {
   reports: [
     { year: "2025", title: "Annual Report 2025", file: "/reports/annual-report-2025.pdf", size: "18 MB" },
     { year: "2024", title: "Annual Report 2024", file: "/reports/annual-report-2024.pdf", size: "3.4 MB" },
+    // TODO(content): the 2025 AGM booklet PDF (12.5 MB in the Figma design) is not in the repo yet
+    { year: "2025-agm", title: "2025 AGM booklet (2024 report and 2025 budget)", file: "[TODO: the 2025 AGM booklet PDF (2024 report and 2025 budget), 12.5 MB]" },
     { year: "2023", title: "Annual Report 2023", file: "/reports/annual-report-2023.pdf", size: "3.9 MB" },
     { year: "2022", title: "Annual Report 2022", file: "/reports/annual-report-2022.pdf", size: "5.9 MB" },
     { year: "2021", title: "Annual Report 2021", file: "/reports/annual-report-2021.pdf", size: "11.9 MB" },

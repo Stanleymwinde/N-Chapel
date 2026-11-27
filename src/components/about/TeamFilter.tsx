@@ -113,7 +113,7 @@ export function TeamFilter({ options, children }: { options: Option[]; children:
       css={hide}
       style={{ "--team-top": `${top}px` } as React.CSSProperties}
     >
-      <Box position="sticky" top="var(--team-top)" zIndex="docked" bg="bg.canvas" borderBottomWidth="1px" borderColor="border" py="3">
+      <Box position="sticky" top="var(--team-top)" zIndex="docked" bg="bg.canvas" borderBottomWidth="1px" borderColor="border" py={{ base: "3", md: "4" }} mt={{ md: "12" }}>
         <Container maxW="container" px={{ base: "0", md: "8" }}>
           <FilterBarRoot
             ref={scrollerRef}
@@ -121,7 +121,8 @@ export function TeamFilter({ options, children }: { options: Option[]; children:
             aria-label="Filter team by ministry"
             display="flex"
             flexWrap={{ base: "nowrap", md: "wrap" }}
-            gap="2"
+            justifyContent={{ md: "center" }}
+            gap="1.5"
             p="0"
             px={{ base: "5", md: "0" }}
             bg="transparent"
@@ -144,6 +145,10 @@ export function TeamFilter({ options, children }: { options: Option[]; children:
                 onClick={() => select(o.id)}
                 flexShrink={0}
                 whiteSpace="nowrap"
+                px="3.5"
+                fontSize="1rem"
+                fontWeight="400"
+                borderColor="night.300"
                 css={{
                   scrollSnapAlign: "start",
                   transition: "background-color 150ms ease-out, border-color 150ms ease-out, transform 160ms cubic-bezier(0.23, 1, 0.32, 1)",

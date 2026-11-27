@@ -68,10 +68,10 @@ export function BlogFilters({ posts, categories, authors }: Props) {
   const grid = showFeatured ? rest : filtered;
 
   return (
-    <Box display="grid" gap={{ base: "12", md: "16" }}>
+    <Box display="grid" gap="28px">
       {showFeatured && (
         <Box as="section" aria-labelledby="latest-post">
-          <Text as="h2" id="latest-post" textStyle="eyebrow" color="brand.fg" mb="4">
+          <Text as="h2" id="latest-post" fontSize="0.75rem" fontWeight="600" letterSpacing="0.06em" textTransform="uppercase" color="brand.fg" mb="4">
             Latest post
           </Text>
           <PostCard post={featured} featured />
@@ -80,12 +80,12 @@ export function BlogFilters({ posts, categories, authors }: Props) {
 
       <Box as="section" aria-labelledby="more-posts">
         {/* Heading on the left, one light toolbar on the right */}
-        <HStack justifyContent="space-between" alignItems={{ base: "flex-start", lg: "flex-end" }} flexDirection={{ base: "column", lg: "row" }} gap="5" mb="6" pb="6" borderBottomWidth="1px" borderColor="border">
+        <HStack justifyContent="space-between" alignItems={{ base: "flex-start", lg: "flex-end" }} flexDirection={{ base: "column", lg: "row" }} gap="5" mb="22px" pb="22px" borderBottomWidth="1px" borderColor="border">
           <Box>
-            <Heading as="h2" id="more-posts" textStyle="h3">
+            <Heading as="h2" id="more-posts" fontFamily="heading" fontWeight="600" fontSize="1.5rem" lineHeight="normal" letterSpacing="-0.005em">
               {showFeatured ? "More posts" : anyFilter ? "Results" : "All posts"}
             </Heading>
-            <Text textStyle="small" color="fg.muted" fontWeight="500" aria-live="polite" aria-atomic="true" mt="1">
+            <Text fontSize="0.8125rem" color="fg.muted" aria-live="polite" aria-atomic="true" mt="1">
               {anyFilter
                 ? filtered.length === 0
                   ? "No posts found"
@@ -94,19 +94,19 @@ export function BlogFilters({ posts, categories, authors }: Props) {
             </Text>
           </Box>
 
-          <FilterBarRoot role="search" aria-label="Search and filter blog posts" p="0" bg="transparent" borderWidth="0" w={{ base: "full", lg: "auto" }}>
-            <HStack gap="3" flexWrap="wrap" alignItems="center" w="full">
-              <FilterBarChips aria-label="Category">
+          <FilterBarRoot role="search" aria-label="Search and filter blog posts" p="0" gap="12px" bg="transparent" borderWidth="0" borderRadius="0" w={{ base: "full", lg: "774px" }} maxW="full">
+            <HStack gap="8px" flexWrap="wrap" alignItems="center" w="full">
+              <FilterBarChips aria-label="Category" gap="8px">
                 {(["", ...categories] as const).map((c) => (
                   <li key={c || "all"}>
-                    <FilterBarChip type="button" aria-pressed={category === c} onClick={() => update({ category: c })}>
+                    <FilterBarChip type="button" aria-pressed={category === c} onClick={() => update({ category: c })} minH="40px" px="16px" fontWeight="400" borderColor="border" lineHeight="normal">
                       {c || "All"}
                     </FilterBarChip>
                   </li>
                 ))}
               </FilterBarChips>
-              <NativeSelect.Root size="md" w={{ base: "full", sm: "200px" }}>
-                <NativeSelect.Field aria-label="Author" value={author} onChange={(e) => update({ author: e.target.value })} bg="bg.canvas" borderColor="border.strong" minH="44px">
+              <NativeSelect.Root size="md" w={{ base: "full", sm: "211px" }}>
+                <NativeSelect.Field aria-label="Author" value={author} onChange={(e) => update({ author: e.target.value })} bg="bg.canvas" borderColor="border" borderRadius="6px" h="40px" minH="40px" ps="12px" fontSize="0.8125rem">
                   <option value="">All authors</option>
                   {authors.map((a) => (
                     <option key={a} value={a}>
@@ -116,34 +116,6 @@ export function BlogFilters({ posts, categories, authors }: Props) {
                 </NativeSelect.Field>
                 <NativeSelect.Indicator />
               </NativeSelect.Root>
-              <chakra.form
-                flex={{ base: "1 1 100%", sm: "1 1 220px" }}
-                position="relative"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  update({ q: query.trim() });
-                }}
-              >
-                <Box position="absolute" left="3" top="50%" transform="translateY(-50%)" color="fg.muted" pointerEvents="none" aria-hidden="true" zIndex="1">
-                  <Search size={18} />
-                </Box>
-                <Input
-                  type="search"
-                  name="q"
-                  aria-label="Search by title or scripture"
-                  value={query}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
-                    if (!e.target.value) update({ q: "" });
-                  }}
-                  onBlur={() => update({ q: query.trim() })}
-                  placeholder="Title or scripture, e.g. Psalm 84"
-                  minH="44px"
-                  ps="10"
-                  bg="bg.canvas"
-                  borderColor="border.strong"
-                />
-              </chakra.form>
               {anyFilter && (
                 <Button
                   variant="link"
@@ -156,11 +128,42 @@ export function BlogFilters({ posts, categories, authors }: Props) {
                 </Button>
               )}
             </HStack>
+              <chakra.form
+                w="full"
+                position="relative"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  update({ q: query.trim() });
+                }}
+              >
+                <Box position="absolute" left="12px" top="50%" transform="translateY(-50%)" color="fg.muted" pointerEvents="none" aria-hidden="true" zIndex="1" display="flex">
+                  <Search size={14} />
+                </Box>
+                <Input
+                  type="search"
+                  name="q"
+                  aria-label="Search by title or scripture"
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                    if (!e.target.value) update({ q: "" });
+                  }}
+                  onBlur={() => update({ q: query.trim() })}
+                  placeholder="Title or scripture, e.g. Psalm 84"
+                  h="40px"
+                  minH="40px"
+                  ps="34px"
+                  fontSize="0.8125rem"
+                  borderRadius="6px"
+                  bg="bg.canvas"
+                  borderColor="border"
+                />
+              </chakra.form>
           </FilterBarRoot>
         </HStack>
 
         {grid.length > 0 ? (
-          <SimpleGrid as="ul" listStyle="none" m="0" p="0" columns={{ base: 1, sm: 2, lg: 3 }} gap="6">
+          <SimpleGrid as="ul" listStyle="none" m="0" p="0" columns={{ base: 1, sm: 2, lg: 3 }} gap="24px">
             {grid.map((p) => (
               <li key={p.slug}>
                 <PostCard post={p} />

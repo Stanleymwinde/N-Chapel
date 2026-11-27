@@ -15,6 +15,14 @@ export const groupAudiences: GroupAudience[] = ["Everyone", "Women", "Men", "You
 
 export const groupsIntro = "Life is better together. Find a group where you can belong, grow and serve.";
 
+/** Aside beside the "Join a group" form. */
+export const joinGroupAside = {
+  title: "Grow deeper with Discipleship",
+  text: "eGroups are part of our Discipleship ministry, alongside Next Steps, Plug-In and the Discipleship BootCamp, which teaches the 5 HABITs.",
+  link: { label: "Explore Discipleship", href: "/ministries/discipleship" },
+  image: "library.prayer-2",
+};
+
 export const groups: Group[] = [
   {
     slug: "egroups",

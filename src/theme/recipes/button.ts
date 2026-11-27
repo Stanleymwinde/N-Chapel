@@ -12,9 +12,10 @@ export const buttonRecipe = defineRecipe({
     justifyContent: "center",
     gap: "2",
     fontFamily: "body",
-    fontWeight: "600",
+    fontWeight: "500",
+    lineHeight: "normal",
     borderRadius: "full",
-    borderWidth: "2px",
+    borderWidth: "1.5px",
     borderColor: "transparent",
     whiteSpace: "nowrap",
     textDecoration: "none",
@@ -65,7 +66,7 @@ export const buttonRecipe = defineRecipe({
       },
       inverse: {
         bg: "paper.white",
-        color: "purple.800",
+        color: "ink.900",
         _hover: { bg: "purple.50" },
       },
       inverseOutline: {
@@ -75,10 +76,15 @@ export const buttonRecipe = defineRecipe({
         _hover: { bg: "whiteAlpha.200" },
       },
     },
+    // Figma has one button size (22px × 11px padding, 15px label); lg is kept as an alias
     size: {
-      md: { minH: "44px", minW: "44px", px: "5", fontSize: "1rem" },
-      lg: { minH: "52px", minW: "52px", px: "7", fontSize: "1.0625rem" },
+      md: { minH: "42px", minW: "42px", px: "22px", py: "11px", fontSize: "0.9375rem" },
+      lg: { minH: "42px", minW: "42px", px: "22px", py: "11px", fontSize: "0.9375rem" },
     },
   },
+  // Figma "Text link": 14px medium, underlined, 14px arrow, no button padding
+  compoundVariants: [
+    { variant: "link", size: ["md", "lg"], css: { minH: "24px", py: "0", fontSize: "0.875rem", gap: "6px", "& svg": { width: "14px", height: "14px" } } },
+  ],
   defaultVariants: { variant: "primary", size: "md" },
 });

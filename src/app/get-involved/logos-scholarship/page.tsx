@@ -21,6 +21,7 @@ export default function LogosScholarshipPage() {
         intro={logosScholarship.intro}
         image="logos.hero"
         breadcrumbs={[{ label: "Get involved", href: "/get-involved" }, { label: "Logos Scholarship Fund" }]}
+        flushBottom
       />
 
       <Section id="about-fund">

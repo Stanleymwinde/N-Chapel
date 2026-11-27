@@ -1,11 +1,10 @@
 import NextLink from "next/link";
-import { Box, Text } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import { ChA } from "@/components/primitives";
 
 /**
- * Temporary logo: the four-colour diamond mark + wordmark, drawn in SVG.
- * TODO: replace with the official artwork in public/brand/ (a version for
- * light backgrounds and one for dark backgrounds). See CONTENT-TODO.md.
+ * Small four-colour diamond mark, drawn in SVG (used by the About page badge).
+ * The full logo below uses the official artwork in public/media/brand/.
  */
 export function LogoMark({ size = 40 }: { size?: number }) {
   return (
@@ -20,29 +19,13 @@ export function LogoMark({ size = 40 }: { size?: number }) {
   );
 }
 
-export function Logo({ tone = "dark", href = "/" }: { tone?: "dark" | "light"; href?: string }) {
-  const color = tone === "dark" ? "fg" : "fg.inverted";
+/** Official Nairobi Chapel Ngong Road logo (from the Figma file), used in the navbar. */
+export function Logo({ href = "/" }: { href?: string }) {
   return (
-    <ChA
-      asChild
-      display="inline-flex"
-      alignItems="center"
-      gap="3"
-      textDecoration="none"
-      color={color}
-      minH="44px"
-      borderRadius="sm"
-    >
+    <ChA asChild display="inline-flex" alignItems="center" flexShrink={0} textDecoration="none" minH="44px" borderRadius="sm">
       <NextLink href={href} aria-label="Nairobi Chapel Ngong Road, home">
-        <LogoMark />
-        <Box lineHeight="1" aria-hidden="true" whiteSpace="nowrap">
-          <Text as="span" display="block" fontFamily="heading" fontWeight="700" fontSize="1.2rem" letterSpacing="-0.01em">
-            Nairobi Chapel
-          </Text>
-          <Text as="span" display="block" fontSize="0.78rem" fontWeight="600" mt="1" color={tone === "dark" ? "fg.muted" : "fg.invertedMuted"}>
-            Ngong Road
-          </Text>
-        </Box>
+        {/* 158.9 × 48 in Figma; width follows the SVG's own proportions */}
+        <Image src="/media/brand/logo.svg" alt="" h={{ base: "40px", lg: "48px" }} w="auto" />
       </NextLink>
     </ChA>
   );

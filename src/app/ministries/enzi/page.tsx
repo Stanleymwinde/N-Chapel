@@ -10,17 +10,16 @@ import { MinistryClosing } from "@/components/ministries/MinistryClosing";
 import { MinistryHero } from "@/components/ministries/MinistryHero";
 import { MoreMinistries } from "@/components/ministries/MoreMinistries";
 import { PublicationCover } from "@/components/publications/PublicationCover";
-import { Section } from "@/components/layout/Section";
-import { BulletList, ScriptureQuote } from "@/components/b/MinistryBlocks";
+import { BulletList, MSection, ScriptureQuote } from "@/components/b/MinistryBlocks";
 import { ChA } from "@/components/primitives";
 
 export const metadata = pageMetadata({ title: m.meta.title, description: m.meta.description, path: m.href });
 
-/** A gold disc holding a line icon, as used across the ministry pages. */
+/** Figma "Icon": a 36px gold disc holding a 16px line icon. */
 function IconDisc({ name, dark }: { name: Parameters<typeof Icon>[0]["name"]; dark?: boolean }) {
   return (
-    <Box display="inline-flex" alignItems="center" justifyContent="center" w="12" h="12" borderRadius="full" bg={dark ? "accent.highlight" : "accent.subtle"} color="ink.900" aria-hidden="true" flexShrink={0}>
-      <Icon name={name} size={22} />
+    <Box display="inline-flex" alignItems="center" justifyContent="center" w="36px" h="36px" borderRadius="full" bg={dark ? "accent.highlight" : "accent.subtle"} color="ink.900" aria-hidden="true" flexShrink={0}>
+      <Icon name={name} size={16} />
     </Box>
   );
 }
@@ -41,9 +40,9 @@ export default function EnziPage() {
         }
       />
 
-      <Section id="why">
-        <Grid templateColumns={{ base: "1fr", lg: "1fr 1fr" }} gap={{ base: "10", lg: "16" }} alignItems="center">
-          <Stack gap="5" maxW="prose">
+      <MSection id="why" afterHero>
+        <Grid templateColumns={{ base: "1fr", lg: "564px minmax(0, 1fr)" }} gap={{ base: "10", lg: "20" }} alignItems="center">
+          <Stack gap="4">
             <Heading as="h2" textStyle="h2">
               Why Enzi matters
             </Heading>
@@ -51,78 +50,82 @@ export default function EnziPage() {
           </Stack>
           {m.scripture && <ScriptureQuote scripture={m.scripture} />}
         </Grid>
-      </Section>
+      </MSection>
 
       {/* What we do: five cards, and the sixth cell invites people to serve */}
-      <Section id="what-we-do" tone="warm" title="What we do">
-        <Grid as="ul" listStyle="none" m="0" p="0" templateColumns={{ base: "1fr", md: "repeat(2, minmax(0, 1fr))", lg: "repeat(3, minmax(0, 1fr))" }} gap={{ base: "4", md: "5" }}>
+      <MSection id="what-we-do" tone="warm" title="What we do" gap="8">
+        <Grid as="ul" listStyle="none" m="0" p="0" templateColumns={{ base: "1fr", md: "repeat(2, minmax(0, 1fr))", lg: "repeat(3, minmax(0, 1fr))" }} gap="4">
           {m.activities.map((a) => (
-            <Stack as="li" key={a.title} gap="4" p={{ base: "6", md: "8" }} bg="bg.canvas" borderRadius="lg" borderWidth="1px" borderColor="border">
+            <Stack as="li" key={a.title} gap="3" px="22px" py="6" bg="bg.canvas" borderRadius="12px" borderWidth="1px" borderColor="border">
               <IconDisc name={a.icon} />
-              <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize={{ base: "1.375rem", md: "1.5rem" }} lineHeight="1.2">
+              <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize="1.125rem" lineHeight="1.25">
                 {a.title}
               </Heading>
-              <Text lineHeight="1.7">{a.text}</Text>
+              <Text fontSize="0.875rem" lineHeight="1.6" color="fg.muted">
+                {a.text}
+              </Text>
             </Stack>
           ))}
 
-          <Stack as="li" id="serve" gap="4" p={{ base: "6", md: "8" }} bg="night.900" color="white" borderRadius="lg" scrollMarginTop="120px">
+          <Stack as="li" id="serve" gap="3" px="22px" py="6" bg="fg" color="white" borderRadius="12px" scrollMarginTop="120px">
             <IconDisc name="heart" dark />
-            <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize={{ base: "1.375rem", md: "1.5rem" }} lineHeight="1.2" color="white">
+            <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize="1.125rem" lineHeight="1.25" color="white">
               {m.serve.title}
             </Heading>
-            <Text lineHeight="1.7" color="rgba(255,255,255,0.9)">
+            <Text fontSize="0.875rem" lineHeight="1.6" color="rgba(255,255,255,0.85)">
               {m.serve.text}
             </Text>
-            <Box as="dl" m="0" display="grid" gap="2">
+            <Box as="dl" m="0" pt="1" display="grid" gap="2">
               {m.serve.codes.map((c) => (
-                <HStack key={c.code} gap="3">
-                  <Text as="dt" fontFamily="heading" fontWeight="700" fontSize="1.125rem" bg="accent.highlight" color="ink.900" borderRadius="md" px="2.5" lineHeight="1.6">
+                <HStack key={c.code} gap="2.5">
+                  <Text as="dt" fontWeight="700" fontSize="0.75rem" bg="accent.highlight" color="ink.900" borderRadius="4px" px="7px" py="2px">
                     {c.code}
                   </Text>
-                  <Text as="dd" m="0" color="rgba(255,255,255,0.9)">
+                  <Text as="dd" m="0" fontSize="0.875rem" color="white">
                     {c.label}
                   </Text>
                 </HStack>
               ))}
             </Box>
-            <Box pt="2" mt="auto">
+            <Box pt="1.5" mt="auto">
               <LinkButton href={`https://wa.me/254701777888?text=${volunteerText}`} variant="accent" external>
                 WhatsApp to volunteer
               </LinkButton>
             </Box>
           </Stack>
         </Grid>
-      </Section>
+      </MSection>
 
-      {/* Contact: two cards, the way the reference site sets its two paths */}
-      <Section id="contact" title="Contact details">
-        <Grid templateColumns={{ base: "1fr", md: "repeat(2, minmax(0, 1fr))" }} gap="5" maxW="56rem">
+      {/* Contact: two cards */}
+      <MSection id="contact" title="Contact details">
+        <Grid templateColumns={{ base: "1fr", md: "repeat(2, minmax(0, 444px))" }} gap="4">
           {m.contact.map((c) => (
-            <HStack key={c.label} alignItems="flex-start" gap="5" p={{ base: "6", md: "8" }} borderRadius="lg" borderWidth="1px" borderColor="border">
+            <HStack key={c.label} alignItems="flex-start" gap="14px" px="22px" pt="22px" pb="6" minH={{ md: "157px" }} borderRadius="12px" borderWidth="1px" borderColor="border">
               <IconDisc name={c.icon} />
               <Stack gap="1.5" minW="0">
-                <Text fontSize="0.75rem" fontWeight="700" letterSpacing="0.08em" textTransform="uppercase" color="fg.muted">
+                <Text fontSize="0.625rem" fontWeight="600" letterSpacing="0.06em" textTransform="uppercase" color="fg.muted">
                   {c.label}
                 </Text>
                 <ChA
                   href={c.href}
-                  fontFamily="heading"
                   fontWeight="600"
-                  fontSize={{ base: "1.25rem", md: "1.5rem" }}
+                  fontSize="1.125rem"
                   color="fg"
                   textDecoration="underline"
-                  textDecorationColor="accent.highlight"
-                  textDecorationThickness="2px"
-                  textUnderlineOffset="0.22em"
+                  textUnderlineOffset="0.2em"
                   overflowWrap="anywhere"
                   _hover={{ color: "brand.fg" }}
                 >
                   {c.value}
                 </ChA>
-                {c.note && <Text color="fg.muted">{c.note}</Text>}
+                {c.note && (
+                  <Text fontSize="0.875rem" color="fg.muted">
+                    {c.note}
+                  </Text>
+                )}
                 {c.whatsapp && (
-                  <HStack gap="3" pt="3" flexWrap="wrap">
+                  // Figma: small 13px outline pills
+                  <HStack gap="2" pt="1.5" flexWrap="wrap" css={{ "& .nc-button": { minH: "0", px: "14px", py: "6px", fontSize: "0.8125rem" } }}>
                     <LinkButton href={c.href} variant="secondary">
                       Call
                     </LinkButton>
@@ -135,17 +138,19 @@ export default function EnziPage() {
             </HStack>
           ))}
         </Grid>
-      </Section>
+      </MSection>
 
       {/* The Enzi publication, its cover resting on a warm panel */}
-      <Section id="publication" tone="warm">
-        <Grid templateColumns={{ base: "1fr", md: "minmax(0, 1fr) 320px" }} gap={{ base: "10", lg: "16" }} alignItems="center">
-          <Stack gap="5" maxW="prose" alignItems="flex-start">
+      <MSection id="publication" tone="warm">
+        <Grid templateColumns={{ base: "1fr", md: "minmax(0, 1fr) 312px" }} gap={{ base: "10", lg: "16" }} alignItems="center">
+          <Stack gap="14px" alignItems="flex-start">
             <Heading as="h2" textStyle="h2">
               Learn more about Enzi
             </Heading>
-            <Text textStyle="lead">{m.document.description}</Text>
-            <Text fontWeight="700">
+            <Text fontSize={{ base: "1rem", md: "1.0625rem" }} lineHeight="1.6" color="fg.muted" maxW="600px">
+              {m.document.description}
+            </Text>
+            <Text fontSize="0.875rem" fontWeight="600">
               {m.document.title} (PDF, {m.document.date})
             </Text>
             <PdfDownload pdfUrl={m.document.pdfUrl} title={m.document.title} fileSize={m.document.fileSize} variant="primary" />
@@ -158,11 +163,11 @@ export default function EnziPage() {
             </ChA>
           )}
         </Grid>
-      </Section>
+      </MSection>
 
       <MoreMinistries current={m.href} />
 
-      <MinistryClosing {...m.nextStep} />
+      <MinistryClosing {...m.nextStep} variant="design" />
     </>
   );
 }

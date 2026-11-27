@@ -50,7 +50,7 @@ export const publications: Publication[] = [
     year: 2026,
     publishDate: "2026-02-20",
     description:
-      "Every serving team at the church, from the crèche and Quest children's ministry to missions, the LOGOS Scholarship Fund and communications. To join a team, send a text or WhatsApp message with your name and the team's code to 0701 777 888.",
+      "Every serving team at the church, from the crèche and Quest children’s ministry to missions, the LOGOS Scholarship Fund and communications. To join a team, send a text or WhatsApp message with your name and the team’s code to 0701 777 888.",
     // Source file: Volunteers Serving Opportunities, Feb 2026
     coverImage: "TODO",
     pageCount: 4,
@@ -64,7 +64,7 @@ export const publications: Publication[] = [
     category: "Strategy",
     year: 2025,
     publishDate: "2025-10-31",
-    description: "The church's strategic plan: where we are heading and the priorities that shape it.",
+    description: "The church’s strategic plan: where we are heading and the priorities that shape it.",
     // Source file: Ngong Road COMPASS
     coverImage: "TODO",
     pageCount: 48,
@@ -78,7 +78,7 @@ export const publications: Publication[] = [
     category: "Ministry",
     year: 2025,
     publishDate: "2025-05-26",
-    description: "A two-page flyer introducing Enzi, the church's disability ministry: why it matters, and the Enzi Class, parents' meetings, sign language interpretation, teaching and wheelchair distribution.",
+    description: "A flyer introducing Enzi, the church’s disability ministry.",
     // Source file: Enzi flyer (nairobichapelngongroad.org asset 24be54ca…)
     coverImage: "TODO",
     pageCount: 2,
@@ -106,7 +106,7 @@ export const publications: Publication[] = [
     category: "Leadership",
     year: 2025,
     publishDate: "2025-12-04",
-    description: "The presentation of the church's elders and office bearers.",
+    description: "The presentation of the church’s elders and office bearers.",
     // Source file: Elders presentation
     coverImage: "TODO",
     pageCount: 11,

@@ -39,22 +39,84 @@ export const getInvolved = {
 /* ---------------- Serve (/get-involved/serve) ---------------- */
 export const serve = {
   title: "Serve on a team",
+  heroIntro: "Find a team where your time, talents and gifts make Sunday, and every day, better for others.",
+  eyebrow: "How to sign up",
+  heading: "Find your team, then say yes",
   intro: "We have been called to use our time, resources, talents and spiritual gifts to serve one another.",
   scripture: { reference: "1 Peter 4:10" },
-  source: "From our “Serving Opportunities” publication.",
+  source: "from our Serving Opportunities guide",
   // Moved here from the old "Our Publications" page. pdfUrl stays "TODO" until uploaded.
   document: {
     title: "Serving Opportunities at Nairobi Chapel – Ngong Road",
-    description: "Our guide to serving at Nairobi Chapel Ngong Road.",
+    description: "Our full guide to every team",
     pdfUrl: "TODO",
     fileSize: undefined as string | undefined,
   },
-  teams: ["Greeters", "Ushers", "Worship", "Children (Quest)", "Youth (Next Gen)", "Outreach", "Media"],
+  /** Team finder: areas group the teams; each team shows what it involves and its SMS code. */
+  teamAreas: ["Sunday services", "Worship & media", "Children & youth", "Reaching out"],
+  teams: [
+    {
+      name: "Greeters",
+      area: "Sunday services",
+      blurb: "Welcome people as they arrive on Sunday",
+      summary: "[TODO: Greeters description (what they do and who it suits)]",
+      when: "[TODO: Greeters serving schedule]",
+      code: "[TODO: Greeters SMS code]",
+    },
+    {
+      name: "Ushers",
+      area: "Sunday services",
+      blurb: "Seat and guide the congregation",
+      summary: "[TODO: Ushers description (what they do and who it suits)]",
+      when: "[TODO: Ushers serving schedule]",
+      code: "[TODO: Ushers SMS code]",
+    },
+    {
+      name: "Worship",
+      area: "Worship & media",
+      blurb: "Lead and support Sunday worship",
+      summary: "[TODO: Worship team description (what they do and who it suits)]",
+      when: "[TODO: Worship team serving schedule]",
+      code: "[TODO: Worship SMS code]",
+    },
+    {
+      name: "Media",
+      area: "Worship & media",
+      blurb: "Sound, streaming and production",
+      summary: "[TODO: Media team description (what they do and who it suits)]",
+      when: "[TODO: Media team serving schedule]",
+      code: "[TODO: Media SMS code]",
+    },
+    {
+      name: "Children (Quest)",
+      area: "Children & youth",
+      blurb: "Teach and care for children aged 2–11",
+      summary: "[TODO: Quest volunteers description (what they do and who it suits)]",
+      when: "[TODO: Quest volunteers serving schedule]",
+      code: "[TODO: Quest SMS code]",
+    },
+    {
+      name: "Youth (Next Gen)",
+      area: "Children & youth",
+      blurb: "Walk alongside teenagers",
+      summary: "[TODO: Next Gen volunteers description (what they do and who it suits)]",
+      when: "[TODO: Next Gen volunteers serving schedule]",
+      code: "[TODO: Next Gen SMS code]",
+    },
+    {
+      name: "Outreach",
+      area: "Reaching out",
+      blurb: "Prison, sports, community and mission teams",
+      summary: "[TODO: Outreach description (what they do and who it suits)]",
+      when: "[TODO: Outreach serving schedule]",
+      code: "[TODO: Outreach SMS code]",
+    },
+  ],
   teamsTodo: "[TODO: confirm the full list of serving teams and each team's SMS sign-up code]",
   steps: [
     {
       title: "Choose a team",
-      summary: "Look through the teams and pick one that fits your gifts and your week.",
+      summary: "Use the team finder to see what each team does and when it serves.",
     },
     {
       title: "Send us a message",
@@ -67,6 +129,12 @@ export const serve = {
       cta: { label: "Go to the form", href: "#serve-form" },
     },
   ] satisfies PathwayStep[],
+  formAside: {
+    title: "New to Nairobi Chapel?",
+    text: "Plug-In, our 10-week course, includes a six-month internship serving as a greeter, usher, in outreach, or in adult, youth and children’s ministries. It’s a great way to start.",
+    link: { label: "Learn about Plug-In", href: "/new-here/next-steps" },
+    image: "nextsteps.hero",
+  },
   form: {
     id: "serve",
     title: "I'd like to serve",
@@ -95,6 +163,14 @@ export const kinara = {
   intro:
     "Kinara is a two-year leadership development programme for emerging leaders who are passionate about Jesus and want a life in ministry.",
   applicationFormUrl: "[TODO: Kinara application form PDF URL]",
+  overview:
+    "Kinara is for university or college graduates who want to pursue full-time ministry in Kenya or beyond. Over two years you grow from leading yourself to leading others.",
+  questionAside: {
+    title: "Not ready to apply yet?",
+    text: "School of Ministry equips you with tools to lead, serve and transform lives through Christ, whether you are new to ministry or sharpening your skills.",
+    link: { label: "Explore School of Ministry", href: "/get-involved/school-of-ministry" },
+    image: "school.hero",
+  },
   facts: [
     {
       icon: "users",
@@ -180,6 +256,14 @@ export const schoolOfMinistry = {
   title: "School of Ministry",
   intro:
     "School of Ministry equips you with tools to lead, serve and transform lives through Christ, whether you are new to ministry or sharpening your skills.",
+  overview:
+    "Whether you’re taking your first steps in ministry or have served for years, School of Ministry gives you practical tools to lead and serve well.",
+  formAside: {
+    title: "Put what you learn into practice",
+    text: "Serving on a team is a great way to use your gifts while you study. Find a team where your time and talents make Sunday, and every day, better for others.",
+    link: { label: "Explore serving teams", href: "/get-involved/serve" },
+    image: "serve.hero",
+  },
   facts: [
     { icon: "users", label: "Who it's for", value: "Anyone new to ministry, or serving already and wanting to sharpen their skills" },
     { icon: "book", label: "Courses", value: "[TODO: School of Ministry course list]" },

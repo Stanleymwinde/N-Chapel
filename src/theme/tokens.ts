@@ -8,7 +8,7 @@ import { defineTokens, defineSemanticTokens } from "@chakra-ui/react";
 export const tokens = defineTokens({
   colors: {
     purple: {
-      50: { value: "#F4EFFB" },
+      50: { value: "#F3EEFA" },
       100: { value: "#E6DBF6" },
       200: { value: "#CDB8EC" },
       300: { value: "#AE8EDF" },
@@ -36,7 +36,7 @@ export const tokens = defineTokens({
     },
     paper: {
       white: { value: "#FFFFFF" },
-      warm: { value: "#FAF8F5" },
+      warm: { value: "#F7F4EE" },
     },
     /** the grey quadrant of the logo diamond */
     stone: {
@@ -73,7 +73,7 @@ export const tokens = defineTokens({
     "s-12": { value: "96px" },
   },
   sizes: {
-    container: { value: "1200px" },
+    container: { value: "1264px" } /* 1200px content + 2 × 32px gutter (Figma frame) */,
     prose: { value: "68ch" },
   },
   radii: {

@@ -52,10 +52,10 @@ export function MinistryPhotoCard({
       }}
     >
       <NextLink href={m.href}>
-        <Stack gap={lg ? "5" : "4"} h="full">
+        <Stack gap={lg ? "5" : "6"} h="full">
           {/* Travels into the ministry page header on navigation */}
           <ViewTransition name={`ministry-${m.href.split("/").pop()}`} share="morph" default="none">
-            <Box className="photo" position="relative" aspectRatio={ratio} borderRadius="lg" overflow="hidden" bg="bg.muted">
+            <Box className="photo" position="relative" aspectRatio={ratio} borderRadius={lg ? "lg" : "12px"} overflow="hidden" bg="bg.muted">
               {m.image && <Img slot={m.image} sizes={sizes} priority={priority} />}
             </Box>
           </ViewTransition>
@@ -64,24 +64,24 @@ export function MinistryPhotoCard({
               as={headingLevel}
               fontFamily="heading"
               fontWeight="600"
-              fontSize={lg ? { base: "1.625rem", md: "2rem" } : { base: "1.375rem", md: "1.5rem" }}
-              lineHeight="1.15"
+              fontSize={lg ? { base: "1.625rem", md: "2rem" } : "1.3125rem"}
+              lineHeight={lg ? "1.15" : "1.25"}
               letterSpacing="-0.01em"
               textWrap="balance"
             >
               {m.name}
             </Heading>
-            <Text color="fg" fontSize={lg ? "1rem" : "0.9375rem"} lineHeight="1.75" textWrap="pretty">
+            <Text color="fg" fontSize={lg ? "1rem" : "0.875rem"} lineHeight={lg ? "1.75" : "1.55"} textWrap="pretty">
               {m.summary}
             </Text>
-            {details && (
+            {lg && details && (
               <Text fontSize="0.9375rem" fontWeight="700" color="fg">
                 {details}
               </Text>
             )}
           </Stack>
-          <Box pt="1">
-            <LearnMore />
+          <Box pt={lg ? "1" : "0"} mt={lg ? "0" : "-2px"}>
+            <LearnMore size="sm" />
           </Box>
         </Stack>
       </NextLink>

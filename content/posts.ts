@@ -8,7 +8,7 @@ export type PostCategory = "Sermon Notes" | "Devotional";
 
 /** Structured rich text: one block per paragraph, heading, list, quote or prayer. */
 export type PostBlock =
-  | { type: "paragraph"; text: string }
+  | { type: "paragraph"; text: string; /** set semibold, for the line a passage turns on */ emphasis?: boolean }
   | { type: "heading"; text: string }
   | { type: "list"; items: string[]; ordered?: boolean }
   | { type: "quote"; text: string; cite?: string }
@@ -87,14 +87,14 @@ const haggaiBody: PostBlock[] = [
   { type: "paragraph", text: "Chapter Breakdown:" },
   {
     type: "list",
-    items: ["Haggai 1:1-11: Apathy in rebuilding the temple", "Haggai 1:12-2:23: God’s promised glory for the new house"],
+    items: ["Haggai 1:1–11: Apathy in rebuilding the temple", "Haggai 1:12–2:23: God’s promised glory for the new house"],
   },
   {
     type: "paragraph",
     text: "Have you ever felt judged or misunderstood? In such moments, it’s easy to wonder if we’re missing something deeper. The Book of Haggai offers a glimpse into a nation grappling with similar emotions and circumstances. As we delve into this book, we aim to understand:",
   },
   { type: "list", items: ["What was God doing in Israel during this time?", "How were God’s people responding to His commands?"] },
-  { type: "paragraph", text: "Haggai 1:1-11 – Today’s Key Points:" },
+  { type: "paragraph", text: "Haggai 1:1–11 – Today’s Key Points:" },
   { type: "list", items: ["The Plan", "The Price", "The Promise"] },
   { type: "heading", text: "The Background" },
   {
@@ -104,7 +104,7 @@ const haggaiBody: PostBlock[] = [
   { type: "heading", text: "Who Was Haggai?" },
   {
     type: "paragraph",
-    text: "Haggai, a postexilic prophet, was sent to confront and comfort the people after their return from exile. In 520 B.C., he delivered a powerful message, encouraging them to resume rebuilding the temple. Having been born in captivity, Haggai returned to Jerusalem with Zerubbabel in 538 B.C. (Ezra 1:2). Alongside Zechariah, another prophet, Haggai spurred the people on to complete the temple—a central aspect of their relationship with God.",
+    text: "Haggai, a postexilic prophet, was sent to confront and comfort the people after their return from exile. In 520 B.C., he delivered a powerful message, encouraging them to resume rebuilding the temple. Having been born in captivity, Haggai returned to Jerusalem with Zerubbabel in 538 B.C. (Ezra 1:2). Alongside Zechariah, another prophet, Haggai spurred the people on to complete the temple – a central aspect of their relationship with God.",
   },
   {
     type: "paragraph",
@@ -119,8 +119,8 @@ const haggaiBody: PostBlock[] = [
   {
     type: "list",
     items: [
-      "Nostalgia: Some elders remembered Solomon’s glorious temple and mourned that the new one seemed smaller and less magnificent.",
-      "Opposition: Enemies of Israel, particularly the Assyrians, infiltrated and sabotaged the rebuilding effort, causing fear and stopping the work.",
+      "**Nostalgia:** Some elders remembered Solomon’s glorious temple and mourned that the new one seemed smaller and less magnificent.",
+      "**Opposition:** Enemies of Israel, particularly the Assyrians, infiltrated and sabotaged the rebuilding effort, causing fear and stopping the work.",
     ],
   },
   { type: "heading", text: "The Heart of the Problem: Misplaced Priorities" },
@@ -130,7 +130,7 @@ const haggaiBody: PostBlock[] = [
   },
   {
     type: "paragraph",
-    text: "Haggai 1:5-6 emphasizes that by neglecting God’s house, the people found themselves unfulfilled. Their crops were sparse, their clothes didn’t keep them warm, and their money vanished as if in purses with holes.",
+    text: "Haggai 1:5–6 emphasizes that by neglecting God’s house, the people found themselves unfulfilled. Their crops were sparse, their clothes didn’t keep them warm, and their money vanished as if in purses with holes.",
   },
   { type: "quote", text: "You have planted much, but harvested little. You eat, but never have enough. You drink, but never have your fill.", cite: "Haggai 1:6" },
   {
@@ -144,7 +144,7 @@ const haggaiBody: PostBlock[] = [
   },
   {
     type: "paragraph",
-    text: "This opposition brought discouragement, and for 16 years, the temple lay incomplete. Haggai’s call to action was a challenge to overcome fear and excuses. He reminded them that rebuilding the temple was not just a task—it was a spiritual duty, directly tied to their covenant relationship with God.",
+    text: "This opposition brought discouragement, and for 16 years, the temple lay incomplete. Haggai’s call to action was a challenge to overcome fear and excuses. He reminded them that rebuilding the temple was not just a task – it was a spiritual duty, directly tied to their covenant relationship with God.",
   },
   { type: "heading", text: "The Promise: Blessings Tied to Obedience" },
   {
@@ -168,9 +168,9 @@ const haggaiBody: PostBlock[] = [
   {
     type: "list",
     items: [
-      "Prioritize God: Like the Israelites, we often get busy with our own lives and forget to put God first. But when we focus on Him, everything else falls into place.",
-      "Count the Cost: Obedience to God may come with challenges, but the rewards of His blessing and presence far outweigh the difficulties.",
-      "Stay Strong in the Face of Opposition: Just as the Jews faced political and personal obstacles, we too will encounter opposition. Yet, when we press on in faith, God promises His blessing.",
+      "**Prioritize God:** Like the Israelites, we often get busy with our own lives and forget to put God first. But when we focus on Him, everything else falls into place.",
+      "**Count the Cost:** Obedience to God may come with challenges, but the rewards of His blessing and presence far outweigh the difficulties.",
+      "**Stay Strong in the Face of Opposition:** Just as the Jews faced political and personal obstacles, we too will encounter opposition. Yet, when we press on in faith, God promises His blessing.",
     ],
   },
 ];
@@ -191,7 +191,7 @@ const hopeBody: PostBlock[] = [
     ],
   },
   { type: "paragraph", text: "There is a unique kind of pain that comes when hope disappoints." },
-  { type: "paragraph", text: "But what if the issue isn’t that hope failed… but that it was misplaced?" },
+  { type: "paragraph", text: "But what if the issue isn’t that hope failed… but that it was misplaced?", emphasis: true },
   { type: "heading", text: "The Emmaus Road: A Journey of Disappointment" },
   { type: "paragraph", text: "In Luke 24:13–35, we meet two disciples walking from Jerusalem to Emmaus—about 11 kilometers." },
   { type: "paragraph", text: "They are:" },
@@ -199,7 +199,7 @@ const hopeBody: PostBlock[] = [
   { type: "paragraph", text: "Their words say it all:" },
   { type: "quote", text: "But we had hoped that he was the one who was going to redeem Israel.", cite: "Luke 24:21" },
   { type: "paragraph", text: "That line is heartbreaking." },
-  { type: "paragraph", text: "“We had hoped…”" },
+  { type: "paragraph", text: "“We had hoped…”", emphasis: true },
   {
     type: "paragraph",
     text: "They believed Jesus was the Messiah. They had seen His miracles, heard His teaching, watched His power. Everything about Him screamed Savior.",
@@ -208,14 +208,14 @@ const hopeBody: PostBlock[] = [
   { type: "paragraph", text: "To them, that meant one thing: He failed." },
   { type: "heading", text: "The Problem Wasn’t Jesus; It Was Their Expectations" },
   { type: "paragraph", text: "Here’s the twist:" },
-  { type: "paragraph", text: "The disciples weren’t wrong about Jesus." },
-  { type: "paragraph", text: "They were wrong about what He came to do." },
+  { type: "paragraph", text: "The disciples weren’t wrong about Jesus.", emphasis: true },
+  { type: "paragraph", text: "They were wrong about what He came to do.", emphasis: true },
   { type: "paragraph", text: "They hoped in the right person, but for the wrong reason." },
   { type: "paragraph", text: "They expected:" },
   { type: "list", items: ["A political deliverer", "A problem-solving Messiah", "A power-establishing king"] },
   { type: "paragraph", text: "What they got was:" },
   { type: "list", items: ["A suffering Savior", "A cross before the crown", "Redemption through sacrifice"] },
-  { type: "paragraph", text: "They had created a version of Jesus without the Cross." },
+  { type: "paragraph", text: "They had created a version of Jesus without the Cross.", emphasis: true },
   { type: "heading", text: "When We Do the Same Thing" },
   { type: "paragraph", text: "If we’re honest, we do this too." },
   { type: "paragraph", text: "We want:" },
@@ -224,9 +224,9 @@ const hopeBody: PostBlock[] = [
     items: ["A Jesus who fixes things quickly", "A Jesus who makes life easier", "A Jesus who answers every prayer on demand"],
   },
   { type: "paragraph", text: "Sometimes, we treat Him like a vending machine:" },
-  { type: "paragraph", text: "Insert prayer → insert obedience → collect blessing." },
+  { type: "paragraph", text: "Insert prayer → insert obedience → collect blessing.", emphasis: true },
   { type: "paragraph", text: "But Jesus is not a means to an end." },
-  { type: "paragraph", text: "He is the end." },
+  { type: "paragraph", text: "He is the end.", emphasis: true },
   { type: "heading", text: "Jesus Meets Us in Our Misunderstanding" },
   { type: "paragraph", text: "One of the most beautiful parts of this story?" },
   { type: "paragraph", text: "Jesus doesn’t abandon the disciples." },
@@ -234,7 +234,7 @@ const hopeBody: PostBlock[] = [
   { type: "list", items: ["Even in their confusion.", "Even in their disappointment.", "Even in their wrong expectations."] },
   { type: "paragraph", text: "They don’t recognize Him, but He is there." },
   { type: "paragraph", text: "Then He does something powerful:" },
-  { type: "paragraph", text: "He explains the Scriptures." },
+  { type: "paragraph", text: "He explains the Scriptures.", emphasis: true },
   { type: "paragraph", text: "He shows them that:" },
   {
     type: "list",
@@ -245,7 +245,7 @@ const hopeBody: PostBlock[] = [
     ],
   },
   { type: "paragraph", text: "Their problem?" },
-  { type: "paragraph", text: "Their hope wasn’t shaped by God’s Word." },
+  { type: "paragraph", text: "Their hope wasn’t shaped by God’s Word.", emphasis: true },
   { type: "heading", text: "From Cold Hearts to Burning Hearts" },
   { type: "paragraph", text: "Later, after Jesus breaks bread with them:" },
   { type: "quote", text: "Then their eyes were opened and they recognized him…", cite: "Luke 24:31" },
@@ -255,10 +255,10 @@ const hopeBody: PostBlock[] = [
   { type: "paragraph", text: "They go from:" },
   { type: "list", items: ["Walking away → running back", "Hopeless → hopeful", "Confused → convinced"] },
   { type: "paragraph", text: "Why?" },
-  { type: "paragraph", text: "Because when you truly see Jesus for who He is, everything changes." },
+  { type: "paragraph", text: "Because when you truly see Jesus for who He is, everything changes.", emphasis: true },
   { type: "heading", text: "Hope Misappropriated vs. Hope Restored" },
   { type: "paragraph", text: "Their hope wasn’t false." },
-  { type: "paragraph", text: "It was misappropriated." },
+  { type: "paragraph", text: "It was misappropriated.", emphasis: true },
   { type: "paragraph", text: "God didn’t fail them." },
   { type: "paragraph", text: "Their expectations did." },
   { type: "paragraph", text: "Sometimes:" },
@@ -271,7 +271,7 @@ const hopeBody: PostBlock[] = [
     ],
   },
   { type: "paragraph", text: "We stop at Friday…" },
-  { type: "paragraph", text: "When Sunday is still coming." },
+  { type: "paragraph", text: "When Sunday is still coming.", emphasis: true },
   { type: "heading", text: "Application: Where Have You Said “I Had Hoped”?" },
   { type: "paragraph", text: "Take a moment and reflect:" },
   {
@@ -286,22 +286,22 @@ const hopeBody: PostBlock[] = [
   { type: "paragraph", text: "Quietly walking away:" },
   { type: "list", items: ["From faith", "From calling", "From relationships", "From God Himself"] },
   { type: "paragraph", text: "But here’s the truth:" },
-  { type: "paragraph", text: "You are not walking alone." },
+  { type: "paragraph", text: "You are not walking alone.", emphasis: true },
   { type: "heading", text: "Don’t Walk Away Too Soon" },
   { type: "paragraph", text: "You might be at 4:59." },
   { type: "paragraph", text: "Don’t walk away." },
-  { type: "paragraph", text: "5:00 PM is coming." },
+  { type: "paragraph", text: "5:00 PM is coming.", emphasis: true },
   { type: "paragraph", text: "Friday is real, but Sunday is coming." },
   { type: "paragraph", text: "Your hope may feel buried, but resurrection is still at work." },
   { type: "heading", text: "The Final Word: Hope Has a Name" },
   { type: "paragraph", text: "Hope is not an outcome." },
   { type: "paragraph", text: "Hope is a person." },
-  { type: "paragraph", text: "Hope has a name, and His name is Jesus." },
+  { type: "paragraph", text: "Hope has a name, and His name is Jesus.", emphasis: true },
   { type: "paragraph", text: "Not the version we invent." },
   { type: "paragraph", text: "Not the one shaped by culture." },
   { type: "paragraph", text: "But the real Jesus:" },
   { type: "list", items: ["The crucified One", "The risen One", "The One who walks with disappointed people"] },
-  { type: "paragraph", text: "Even when we miss Him, He never misses us." },
+  { type: "paragraph", text: "Even when we miss Him, He never misses us.", emphasis: true },
   { type: "heading", text: "Conclusion & Prayer" },
   { type: "paragraph", text: "If you feel disappointed today, don’t walk away." },
   { type: "paragraph", text: "Look again." },
@@ -342,12 +342,12 @@ export const posts: Post[] = [
     category: "Sermon Notes",
     scripture: "Haggai 1",
     excerpt:
-      "Sermon notes on Haggai covering God's plan, the price of obedience, and His promise, and why God's compassion triumphs over judgement.",
+      "Sermon notes on Haggai covering God’s plan, the price of obedience, and His promise, and why God’s compassion triumphs over judgement.",
     heroImage: "blog.hero",
     body: haggaiBody,
   },
   {
-    title: "Hope Misappropriated: When God Doesn't Meet Our Expectations",
+    title: "Hope Misappropriated: When God Doesn’t Meet Our Expectations",
     slug: "hope-misappropriated",
     author: "Rev. Gedion Kadu",
     authorRole: "Rev.",
@@ -355,7 +355,7 @@ export const posts: Post[] = [
     category: "Sermon Notes",
     scripture: "Luke 24:13–35",
     excerpt:
-      "The Emmaus road disciples hoped in the right person for the wrong reasons. A message on reshaping our expectations around who Jesus really is.",
+      "Have you ever said, “I had hoped…”? A reflection on the road to Emmaus, and what happens when God doesn’t meet our expectations.",
     heroImage: "discipleship.hero",
     body: hopeBody,
     // CONFIRM WITH THE CHURCH: that this message belongs to the "Hope" Bible study series.

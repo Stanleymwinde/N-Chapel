@@ -60,8 +60,9 @@ export type ThisWeekPicks = {
  * Everything "This week" shows, derived from the data (adjust the rules here):
  *
  * - Featured: the most recent Bible-study series with a week dated within the
- *   last 6 weeks, badged "Current series". If none qualifies, the most recent
- *   series (lowest sortOrder) without the badge. Its latest week is highlighted.
+ *   last 6 weeks, badged "Current series". If none qualifies, the series with
+ *   isCurrent: true (also badged), else the most recent series (lowest
+ *   sortOrder) without the badge. Its latest week is highlighted.
  * - The newest Prayer & fasting item and the newest Quest Kids craft.
  *
  * TODO(content): Bible-study weeks have no posting dates yet (publishDate is null),
@@ -77,12 +78,14 @@ export function thisWeekPicks(today: Date = new Date()): ThisWeekPicks {
     .map((s) => ({ s, last: lastDated(s.slug) }))
     .filter((x) => x.last >= cutoff && x.last <= today.getTime())
     .sort((a, b) => b.last - a.last)[0]?.s;
-  const pick = current ?? bySortOrder.find((s) => seriesResources(s.slug).length > 0);
+  // Until weeks carry dates, the series flagged isCurrent in series.ts stands in.
+  const flagged = bySortOrder.find((s) => s.isCurrent && seriesResources(s.slug).length > 0);
+  const pick = current ?? flagged ?? bySortOrder.find((s) => seriesResources(s.slug).length > 0);
 
   let featured: ThisWeekPicks["featured"];
   if (pick) {
     const weeks = seriesResources(pick.slug);
-    featured = { series: pick, weeks, latest: weeks.at(-1)!, isCurrent: Boolean(current) };
+    featured = { series: pick, weeks, latest: weeks.at(-1)!, isCurrent: Boolean(current) || (!current && pick === flagged) };
   }
 
   const guide = resources.filter((r) => r.type === "prayer-fasting").sort(byNewest)[0];

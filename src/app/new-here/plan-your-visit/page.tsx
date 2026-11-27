@@ -1,17 +1,14 @@
-import { Box, Container, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
-import { ShieldCheck } from "lucide-react";
+import { Box, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
+import { Shield } from "lucide-react";
 import { visit, visitForm } from "@content/new-here";
 import { site } from "@content/site";
 import { pageMetadata } from "@/lib/metadata";
 import { LinkButton } from "@/components/Button";
 import { Faq } from "@/components/Faq";
-import { Form } from "@/components/Form";
 import { Icon } from "@/components/icons";
 import { Img } from "@/components/Img";
-import { MapEmbed } from "@/components/MapEmbed";
 import { RichText } from "@/components/RichText";
-import { Squiggle } from "@/components/home/Squiggle";
-import { CentreHeader, SplitRow, WelcomeRibbons } from "@/components/new-here/NewHereParts";
+import { enter, FormCard, infoLabel, sectionHeading, SmallCrumbs, Swooshed, WelcomeRibbons, Wrap } from "@/components/new-here/NewHereParts";
 import { ChA, ChLi, ChUl } from "@/components/primitives";
 
 export const metadata = pageMetadata({
@@ -21,88 +18,104 @@ export const metadata = pageMetadata({
   path: "/new-here/plan-your-visit",
 });
 
-/** Section heading: large, left, with an optional line beside it. */
-function Head({ id, title, text }: { id: string; title: string; text?: string }) {
+/** Heading on the left, a short line of text on the right (Figma "Header" rows). */
+function Head({ id, title, text, textW }: { id: string; title: string; text: string; textW: string }) {
   return (
-    <Grid templateColumns={{ base: "1fr", lg: "minmax(0, 1fr) minmax(0, 1fr)" }} gap={{ base: "3", lg: "16" }} alignItems="end" mb={{ base: "8", md: "12" }}>
-      <Heading as="h2" id={id} fontFamily="heading" fontWeight="700" fontSize={{ base: "2.25rem", md: "3.25rem" }} lineHeight="1.05" letterSpacing="-0.02em" textWrap="balance">
+    <Grid templateColumns={{ base: "1fr", lg: `minmax(0, 1fr) ${textW}` }} gap={{ base: "3", lg: "10" }} alignItems="center">
+      <Heading as="h2" id={id} {...sectionHeading}>
         {title}
       </Heading>
-      {text && (
-        <Text fontSize={{ base: "1.0625rem", md: "1.1875rem" }} lineHeight="1.7" maxW="32rem" textWrap="pretty">
-          {text}
-        </Text>
-      )}
+      <Text lineHeight="1.65">{text}</Text>
     </Grid>
   );
 }
 
-const label = { fontSize: "0.75rem", fontWeight: "700", letterSpacing: "0.08em", textTransform: "uppercase", color: "fg.muted" } as const;
+/** Small pill buttons inside cards (Figma: 18 × 10 padding, 14px label). */
+const smallButton = { px: "18px", py: "10px", minH: "0", fontSize: "0.875rem" } as const;
 
 export default function PlanYourVisitPage() {
   return (
     <>
-      <CentreHeader
-        crumbs={[{ label: "New Here", href: "/new-here" }, { label: "Plan your visit" }]}
-        title={
-          <>
-            <Squiggle>Welcome</Squiggle> to Nairobi Chapel
-          </>
-        }
-      />
+      {/* 1. Welcome: centred title, photograph beside the two service times */}
+      <Box as="header" bg="bg.canvas" pt={{ base: "8", md: "10" }} pb={{ base: "16", md: "24" }}>
+        <Wrap>
+          <SmallCrumbs items={[{ label: "New Here", href: "/new-here" }, { label: "Plan your visit" }]} />
+          <Heading
+            as="h1"
+            py={{ base: "10", md: "14" }}
+            textAlign="center"
+            fontFamily="heading"
+            fontWeight="600"
+            fontSize={{ base: "3rem", md: "4.5rem" }}
+            lineHeight="1.05"
+            letterSpacing="-0.02em"
+            css={enter(0)}
+          >
+            <Swooshed src="/media/newhere/swoosh.svg">Welcome to</Swooshed>
+            <br />
+            Nairobi Chapel
+          </Heading>
 
-      {/* 1. Sunday: a photograph beside the two service times */}
-      <Box as="section" id="times" aria-labelledby="times-heading" bg="bg.canvas" pb={{ base: "20", md: "28" }} scrollMarginTop="96px">
-        <Container maxW="container" px={{ base: "5", md: "8" }}>
-          <SplitRow image="visit.hero" imageAlt ratio="5 / 4">
-            <Heading as="h2" id="times-heading" fontFamily="heading" fontWeight="700" fontSize={{ base: "2rem", md: "2.75rem" }} lineHeight="1.12" letterSpacing="-0.015em" textWrap="balance">
-              We&apos;d love to welcome you at one of our Sunday services.
-            </Heading>
-            <Text fontSize={{ base: "1.0625rem", md: "1.1875rem" }} lineHeight="1.75">
-              Whether it&apos;s your first time in a church or you&apos;ve been many times before, here&apos;s everything you need for your visit.
-            </Text>
-            <Grid templateColumns="1fr 1fr" gap="3" pt="1">
-              {visit.serviceTimes.map((s) => (
-                <Box key={s.time} p={{ base: "4", md: "5" }} borderRadius="lg" bg="accent.highlight" color="ink.900">
-                  <Text fontSize="0.8125rem" fontWeight="700" letterSpacing="0.06em" textTransform="uppercase">
-                    {s.label}
-                  </Text>
-                  <Text fontFamily="heading" fontWeight="700" fontSize={{ base: "1.875rem", md: "2.25rem", xl: "2.5rem" }} lineHeight="1.05" letterSpacing="-0.02em" whiteSpace="nowrap">
-                    {s.time}
-                  </Text>
-                </Box>
-              ))}
-            </Grid>
-            <HStack gap="3" flexWrap="wrap" pt="2">
-              <LinkButton href="#coming" size="lg">
-                Let us know you&apos;re coming
-              </LinkButton>
-              <LinkButton href={site.mapUrl} variant="secondary" size="lg">
-                Get directions
-              </LinkButton>
-            </HStack>
-          </SplitRow>
-        </Container>
+          <Grid id="times" scrollMarginTop="96px" templateColumns={{ base: "minmax(0, 1fr)", lg: "minmax(0, 592px) minmax(0, 1fr)" }} gap={{ base: "8", lg: "12" }} alignItems="center" css={enter(120)}>
+            <Box position="relative" aspectRatio="592 / 328" borderRadius="12px" overflow="hidden" bg="bg.muted">
+              <Img slot="visit.expect" priority sizes="(min-width: 1024px) 592px, 100vw" />
+            </Box>
+            <Stack gap="18px">
+              <Heading as="h2" fontFamily="heading" fontWeight="600" fontSize={{ base: "1.75rem", md: "2.25rem" }} lineHeight="1.15" letterSpacing="-0.01em" textWrap="balance">
+                We&apos;d love to welcome you at one of our Sunday services.
+              </Heading>
+              <Text lineHeight="1.6" color="fg.muted">
+                Whether it&apos;s your first time in a church or you&apos;ve been many times before, here&apos;s everything you need for your visit.
+              </Text>
+              <Grid as="dl" m="0" templateColumns="1fr 1fr" gap="3">
+                {visit.serviceTimes.map((s) => (
+                  <Box key={s.time} pt="14px" pb="4" px="18px" borderRadius="8px" bg="accent.highlight" color="ink.900">
+                    <Text as="dt" fontSize="0.625rem" fontWeight="600" letterSpacing="0.06em" textTransform="uppercase">
+                      {s.label}
+                    </Text>
+                    <Text as="dd" m="0" mt="0.5" fontFamily="heading" fontWeight="700" fontSize={{ base: "1.75rem", md: "2rem" }} lineHeight="normal" letterSpacing="-0.01em" whiteSpace="nowrap">
+                      {s.time}
+                    </Text>
+                  </Box>
+                ))}
+              </Grid>
+              <HStack gap="3" flexWrap="wrap">
+                <LinkButton href="#coming" px="20px">
+                  Let us know you&apos;re coming
+                </LinkButton>
+                <LinkButton href={site.mapUrl} variant="secondary" px="20px">
+                  Get directions
+                </LinkButton>
+              </HStack>
+            </Stack>
+          </Grid>
+
+          <Box pt={{ base: "14", md: "20" }}>
+            <Box h="1px" bg="border" maxW="1000px" />
+          </Box>
+        </Wrap>
       </Box>
 
       {/* 2. Also on Sunday */}
-      <Box as="section" aria-labelledby="also-heading" bg="bg.canvas" pb={{ base: "20", md: "28" }}>
-        <Container maxW="container" px={{ base: "5", md: "8" }}>
-          <Box borderTopWidth="1px" borderColor="border" pt={{ base: "14", md: "20" }}>
-            <Head id="also-heading" title="Also on Sunday" />
-          </Box>
-          <Grid as="ul" listStyle="none" m="0" p="0" templateColumns={{ base: "1fr", md: "repeat(2, minmax(0, 1fr))" }} gap={{ base: "5", md: "6" }}>
+      <Box as="section" aria-labelledby="also-heading" bg="bg.canvas" pb={{ base: "16", md: "24" }}>
+        <Wrap>
+          <Heading as="h2" id="also-heading" {...sectionHeading} mb="8">
+            Also on Sunday
+          </Heading>
+          <Grid as="ul" listStyle="none" m="0" p="0" templateColumns={{ base: "1fr", md: "repeat(2, minmax(0, 1fr))" }} gap="6">
             {visit.alsoOnSunday.map((g) => (
-              <Stack as="li" key={g.title} gap="3" p={{ base: "6", md: "8" }} borderRadius="xl" borderWidth="1px" borderColor="border">
-                <Text fontFamily="heading" fontWeight="700" fontSize={{ base: "1.375rem", md: "1.625rem" }} color="brand.fg">
+              <Stack as="li" key={g.title} gap="3" pt="7" pb="30px" px="7" borderRadius="14px" borderWidth="1px" borderColor="border">
+                <Text fontFamily="heading" fontWeight="600" fontSize="1.375rem" lineHeight="normal" color="brand.fg">
                   {g.when}
                 </Text>
-                <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize={{ base: "1.25rem", md: "1.375rem" }}>
+                <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize="1.0625rem" lineHeight="normal">
                   {g.title}
                 </Heading>
-                <Text lineHeight="1.7">{g.detail}</Text>
+                <Text fontSize="0.9375rem" lineHeight="1.6">
+                  {g.detail}
+                </Text>
                 {"href" in g && g.href && (
-                  <Box pt="1">
+                  <Box pt="2">
                     <LinkButton href={g.href} variant="link">
                       {g.cta}
                     </LinkButton>
@@ -111,184 +124,208 @@ export default function PlanYourVisitPage() {
               </Stack>
             ))}
           </Grid>
-        </Container>
+        </Wrap>
       </Box>
 
       {/* 3. Finding us */}
       <Box as="section" id="directions" aria-labelledby="directions-heading" bg="bg.warm" py={{ base: "16", md: "24" }} scrollMarginTop="96px">
-        <Container maxW="container" px={{ base: "5", md: "8" }}>
-          <Grid templateColumns={{ base: "1fr", lg: "minmax(0, 0.8fr) minmax(0, 1.2fr)" }} gap={{ base: "10", lg: "16" }} alignItems="center">
-            <Stack gap="6">
-              <Heading as="h2" id="directions-heading" fontFamily="heading" fontWeight="700" fontSize={{ base: "2.25rem", md: "3.25rem" }} lineHeight="1.05" letterSpacing="-0.02em">
+        <Wrap>
+          <Grid templateColumns={{ base: "minmax(0, 1fr)", lg: "456px minmax(0, 1fr)" }} gap={{ base: "10", lg: "20" }} alignItems="center">
+            <Stack gap="10px">
+              <Heading as="h2" id="directions-heading" {...sectionHeading} mb="5">
                 {visit.location.title}
               </Heading>
-              <Stack gap="1">
-                <Text {...label}>Address</Text>
-                <Text fontFamily="heading" fontWeight="600" fontSize={{ base: "1.375rem", md: "1.625rem" }}>
-                  {visit.location.address}
-                </Text>
-              </Stack>
-              <Stack gap="1">
-                <Text {...label}>Lost on the way?</Text>
-                <Text fontSize="1.0625rem" lineHeight="1.7">
-                  Call or WhatsApp us on{" "}
-                  <ChA href={`tel:${site.phone.tel}`} fontWeight="700" color="fg" textDecoration="underline" textDecorationColor="accent.highlight" textDecorationThickness="2px" textUnderlineOffset="0.22em">
-                    {site.phone.local}
-                  </ChA>
-                  .
-                </Text>
-              </Stack>
-              <Box>
-                <LinkButton href={site.mapUrl} variant="accent" size="lg" external>
-                  Open in Google Maps
-                </LinkButton>
-              </Box>
+              <Text {...infoLabel}>Address</Text>
+              <Text fontFamily="heading" fontWeight="600" fontSize="1.375rem" lineHeight="normal" mb="5">
+                {visit.location.address}
+              </Text>
+              <Text {...infoLabel}>Lost on the way?</Text>
+              <Text fontSize="0.9375rem">
+                Call or WhatsApp us on{" "}
+                <ChA href={`tel:${site.phone.tel}`} fontWeight="600" color="fg" textDecoration="underline" textUnderlineOffset="0.2em">
+                  {site.phone.local}
+                </ChA>
+                .
+              </Text>
             </Stack>
-            <Box borderRadius="lg" overflow="hidden" boxShadow="0 30px 60px -28px rgba(22, 18, 31, 0.45)">
-              <MapEmbed />
-            </Box>
+            {/* Map card: a static map that opens Google Maps (no heavy embed) */}
+            <ChA
+              href={site.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              display="block"
+              position="relative"
+              aspectRatio="648 / 305"
+              borderRadius="14px"
+              borderWidth="1px"
+              borderColor="brand.solid"
+              overflow="hidden"
+              bg="bg.warm"
+              boxShadow="0 12px 30px rgba(28, 23, 38, 0.12)"
+              transition="transform 200ms cubic-bezier(0.23, 1, 0.32, 1)"
+              _hover={{ transform: "translateY(-2px)" }}
+              _focusVisible={{ outline: "3px solid", outlineColor: "brand.solid", outlineOffset: "3px" }}
+            >
+              <Img slot="newhere.visit-map" sizes="(min-width: 1024px) 648px, 100vw" />
+              <span className="sr-only"> Open in Google Maps (opens in a new tab)</span>
+            </ChA>
           </Grid>
-        </Container>
+        </Wrap>
       </Box>
 
       {/* 4. Kids on Sunday */}
       <Box as="section" id="kids" aria-labelledby="kids-heading" bg="bg.canvas" py={{ base: "16", md: "24" }} scrollMarginTop="96px">
-        <Container maxW="container" px={{ base: "5", md: "8" }}>
-          <Head id="kids-heading" title={visit.kids.title} text={visit.kids.summary} />
-          <Grid templateColumns={{ base: "1fr", lg: "minmax(0, 1.4fr) minmax(0, 1fr)" }} gap={{ base: "8", lg: "10" }} alignItems="start">
-            <Stack gap="6">
-              <Grid templateColumns={{ base: "1fr", md: "1fr 1fr" }} gap="5">
-                {visit.kids.groups.map((g) => (
-                  <Box key={g.name} p={{ base: "6", md: "7" }} borderRadius="xl" bg="bg.warm">
-                    <Text fontFamily="heading" fontWeight="700" fontSize="2rem" lineHeight="1" color="brand.fg">
-                      {g.name}
-                    </Text>
-                    <Text mt="1.5" fontSize="0.9375rem" color="fg.muted">
-                      {g.meaning} · <strong>{g.ages}</strong>
-                    </Text>
-                    <ChUl listStyle="none" m="0" mt="5" p="0" display="grid" borderTopWidth="1px" borderColor="border">
-                      {g.classes.map((c) => (
-                        <ChLi key={c.name} display="grid" gridTemplateColumns="minmax(0, 1fr) auto" gap="3" alignItems="baseline" py="3" borderBottomWidth="1px" borderColor="border">
-                          <span>
-                            <strong>{c.name}</strong>{" "}
-                            <Text as="span" color="fg.muted">
-                              ({c.meaning})
-                            </Text>
-                          </span>
-                          <Text as="span" fontWeight="600" textAlign="right">
-                            <RichText text={c.age} />
-                          </Text>
-                        </ChLi>
-                      ))}
-                    </ChUl>
-                  </Box>
-                ))}
-              </Grid>
-              <Stack gap="3">
-                <Text fontWeight="700">Every session includes</Text>
-                <HStack gap="2" flexWrap="wrap">
-                  {visit.kids.session.map((s) => (
-                    <Text key={s} as="span" px="4" py="1.5" borderRadius="full" borderWidth="1px" borderColor="border.strong" fontWeight="600" fontSize="0.9375rem">
-                      {s}
-                    </Text>
+        <Wrap display="grid" gap="7">
+          <Head id="kids-heading" title={visit.kids.title} text={visit.kids.summary} textW="430px" />
+          <Grid templateColumns={{ base: "minmax(0, 1fr)", md: "1fr 1fr", xl: "296px 296px minmax(0, 1fr)" }} gap="4" alignItems="stretch">
+            {visit.kids.groups.map((g) => (
+              <Box key={g.name} p="22px" borderRadius="14px" bg="bg.warm">
+                <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize="1.5rem" lineHeight="normal" color="brand.fg">
+                  {g.name}
+                </Heading>
+                <Text mt="1" fontSize="0.75rem" color="fg.muted">
+                  {g.meaning} ·{" "}
+                  <Text as="strong" fontWeight="600" color="fg">
+                    {g.ages}
+                  </Text>
+                </Text>
+                <ChUl listStyle="none" m="0" mt="2.5" p="0" display="grid" fontSize="0.875rem">
+                  {g.classes.map((c) => (
+                    <ChLi key={c.name} display="flex" justifyContent="space-between" gap="3" py="3" borderTopWidth="1px" borderColor="border">
+                      <span>
+                        <Text as="span" fontWeight="500">
+                          {c.name}
+                        </Text>{" "}
+                        <Text as="span" color="fg.muted">
+                          ({c.meaning})
+                        </Text>
+                      </span>
+                      <Text as="span" textAlign="right">
+                        <RichText text={c.age} />
+                      </Text>
+                    </ChLi>
                   ))}
-                </HStack>
-              </Stack>
-            </Stack>
+                </ChUl>
+              </Box>
+            ))}
 
-            <Stack gap="5" p={{ base: "6", md: "8" }} borderRadius="xl" bg="night.900" color="white">
+            <Stack gridColumn={{ md: "1 / -1", xl: "auto" }} gap="14px" p="26px" borderRadius="14px" bg="night.900" color="white">
               <HStack gap="3">
-                <Box display="inline-flex" alignItems="center" justifyContent="center" w="11" h="11" borderRadius="full" bg="accent.highlight" color="ink.900" aria-hidden="true">
-                  <ShieldCheck size={22} />
+                <Box display="inline-flex" alignItems="center" justifyContent="center" w="9" h="9" borderRadius="full" bg="accent.highlight" color="ink.900" aria-hidden="true">
+                  <Shield size={16} />
                 </Box>
-                <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize="1.5rem" color="white">
+                <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize="1.25rem" color="white">
                   Safety first
                 </Heading>
               </HStack>
-              <ChUl listStyle="none" m="0" p="0" display="grid" gap="4">
+              <ChUl listStyle="none" m="0" p="0" display="grid" gap="14px">
                 {visit.kids.safety.map((s) => (
-                  <ChLi key={s} display="grid" gridTemplateColumns="auto 1fr" gap="3" alignItems="baseline" color="rgba(255,255,255,0.92)" lineHeight="1.6">
-                    <Box as="span" w="2" h="2" bg="accent.highlight" transform="rotate(45deg) translateY(-2px)" aria-hidden="true" />
+                  <ChLi key={s} display="grid" gridTemplateColumns="auto 1fr" gap="10px" alignItems="baseline" fontSize="0.875rem" lineHeight="1.55">
+                    <Box as="span" color="accent.highlight" fontSize="9px" aria-hidden="true">
+                      ◆
+                    </Box>
                     {s}
                   </ChLi>
                 ))}
               </ChUl>
-              <HStack gap="4" flexWrap="wrap" pt="2">
-                <LinkButton href="/ministries/quest-children" variant="accent">
+              <HStack gap="10px" flexWrap="wrap" pt="1.5">
+                <LinkButton href="/ministries/quest-children" variant="accent" {...smallButton}>
                   Explore Quest
                 </LinkButton>
-                <LinkButton href="/safeguarding" variant="inverseOutline">
+                <LinkButton href="/safeguarding" variant="inverseOutline" {...smallButton}>
                   Safeguarding policy
                 </LinkButton>
               </HStack>
             </Stack>
           </Grid>
-        </Container>
+          <Stack gap="10px">
+            <Text fontWeight="600" fontSize="0.9375rem">
+              Every session includes
+            </Text>
+            <HStack as="ul" listStyle="none" m="0" p="0" gap="2" flexWrap="wrap">
+              {visit.kids.session.map((s) => (
+                <Box as="li" key={s} px="14px" py="7px" borderRadius="full" borderWidth="1px" borderColor="border" fontSize="0.8125rem" lineHeight="normal">
+                  {s}
+                </Box>
+              ))}
+            </HStack>
+          </Stack>
+        </Wrap>
       </Box>
 
       {/* 5. Through the week */}
       <Box as="section" id="gatherings" aria-labelledby="week-heading" bg="bg.warm" py={{ base: "16", md: "24" }} scrollMarginTop="96px">
-        <Container maxW="container" px={{ base: "5", md: "8" }}>
-          <Head id="week-heading" title="Through the week" text="Beyond Sunday mornings, there are more ways to worship and pray together." />
-          <Grid as="ul" listStyle="none" m="0" p="0" templateColumns={{ base: "1fr", md: "repeat(2, minmax(0, 1fr))" }} gap={{ base: "5", md: "6" }}>
+        <Wrap display="grid" gap="7">
+          <Head id="week-heading" title="Through the week" text="Beyond Sunday mornings, there are more ways to worship and pray together." textW="516px" />
+          <Grid as="ul" listStyle="none" m="0" p="0" templateColumns={{ base: "1fr", md: "repeat(2, minmax(0, 1fr))" }} gap="6">
             {visit.otherGatherings.map((g) => (
-              <Stack as="li" key={g.title} gap="4" p={{ base: "6", md: "8" }} bg="bg.canvas" borderRadius="xl">
-                <Stack gap="0.5">
-                  <Text fontSize="0.8125rem" fontWeight="700" letterSpacing="0.06em" textTransform="uppercase" color="brand.fg">
-                    {g.day}
-                  </Text>
-                  <Text fontFamily="heading" fontWeight="700" fontSize={{ base: "1.75rem", md: "2.25rem" }} lineHeight="1.1" letterSpacing="-0.015em">
-                    {g.time}
-                  </Text>
-                </Stack>
-                <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize={{ base: "1.25rem", md: "1.375rem" }}>
+              <Stack as="li" key={g.title} gap="10px" p="26px" bg="bg.canvas" borderRadius="14px">
+                <Text fontSize="0.6875rem" fontWeight="600" letterSpacing="0.04em" textTransform="uppercase" color="brand.fg" lineHeight="normal">
+                  {g.day}
+                </Text>
+                <Text fontFamily="heading" fontWeight="600" fontSize={{ base: "1.625rem", md: "1.875rem" }} lineHeight="normal" letterSpacing="-0.005em">
+                  {g.time}
+                </Text>
+                <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize="1.125rem" lineHeight="normal">
                   {g.title}
                 </Heading>
-                <Text lineHeight="1.7">{g.summary}</Text>
-                <Stack gap="2" pt="3" mt="auto" borderTopWidth="1px" borderColor="border" fontSize="0.9375rem">
-                  <HStack gap="2.5">
-                    <Box color="brand.fg" display="inline-flex" aria-hidden="true">
-                      <Icon name="mapPin" size={16} />
+                <Text fontSize="0.9375rem" lineHeight="1.65">
+                  {g.summary}
+                </Text>
+                <Stack gap="2" pt="14px" mt="auto" borderTopWidth="1px" borderColor="border" fontSize="0.8125rem">
+                  <HStack gap="2">
+                    <Box display="inline-flex" aria-hidden="true">
+                      <Icon name="mapPin" size={13} />
                     </Box>
                     <span>{g.where}</span>
                   </HStack>
                   {"who" in g && g.who && (
-                    <HStack gap="2.5">
-                      <Box color="brand.fg" display="inline-flex" aria-hidden="true">
-                        <Icon name="users" size={16} />
+                    <HStack gap="2">
+                      <Box display="inline-flex" aria-hidden="true">
+                        <Icon name="users" size={13} />
                       </Box>
                       <span>{g.who}</span>
                     </HStack>
                   )}
+                  {"cta" in g && g.cta && (
+                    <Box pt="2">
+                      <LinkButton href={g.cta.href} variant="link">
+                        {g.cta.label}
+                      </LinkButton>
+                    </Box>
+                  )}
                 </Stack>
-                {"cta" in g && g.cta && (
-                  <Box>
-                    <LinkButton href={g.cta.href} variant="link">
-                      {g.cta.label}
-                    </LinkButton>
-                  </Box>
-                )}
               </Stack>
             ))}
           </Grid>
-        </Container>
+        </Wrap>
       </Box>
 
-      {/* 6. Questions beside a photograph, as on the reference site */}
+      {/* 6. Questions beside a photograph */}
       <Box as="section" id="faq" aria-labelledby="faq-heading" bg="bg.canvas" py={{ base: "16", md: "24" }} scrollMarginTop="96px">
-        <Container maxW="container" px={{ base: "5", md: "8" }}>
-          <Heading as="h2" id="faq-heading" textAlign="center" fontFamily="heading" fontWeight="700" fontSize={{ base: "2.25rem", md: "3.25rem" }} lineHeight="1.05" letterSpacing="-0.02em" mb={{ base: "10", md: "14" }}>
+        <Wrap>
+          <Heading as="h2" id="faq-heading" {...sectionHeading} textAlign="center" mb="10">
             Your questions, answered
           </Heading>
-          <Grid templateColumns={{ base: "1fr", lg: "minmax(0, 1.15fr) minmax(0, 1fr)" }} gap={{ base: "10", lg: "16" }} alignItems="center">
-            <Faq items={visit.faq} />
-            <Stack gap="5">
-              <Box position="relative" aspectRatio="4 / 3" borderRadius="lg" overflow="hidden" bg="bg.muted" boxShadow="0 30px 60px -28px rgba(22, 18, 31, 0.45)">
-                <Img slot="visit.expect" sizes="(min-width: 1024px) 34rem, 100vw" />
+          <Grid templateColumns={{ base: "minmax(0, 1fr)", lg: "600px minmax(0, 1fr)" }} gap={{ base: "10", lg: "12" }} alignItems="start">
+            <Box
+              css={{
+                "& > div": { maxWidth: "none" },
+                "& button": { fontSize: "0.9375rem", fontWeight: "500", minHeight: "0", paddingBlock: "16px", paddingInline: "0" },
+                "& button svg": { width: "15px", height: "15px" },
+              }}
+            >
+              <Faq items={visit.faq} />
+            </Box>
+            <Stack gap="14px" alignItems="flex-start">
+              <Box position="relative" w="full" aspectRatio="608 / 338" borderRadius="12px" overflow="hidden" bg="bg.muted">
+                <Img slot="newhere.visit-worship" sizes="(min-width: 1024px) 608px, 100vw" />
               </Box>
-              <Text color="fg.muted">Still wondering about something? We&apos;re happy to help.</Text>
-              <HStack gap="3" flexWrap="wrap">
-                <LinkButton href={site.whatsapp.url} variant="secondary" external>
+              <Text fontSize="0.9375rem" color="fg.muted">
+                Still wondering about something? We&apos;re happy to help.
+              </Text>
+              <HStack gap="14px" flexWrap="wrap">
+                <LinkButton href={site.whatsapp.url} variant="secondary" external {...smallButton}>
                   Ask on WhatsApp
                 </LinkButton>
                 <LinkButton href="/new-here#questions" variant="link">
@@ -297,29 +334,27 @@ export default function PlanYourVisitPage() {
               </HStack>
             </Stack>
           </Grid>
-        </Container>
+        </Wrap>
       </Box>
 
-      <WelcomeRibbons />
+      <WelcomeRibbons tall />
 
       {/* 7. Let us know you're coming */}
       <Box as="section" id="coming" aria-label="Let us know you're coming" bg="bg.warm" pb={{ base: "16", md: "24" }} scrollMarginTop="96px">
-        <Container maxW="48rem" px={{ base: "5", md: "8" }}>
-          <Box p={{ base: "6", md: "10" }} bg="bg.canvas" borderRadius="xl" boxShadow="0 24px 60px -30px rgba(22, 18, 31, 0.3)">
-            <Form form={visitForm} plain />
-          </Box>
-          <Stack mt={{ base: "10", md: "12" }} alignItems="center" textAlign="center" gap="3">
-            <Text fontFamily="heading" fontWeight="600" fontSize={{ base: "1.25rem", md: "1.5rem" }}>
+        <Wrap>
+          <FormCard form={visitForm} />
+          <Stack mt="12" alignItems="center" textAlign="center" gap="3">
+            <Text fontFamily="heading" fontWeight="600" fontSize="1.375rem">
               After your first Sunday
             </Text>
-            <Text color="fg.muted" maxW="30rem">
+            <Text color="fg.muted" lineHeight="1.6" maxW="458px">
               Plug-In, the New Believers class, baptism and eGroups help you belong and grow.
             </Text>
             <LinkButton href="/new-here/next-steps" variant="link">
               See next steps
             </LinkButton>
           </Stack>
-        </Container>
+        </Wrap>
       </Box>
     </>
   );

@@ -1,5 +1,6 @@
-import { Box, Container, Grid, Heading, HStack, Stack, Text } from "@chakra-ui/react";
-import { HeartHandshake } from "lucide-react";
+import NextLink from "next/link";
+import { Box, Container, Flex, Heading, HStack, Image, Stack, Text } from "@chakra-ui/react";
+import { Heart } from "lucide-react";
 import { home } from "@content/home";
 import { isTodo, site } from "@content/site";
 import { events, type EventEntry } from "@content/events";
@@ -19,11 +20,10 @@ import { RichText } from "@/components/RichText";
 import { FeatureRow } from "@/components/home/FeatureRow";
 import { FeaturedCarousel } from "@/components/home/FeaturedCarousel";
 import { HeroVideo } from "@/components/home/HeroVideo";
-import { Squiggle } from "@/components/home/Squiggle";
 import { StepTiles } from "@/components/home/StepTiles";
 import { ScrollRow } from "@/components/home/ScrollRow";
 import { Section } from "@/components/layout/Section";
-import { ChBlockquote, ChFigcaption, ChFigure } from "@/components/primitives";
+import { ChA, ChBlockquote, ChFigcaption, ChFigure } from "@/components/primitives";
 
 export const metadata = {
   ...pageMetadata({ title: home.meta.title, description: home.meta.description, path: "/" }),
@@ -32,7 +32,7 @@ export const metadata = {
 
 const container = { maxW: "container", px: { base: "5", md: "8" } } as const;
 
-/* 1. Full-bleed hero under the floating header ------------------------- */
+/* 1. Full-bleed hero under the floating header (Figma: 786px tall) ------- */
 function Hero() {
   const { hero } = home;
   return (
@@ -45,8 +45,7 @@ function Hero() {
       overflow="hidden"
       mt={{ base: `-${HEADER_HEIGHT.base}`, lg: `-${HEADER_HEIGHT.lg}` }}
       pt={{ base: HEADER_HEIGHT.base, lg: HEADER_HEIGHT.lg }}
-      minH={{ base: "max(560px, 100vh)", md: "100vh" }}
-      css={{ "@supports (height: 100svh)": { minHeight: "max(560px, 100svh)" } }}
+      minH={{ base: "560px", md: "786px" }}
       display="flex"
       alignItems="center"
     >
@@ -54,14 +53,14 @@ function Hero() {
         <Img slot="home.hero" priority decorative sizes="(orientation: portrait) 330vw, 100vw" />
       </Box>
       {hero.video && <HeroVideo {...hero.video} />}
-      {/* Solid scrim (not a gradient) so white text passes AA on any frame */}
-      <Box position="absolute" inset="0" bg="rgba(22, 18, 31, 0.62)" aria-hidden="true" />
+      {/* Figma scrim: 45% → 70% ink, top to bottom */}
+      <Box position="absolute" inset="0" bgGradient="to-b" gradientFrom="rgba(20, 15, 26, 0.45)" gradientTo="rgba(20, 15, 26, 0.7)" aria-hidden="true" />
       <Container {...container} position="relative" py={{ base: "16", md: "20" }}>
         <Stack
           gap="5"
           alignItems="center"
           textAlign="center"
-          maxW="52rem"
+          maxW="56rem"
           mx="auto"
           css={{
             "& > *": { animation: "heroIn 300ms cubic-bezier(0.23, 1, 0.32, 1) both" },
@@ -77,34 +76,25 @@ function Hero() {
             id="hero-title"
             fontFamily="heading"
             fontWeight="600"
-            lineHeight="1.02"
-            letterSpacing="-0.01em"
-            fontSize="clamp(2.75rem, 1.5rem + 5.6vw, 5.5rem)"
+            lineHeight="1"
+            letterSpacing="-0.02em"
+            fontSize="clamp(2.75rem, 1.5rem + 4.6vw, 5rem)"
             color="fg.inverted"
             textWrap="balance"
           >
             {hero.title}
           </Heading>
-          <Text
-            as="p"
-            bg="brand.solid"
-            color="white"
-            borderRadius="full"
-            px="4"
-            py="1.5"
-            fontWeight="600"
-            fontSize={{ base: "0.875rem", md: "0.9375rem" }}
-          >
-            {site.serviceTimesShort} · Ngong Road, Nairobi
+          <Text as="p" bg="brand.solid" color="white" borderRadius="full" px="4" py="1.5" fontWeight="500" fontSize="0.875rem" whiteSpace="pre-wrap">
+            {site.serviceTimesShort}  ·  Ngong Road, Nairobi
           </Text>
-          <Text textStyle="lead" color="fg.inverted" maxW="34rem">
+          <Text color="fg.inverted" fontSize={{ base: "1.0625rem", md: "1.125rem" }} lineHeight="1.5" maxW="33rem">
             {hero.subline}
           </Text>
-          <HStack gap="3" flexWrap="wrap" justifyContent="center" pt="1">
-            <LinkButton href={hero.primary.href} variant="inverse" size="lg">
+          <HStack gap="3" flexWrap="wrap" justifyContent="center">
+            <LinkButton href={hero.primary.href} variant="inverse">
               {hero.primary.label}
             </LinkButton>
-            <LinkButton href={hero.secondary.href} variant="inverseOutline" size="lg">
+            <LinkButton href={hero.secondary.href} variant="inverseOutline">
               {hero.secondary.label}
             </LinkButton>
           </HStack>
@@ -114,11 +104,11 @@ function Hero() {
   );
 }
 
-/* 2. This Sunday --------------------------------------------------------- */
+/* 2. Service info strip ------------------------------------------------------ */
 function ThisSunday() {
   return (
-    <Box as="section" aria-labelledby="this-sunday" bg="bg.warm" borderBottomWidth="1px" borderColor="border">
-      <Container {...container} py={{ base: "8", md: "10" }}>
+    <Box as="section" aria-labelledby="this-sunday" bg="bg.warm">
+      <Container {...container} py="10">
         <Heading as="h2" id="this-sunday" className="sr-only">
           This Sunday
         </Heading>
@@ -128,12 +118,10 @@ function ThisSunday() {
   );
 }
 
-/* 3. Featured events slider ---------------------------------------------- */
-function eventDetails(e: EventEntry): string[] {
-  const lines = [e.dateTbc ? "Date to be confirmed" : formatRange(e.startDate, e.endDate)];
-  if (e.time) lines.push(e.time);
-  lines.push(e.venue);
-  return lines;
+/* 3. What's on: heading, intro and featured events slider ------------------ */
+function eventDate(e: EventEntry): string {
+  const date = e.dateTbc ? "Date to be confirmed" : formatRange(e.startDate, e.endDate);
+  return e.time ? `${date}, ${e.time}` : date;
 }
 
 function Featured() {
@@ -147,21 +135,27 @@ function Featured() {
   };
   if (next.length === 0) return null;
   return (
-    <Box as="section" aria-labelledby="featured-heading" py={{ base: "14", md: "20" }}>
+    <Box as="section" aria-labelledby="featured-heading" py={{ base: "16", md: "24" }}>
       <Container {...container}>
-        <Heading as="h2" id="featured-heading" className="sr-only">
-          Featured events
-        </Heading>
+        <Stack gap="10px" mb="8" maxW="620px">
+          <Heading as="h2" id="featured-heading" textStyle="h2">
+            {home.whatsOn.title}
+          </Heading>
+          <Text textStyle="lead" color="fg.muted">
+            {home.whatsOn.intro}
+          </Text>
+        </Stack>
         <FeaturedCarousel label="Featured events">
           {next.map((e) => (
             <HideWhenExpired key={e.slug} expires={e.expires}>
               <FeatureRow
                 image={imageFor(e)}
-                eyebrow={`${e.type} · For ${e.audience.join(", ").toLowerCase()}`}
+                eyebrow={`${e.type}  ·  For ${e.audience.join(", ").toLowerCase()}`}
                 title={e.title}
                 href={`/events/${e.slug}`}
                 summary={e.summary}
-                details={eventDetails(e)}
+                date={eventDate(e)}
+                extra={[e.venue]}
                 cta="See event details"
               />
             </HideWhenExpired>
@@ -172,7 +166,7 @@ function Featured() {
   );
 }
 
-/* 4. Every age and stage: big heading + sideways-scrolling row ------------ */
+/* 4. Every age and stage: heading + sideways-scrolling row ------------------ */
 function AgesRow() {
   return (
     <ScrollRow
@@ -194,72 +188,87 @@ function AgesRow() {
   );
 }
 
-/* 5. Mission over a dark photo, with the pastor's welcome ---------------- */
+/* 5. Mission over a photo (Figma: 500px, 56px heading, gold underline) ----- */
 function Mission() {
   const { rhythms, pastor } = home;
+  const last = rhythms.items.length - 1;
   return (
     <Box as="section" aria-labelledby="mission-heading" position="relative" bg="night.900" color="fg.inverted" overflow="hidden">
       <Box position="absolute" inset="0" aria-hidden="true">
         <Img slot="visit.expect" decorative sizes="(orientation: portrait) 160vw, 100vw" />
       </Box>
-      <Box position="absolute" inset="0" bg="rgba(22, 18, 31, 0.72)" aria-hidden="true" />
-      <Container {...container} position="relative" py={{ base: "20", md: "28" }}>
+      <Box position="absolute" inset="0" bgGradient="to-r" gradientFrom="rgba(20, 15, 26, 0.8)" gradientTo="rgba(20, 15, 26, 0.3)" aria-hidden="true" />
+      <Container {...container} position="relative" minH={{ md: "500px" }} display="flex" alignItems="center" py={{ base: "20", md: "16" }}>
         <Stack gap="8" maxW="40rem">
-          <Stack gap="3">
-            <Text textStyle="small" fontWeight="600" color="accent.highlight">
+          <Stack gap="5" alignItems="flex-start">
+            <Text fontSize="0.8125rem" fontWeight="500" color="accent.highlight">
               {rhythms.title}
             </Text>
-            <Heading as="h2" id="mission-heading" fontFamily="heading" fontWeight="600" lineHeight="1.08" fontSize="clamp(2.25rem, 1.4rem + 3.6vw, 4rem)" color="fg.inverted">
-              {rhythms.items.map((r, i) => (
-                <Box as="span" key={r.title} display="block">
-                  {i === rhythms.items.length - 1 ? <Squiggle>{r.title}.</Squiggle> : `${r.title},`}
-                </Box>
-              ))}
+            <Heading
+              as="h2"
+              id="mission-heading"
+              fontFamily="heading"
+              fontWeight="600"
+              lineHeight="1.1"
+              letterSpacing="-0.015em"
+              fontSize="clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem)"
+              color="fg.inverted"
+            >
+              {rhythms.items.map((r, i) =>
+                i === last ? (
+                  <Box as="span" key={r.title} display="inline-block">
+                    {r.title}.
+                    <Box as="span" display="block" h="5px" mt="2px" bg="accent.highlight" aria-hidden="true" />
+                  </Box>
+                ) : (
+                  <Box as="span" key={r.title} display="block">
+                    {r.title},
+                  </Box>
+                ),
+              )}
             </Heading>
-            <Text color="night.300" maxW="prose">
+            <Text color="fg.inverted" fontSize={{ base: "1.125rem", md: "1.25rem" }}>
               {site.missionLine}
             </Text>
-            <Box pt="3">
-              <LinkButton href="/about" variant="inverseOutline">
-                Learn about our church
-              </LinkButton>
-            </Box>
+            <LinkButton href="/about" variant="inverseOutline">
+              Learn about our church
+            </LinkButton>
           </Stack>
           {/* The pastor's welcome shows once the real words exist (no placeholder quote) */}
           {!isTodo(pastor.message) && (
-          <>
-          <Box h="1px" bg="whiteAlpha.300" />
-          <ChFigure m="0">
-            <ChBlockquote m="0" color="fg.inverted" fontSize="1.0625rem" lineHeight="1.6">
-              “<RichText text={pastor.message} />”
-            </ChBlockquote>
-            <ChFigcaption mt="5" display="flex" alignItems="center" gap="3">
-              <Box
-                w="44px"
-                h="44px"
-                borderRadius="full"
-                bg="whiteAlpha.200"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                fontFamily="heading"
-                fontWeight="600"
-                role="img"
-                aria-label="Photo of our pastor coming soon"
-              >
-                {pastor.initials}
-              </Box>
-              <Box>
-                <Text fontWeight="600">
-                  <RichText text={pastor.name} />
-                </Text>
-                <Text textStyle="small" color="fg.inverted">
-                  <RichText text={pastor.role} />
-                </Text>
-              </Box>
-            </ChFigcaption>
-          </ChFigure>
-          </>
+            <>
+              <Box h="1px" bg="whiteAlpha.300" />
+              <ChFigure m="0">
+                <ChBlockquote m="0" color="fg.inverted" fontSize="1.0625rem" lineHeight="1.6">
+                  “<RichText text={pastor.message} />”
+                </ChBlockquote>
+                <ChFigcaption mt="5" display="flex" alignItems="center" gap="3">
+                  <Box
+                    w="44px"
+                    h="44px"
+                    borderRadius="full"
+                    bg="whiteAlpha.200"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    fontFamily="heading"
+                    fontWeight="600"
+                    role="img"
+                    aria-label="Photo of our pastor coming soon"
+                  >
+                    {pastor.initials}
+                  </Box>
+                  <Box>
+                    <Text fontWeight="600">
+                      <RichText text={pastor.name} />
+                    </Text>
+                    <Text textStyle="small" color="fg.inverted">
+                      <RichText text={pastor.role} />
+                    </Text>
+                  </Box>
+                </ChFigcaption>
+              </ChFigure>
+            </>
           )}
         </Stack>
       </Container>
@@ -267,21 +276,31 @@ function Mission() {
   );
 }
 
-/* 6. Invitation band ------------------------------------------------------ */
+/* 6. Closing CTA band (Figma: 80px padding, 36px heading) ------------------ */
 function InviteBand({ id, title }: { id: string; title: string }) {
   return (
     <Box as="section" aria-labelledby={id} bg="brand.solid" color="fg.inverted" py={{ base: "14", md: "20" }}>
       <Container {...container}>
         <Stack gap="6" alignItems="center" textAlign="center">
-          <Heading as="h2" id={id} fontFamily="heading" fontWeight="600" fontSize="clamp(1.625rem, 1.2rem + 1.8vw, 2.5rem)" lineHeight="1.15" color="fg.inverted" maxW="44rem">
+          <Heading
+            as="h2"
+            id={id}
+            fontFamily="heading"
+            fontWeight="600"
+            fontSize="clamp(1.625rem, 1.3rem + 1.2vw, 2.25rem)"
+            letterSpacing="-0.01em"
+            lineHeight="1.2"
+            color="fg.inverted"
+            maxW="44rem"
+          >
             {title}
           </Heading>
           <HStack gap="3" flexWrap="wrap" justifyContent="center">
-            <LinkButton href="/new-here/plan-your-visit" variant="inverse">
-              Plan your visit
+            <LinkButton href={home.nextStep.primary.href} variant="inverse">
+              {home.nextStep.primary.label}
             </LinkButton>
-            <LinkButton href="/watch" variant="inverseOutline">
-              Watch live
+            <LinkButton href={home.nextStep.secondary.href} variant="inverseOutline">
+              {home.nextStep.secondary.label}
             </LinkButton>
           </HStack>
         </Stack>
@@ -295,8 +314,8 @@ function Steps() {
   return (
     <Section id="new-here" title={home.steps.title} intro={home.steps.intro}>
       <Pathway steps={home.steps.items} />
-      <HStack mt="10" gap="2" color="fg.muted">
-        <HeartHandshake size={20} aria-hidden="true" />
+      <HStack mt="10" gap="2" color="brand.fg">
+        <Heart size={16} aria-hidden="true" />
         <LinkButton href={home.steps.prayer.href} variant="link">
           {home.steps.prayer.label}
         </LinkButton>
@@ -305,27 +324,29 @@ function Steps() {
   );
 }
 
-/* 8. Latest sermon ---------------------------------------------------------- */
+/* 8. Latest sermon (Figma: 560px video beside the details, 48px apart) ------ */
 function LatestSermon() {
   return (
     <Section id="latest-sermon" tone="warm" title="Watch the latest sermon">
-      <Grid templateColumns={{ base: "1fr", lg: "1.5fr 1fr" }} gap={{ base: "6", lg: "12" }} alignItems="center">
-        <LiteYouTube id={latestSermon.youtubeId} title={latestSermon.title} />
-        <Stack gap="3">
-          <Text textStyle="small" fontWeight="600" color="brand.fg">
+      <Flex direction={{ base: "column", lg: "row" }} gap={{ base: "6", lg: "48px" }} alignItems={{ lg: "center" }}>
+        <Box w={{ base: "100%", lg: "560px" }} flexShrink={0}>
+          <LiteYouTube id={latestSermon.youtubeId} title={latestSermon.title} />
+        </Box>
+        <Stack gap="3" alignItems="flex-start">
+          <Text fontSize="0.9375rem" fontWeight="500" color="brand.fg">
             Series: {latestSermon.series}
           </Text>
-          <Heading as="h3" textStyle="h3">
+          <Heading as="h3" fontFamily="heading" fontWeight="600" fontSize={{ base: "1.5rem", md: "1.75rem" }} lineHeight="1.2" maxW="22ch">
             {latestSermon.title}
           </Heading>
-          <Text color="fg.muted">{latestSermon.speaker}</Text>
-          <Box pt="2">
-            <LinkButton href="/watch" variant="secondary">
-              Watch all sermons
-            </LinkButton>
-          </Box>
+          <Text color="fg.muted" fontSize="1rem">
+            {latestSermon.speaker}
+          </Text>
+          <LinkButton href="/watch" variant="secondary">
+            Watch all sermons
+          </LinkButton>
         </Stack>
-      </Grid>
+      </Flex>
     </Section>
   );
 }
@@ -335,7 +356,16 @@ function Connect() {
   return (
     <Box as="section" aria-labelledby="connect-heading" py={{ base: "16", md: "24" }}>
       <Container {...container}>
-        <Heading as="h2" id="connect-heading" textAlign="center" fontFamily="heading" fontWeight="500" fontSize={{ base: "1.25rem", md: "1.5rem" }} mb={{ base: "6", md: "10" }}>
+        <Heading
+          as="h2"
+          id="connect-heading"
+          textAlign="center"
+          fontFamily="heading"
+          fontWeight="500"
+          letterSpacing="-0.005em"
+          fontSize={{ base: "1.375rem", md: "1.75rem" }}
+          mb="9"
+        >
           We&apos;d love to connect with you
         </Heading>
         <StepTiles tiles={home.tiles} />
@@ -344,36 +374,58 @@ function Connect() {
   );
 }
 
-/* 10. Give ------------------------------------------------------------------ */
+/* 10. Give (Figma: 964px row, 56px verse, 440px copy with M-Pesa mark) ------ */
 function Give() {
   return (
     <Section id="give" tone="tint" label="Give">
-      <Grid templateColumns={{ base: "1fr", lg: "1.2fr 1fr" }} gap={{ base: "6", lg: "16" }} alignItems="end">
+      <Flex
+        direction={{ base: "column", lg: "row" }}
+        gap={{ base: "8", lg: "6" }}
+        alignItems={{ lg: "center" }}
+        justifyContent="space-between"
+        maxW="964px"
+        mx="auto"
+      >
         <ChFigure m="0">
-          <ChBlockquote m="0" fontFamily="heading" fontWeight="600" lineHeight="1.05" fontSize="clamp(2.25rem, 1.5rem + 3.5vw, 4rem)" color="purple.900">
-            “{home.give.verse}”
+          <ChBlockquote
+            m="0"
+            fontFamily="heading"
+            fontWeight="600"
+            lineHeight="1.05"
+            letterSpacing="-0.015em"
+            fontSize="clamp(2.25rem, 1.5rem + 2.6vw, 3.5rem)"
+            color="brand.fg"
+          >
+            {/* Figma breaks the verse after its third word */}
+            “{home.give.verse.split(" ").slice(0, 3).join(" ")}
+            <br />
+            {home.give.verse.split(" ").slice(3).join(" ")}”
           </ChBlockquote>
-          <ChFigcaption mt="4" textStyle="label" color="brand.fg">
+          <ChFigcaption mt="3" fontSize="0.875rem" fontWeight="500" color="brand.fg">
             {home.give.reference}
           </ChFigcaption>
         </ChFigure>
-        <Stack gap="5" maxW="prose">
-          <Heading as="h2" textStyle="h3">
+        <Stack gap="4" w={{ lg: "440px" }} flexShrink={0}>
+          <Heading as="h2" fontFamily="heading" fontWeight="600" fontSize="1.25rem" lineHeight="normal">
             Give generously
           </Heading>
-          <Text color="fg.muted">
-            <RichText text={home.give.text} />
+          <Text color="fg.muted" fontSize={{ base: "1.125rem", md: "1.25rem" }} lineHeight="1.55">
+            <RichText text={home.give.text} />{" "}
+            <ChA asChild color="brand.fg" textDecoration="underline" textUnderlineOffset="0.2em">
+              <NextLink href={home.give.story.href}>{home.give.story.label}</NextLink>
+            </ChA>
           </Text>
-          <HStack gap="4" flexWrap="wrap">
-            <LinkButton href={home.give.cta.href} size="lg">
-              {home.give.cta.label}
-            </LinkButton>
-            <Text textStyle="small" color="fg.muted">
-              M-Pesa Paybill {site.giving.paybill}
-            </Text>
+          <HStack gap="5" flexWrap="wrap">
+            <LinkButton href={home.give.cta.href}>{home.give.cta.label}</LinkButton>
+            <HStack gap="10px">
+              <Image src="/media/brand/mpesa.png" alt="M-Pesa" width="103px" height="38px" objectFit="contain" />
+              <Text fontWeight="700" fontSize="1rem">
+                Paybill {site.giving.paybill}
+              </Text>
+            </HStack>
           </HStack>
         </Stack>
-      </Grid>
+      </Flex>
     </Section>
   );
 }

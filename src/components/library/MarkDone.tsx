@@ -58,7 +58,7 @@ export function MarkDone({ slug }: { slug: string }) {
 
   return (
     <Button variant={done ? "primary" : "secondary"} aria-pressed={done} onClick={toggle} minH="44px">
-      {done ? <Check aria-hidden="true" /> : <Circle aria-hidden="true" />}
+      {done ? <Check aria-hidden="true" data-anim="icon-pop" /> : <Circle aria-hidden="true" />}
       {done ? "Done" : "Mark as done"}
     </Button>
   );

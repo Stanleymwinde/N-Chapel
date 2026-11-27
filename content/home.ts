@@ -12,7 +12,7 @@ export const home = {
   hero: {
     eyebrow: "Nairobi Chapel Ngong Road",
     title: "Called to be disciples of Jesus.",
-    subline: "Join us this Sunday at 9:00 or 11:30 AM on Ngong Road, or watch live from anywhere.",
+    subline: "Join us this Sunday at 9:00 or 11:30 AM on Ngong Road, Nairobi, or watch live from anywhere.",
     primary: { label: "Plan your visit", href: "/new-here/plan-your-visit" } satisfies Link,
     secondary: { label: "Watch live", href: "/watch" } satisfies Link,
     /**
@@ -38,6 +38,11 @@ export const home = {
       href: "/ministries/quest-children",
     },
   ] satisfies Fact[],
+
+  whatsOn: {
+    title: "What’s on",
+    intro: "Gatherings, conferences and special services coming up at Nairobi Chapel Ngong Road. There’s something for every age.",
+  },
 
   steps: {
     title: "New here? Three simple steps",
@@ -69,10 +74,10 @@ export const home = {
 
   /** "Your next step" tiles (four-up row). */
   tiles: [
-    { title: "New here?", text: "Everything you need for your first Sunday.", detail: "Sundays 9:00 & 11:30 AM", href: "/new-here/plan-your-visit", cta: "Plan your visit", image: "newhere.hero" },
-    { title: "eGroups", text: "Small groups meeting in homes across Nairobi.", detail: "Find one near you", href: "/get-involved/groups", cta: "Find a group", image: "home.community" },
-    { title: "Join a team", text: "Use your time and gifts to serve others.", detail: "Greeters, ushers, worship and more", href: "/get-involved/serve", cta: "Serve on a team", image: "home.together" },
-    { title: "Watch online", text: "Worship with us live from anywhere.", detail: "Live on Sundays", href: "/watch", cta: "Watch live", image: "watch.hero" },
+    { title: "New here?", text: "Everything you need for your first Sunday", detail: "Sundays 9:00 & 11:30 AM", href: "/new-here/plan-your-visit", cta: "Plan your visit", image: "newhere.hero" },
+    { title: "eGroups", text: "Small groups meeting in homes across Nairobi", detail: "Find one near you", href: "/get-involved/groups", cta: "Find a group", image: "home.community" },
+    { title: "Join a team", text: "Use your time and gifts to serve others", detail: "Greeters, ushers, worship and more", href: "/get-involved/serve", cta: "Serve on a team", image: "home.together" },
+    { title: "Watch online", text: "Worship with us from anywhere", detail: "Live on Sundays", href: "/watch", cta: "Watch live", image: "watch.hero" },
   ],
 
   /** Featured "What's on" rows: image per ministry (falls back to events.hero). */
@@ -98,8 +103,7 @@ export const home = {
       { title: "Next Gen", summary: "Where teenagers find God and grow into who He made them to be.", who: "Teens", href: "/ministries/next-gen-youth", image: "nextgen.hero", cta: "Explore Next Gen" },
       { title: "BLITZ 5:16", summary: "College students and early-career young people growing deeper with God.", who: "Ages 19–26", href: "/ministries/blitz-young-adults", image: "blitz.hero", cta: "Explore BLITZ 5:16" },
       { title: "Binti", summary: "Women standing together, lifting each other up and praying.", who: "Women", href: "/get-involved/groups?who=women", image: "groups.binti", cta: "Meet Binti" },
-      { title: "Jabari", summary: "A brotherhood calling men to courageous, uncommon Christian lives.", who: "Men", href: "/get-involved/groups?who=men", image: "groups.jabari", cta: "Meet Jabari" },
-      { title: "Support and care", summary: "Free, confidential counselling and support groups.", who: "Anyone", href: "/ministries/counselling-care", image: "counselling.hero", cta: "Find support" },
+      { title: "Men’s Ministry", summary: "Men growing in faith, friendship and service together.", who: "Men", href: "/get-involved/groups?who=men", image: "groups.jabari", cta: "Meet the men’s ministry" },
     ],
   },
 
@@ -112,7 +116,8 @@ export const home = {
   give: {
     verse: "A generous soul will prosper.",
     reference: "Proverbs 11:25",
-    text: "Your giving supports ministry in our church and community, such as the PPI Bible Drive, which aims to give 700 Bibles to children in the community around us. [TODO: one real impact story]",
+    text: "Your giving supports ministry in our church and community, such as the PPI Bible Drive, which aims to give 700 Bibles to children in the community around us.",
+    story: { label: "See a real impact story", href: "/events/ppi-bible-drive" } satisfies Link,
     cta: { label: "Give now", href: "/give" } satisfies Link,
   },
 
@@ -129,6 +134,6 @@ export const home = {
     title: "We'd love to meet you this Sunday",
     text: "Find out what to expect, where to park and how we look after your kids.",
     primary: { label: "Plan your visit", href: "/new-here/plan-your-visit" },
-    secondary: { label: "Watch live", href: "/watch" },
+    secondary: { label: "Get counselling", href: "/ministries/counselling-care" },
   },
 };

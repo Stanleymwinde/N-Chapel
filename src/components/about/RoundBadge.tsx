@@ -5,7 +5,7 @@ import { LogoMark } from "../layout/Logo";
  * A round text badge (text set on a circle around the logo mark). Static on
  * purpose: no spinning loop. Decorative; the words repeat the mission line.
  */
-export function RoundBadge({ text, size = 132 }: { text: string; size?: number }) {
+export function RoundBadge({ text, size = 132, markSize = 40 }: { text: string; size?: number; markSize?: number }) {
   const id = "round-badge-path";
   return (
     <Box
@@ -39,7 +39,7 @@ export function RoundBadge({ text, size = 132 }: { text: string; size?: number }
           </textPath>
         </text>
       </svg>
-      <LogoMark size={40} />
+      <LogoMark size={markSize} />
     </Box>
   );
 }

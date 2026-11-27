@@ -8,7 +8,8 @@ import { Play } from "lucide-react";
  * A podcast episode player. Nothing loads until "Play" is pressed (so a page
  * of episodes stays light); then the browser's own audio controls take its
  * place, which are keyboard and screen-reader accessible. Starting one
- * episode pauses any other that is playing.
+ * episode pauses any other that is playing. The button follows the Figma
+ * "Button / Play" (purple, 14.5px) and "Play latest" (gold, 15px) pills.
  */
 export function EpisodePlayer({ src, title, duration, tone = "light", size = "md" }: { src: string; title: string; duration?: string; tone?: "light" | "dark"; size?: "md" | "lg" }) {
   const [on, setOn] = useState(false);
@@ -41,9 +42,17 @@ export function EpisodePlayer({ src, title, duration, tone = "light", size = "md
       onClick={() => setOn(true)}
       variant={tone === "dark" ? "accent" : "primary"}
       size={size}
+      h="auto"
+      minH="0"
+      gap="2"
+      pl={size === "lg" ? "20px" : "18px"}
+      pr={size === "lg" ? "22px" : "20px"}
+      py={size === "lg" ? "12px" : "11px"}
+      fontSize={size === "lg" ? "15px" : "14.5px"}
+      fontWeight="600"
       aria-label={`Play ${title}${duration ? ` (${duration})` : ""}`}
     >
-      <Play size={size === "lg" ? 18 : 16} fill="currentColor" aria-hidden="true" />
+      <Play size={size === "lg" ? 16 : 14} fill="currentColor" aria-hidden="true" />
       Play{duration ? ` · ${duration}` : ""}
     </Button>
   );
